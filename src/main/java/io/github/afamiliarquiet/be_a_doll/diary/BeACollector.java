@@ -17,7 +17,7 @@ import java.util.function.Function;
 public class BeACollector {
 	public static final Item SEWING_NEEDLE = register("sewing_needle", DollcraftItem::new, new Item.Settings());
 
-	public static void initialize() {
+	public static void inquireAboutTheCollection() {
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(itemGroup -> {
 			itemGroup.addAfter(Items.SHEARS, SEWING_NEEDLE);
 		});
