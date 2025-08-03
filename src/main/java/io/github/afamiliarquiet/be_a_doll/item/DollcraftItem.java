@@ -14,6 +14,7 @@ public class DollcraftItem extends Item {
 
 	@Override
 	public ActionResult use(World world, PlayerEntity user, Hand hand) {
+		// much todo here but certainly remember to give it a reasonably long cooldown
 		if (!world.isClient()) {
 			BeAMaid.setDoll(user, !BeAMaid.isDoll(user));
 		}

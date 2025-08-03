@@ -9,6 +9,13 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 public class BeAMaid {
 	// to be completely honest, most of this is probably better suited to BeADoll in name
@@ -28,7 +35,11 @@ public class BeAMaid {
 		));
 	}
 
-	public static boolean isDoll(PlayerEntity player) {
+	public static boolean isDoll(@Nullable PlayerEntity player) {
+		if (player == null) {
+			return false;
+		}
+
 		// if there's any signs of being a doll.... yep, that's a doll
 //		int dollPoints = 0;
 		for (RegistryEntry<EntityAttribute> attribute : DOLL_MODIFICATIONS.keySet()) {
@@ -44,9 +55,9 @@ public class BeAMaid {
 		// but in spirit that's what i want to do
 	}
 
-	public static void setDoll(PlayerEntity player, boolean beADoll) {
+	public static void setDoll(@Nullable PlayerEntity player, boolean beADoll) {
 		// todo - maybe throw in an isClient check so client and server don't try to desync? idk if that'll happen
-		if (beADoll == isDoll(player)) {
+		if (player == null || beADoll == isDoll(player)) {
 			// nothing to do boss, that doll is doll! or that.. not doll is not doll, i guess.
 			return;
 		}
@@ -62,5 +73,43 @@ public class BeAMaid {
 		} else {
 			player.getAttributes().removeModifiers(DOLL_MODIFICATIONS);
 		}
+	}
+
+	public static @NotNull String dollishKeysmashing(@NotNull String originalMessage, @Nullable PlayerEntity keySmasher) {
+		// if you want to try doll-to-doll communication later, try a mixin at PlayerManager#824 or so
+		// this is entirely limited to whatever lowercase can detect, and subject to what My Keyboard looks like.
+		// thats just how it is
+		if (!originalMessage.isEmpty() && originalMessage.charAt(0) == '\\') {
+			return originalMessage;
+		}
+
+		Set<Character> material = Set.of('a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'');
+		List<Character> spool = new ArrayList<>(material.size());
+		Random random = new Random(); // todo: maybe not idk. figure out where i want to source my random
+		StringBuilder smashed = new StringBuilder();
+		double clarity = 1;
+
+		for (int i = 0; i < originalMessage.length(); i++) {
+			if (spool.size() < material.size() * 0.13) {
+				spool.clear();
+				spool.addAll(material);
+			}
+
+			char current = originalMessage.charAt(i);
+			if (Character.isLowerCase(current)) {
+				smashed.append(spool.remove(random.nextInt(spool.size())));
+				clarity *= 0.8;
+			} else if (Character.isUpperCase(current)) {
+				smashed.append(Character.toLowerCase(current));
+				clarity += 1.3;
+			} else if (random.nextDouble() < 0.31 + (clarity / (1 + smashed.length()))) { // not normal text? good luck
+				smashed.append(current);
+			}
+		}
+
+		if (smashed.isEmpty()) { // if it was non-letters and bad luck. a (i don't think this is possible anymore?)
+			smashed.append('a');
+		}
+		return smashed.toString();
 	}
 }

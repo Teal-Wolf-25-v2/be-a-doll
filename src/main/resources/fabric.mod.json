@@ -18,7 +18,11 @@
 	"license": "${license}",
 	"icon": "assets/${modId}/icon.png",
 	"mixins": [
-		"${modId}.mixins.json"
+		"${modId}.mixins.json",
+		{
+			"config": "${modId}.client.mixins.json",
+			"environment": "client"
+		}
 	],
 	"depends": {
 		"minecraft": ">=${mc}",
