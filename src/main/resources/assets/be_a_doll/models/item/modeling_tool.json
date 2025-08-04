@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/handheld",
+	"textures": {
+		"layer0": "be_a_doll:item/modeling_tool"
+	}
+}

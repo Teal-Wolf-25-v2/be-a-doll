@@ -17,7 +17,9 @@ public class DollcraftItem extends Item {
 		// much todo here but certainly remember to give it a reasonably long cooldown
 		if (!world.isClient()) {
 			BeAMaid.setDoll(user, !BeAMaid.isDoll(user));
+			return ActionResult.SUCCESS;
+		} else {
+			return ActionResult.SUCCESS_SERVER;
 		}
-		return super.use(world, user, hand);
 	}
 }
