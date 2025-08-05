@@ -24,7 +24,7 @@ public abstract class DressUpDollEntityMixin {
 		// why do you think this, intellij? you don't complain if they're separate
 		// ohhh you're a hater of the instanceof x isDoll ship. i get it it's not the best pairing but it is valid ok
 		//noinspection ConstantValue
-		if ((Object)this instanceof PlayerEntity thisDoll && BeAMaid.isDoll(thisDoll)) {
+		if ((Object)this instanceof PlayerEntity thisDoll && BeAMaid.isDoll(thisDoll) && thatGrabbyPlayer.shouldCancelInteraction()) {
 			ItemStack itemStack = thatGrabbyPlayer.getStackInHand(hand);
 			if (thatGrabbyPlayer.isSpectator()) {
 				cir.setReturnValue(ActionResult.SUCCESS);

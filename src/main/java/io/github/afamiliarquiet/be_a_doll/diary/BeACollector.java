@@ -1,6 +1,7 @@
 package io.github.afamiliarquiet.be_a_doll.diary;
 
 import io.github.afamiliarquiet.be_a_doll.BeADoll;
+import io.github.afamiliarquiet.be_a_doll.item.RibbonItem;
 import io.github.afamiliarquiet.be_a_doll.item.DollcraftItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.component.type.AttributeModifierSlot;
@@ -19,17 +20,19 @@ import net.minecraft.registry.RegistryKeys;
 import java.util.function.Function;
 
 public class BeACollector {
+	// todo - figure out why enchanting table only gives unbreaking and not sharpstuffs :( anvil works fine though
 	public static final Item CARVING_KNIFE = register("carving_knife", DollcraftItem::new, new Item.Settings()
 		.repairable(Items.IRON_INGOT).maxDamage(310).enchantable(17).attributeModifiers(weapon(4, -2.4f)));
 	public static final Item MODELING_TOOL = register("modeling_tool", DollcraftItem::new, new Item.Settings()
 		.repairable(Items.IRON_INGOT).maxDamage(310).enchantable(17).attributeModifiers(weapon(2, -1.3f)));
 	public static final Item SEWING_NEEDLE = register("sewing_needle", DollcraftItem::new, new Item.Settings()
-		.repairable(Items.IRON_INGOT).maxDamage(310).attributeModifiers(weapon(3, -2f)));
 		.repairable(Items.IRON_INGOT).maxDamage(310).enchantable(17).attributeModifiers(weapon(3, -2f)));
+
+	public static final Item DOLL_RIBBON = register("ribbon", RibbonItem::new, new Item.Settings());
 
 	public static void inquireAboutTheCollection() {
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(itemGroup -> {
-			itemGroup.addAfter(Items.BRUSH, CARVING_KNIFE, MODELING_TOOL, SEWING_NEEDLE);
+			itemGroup.addAfter(Items.BRUSH, CARVING_KNIFE, MODELING_TOOL, SEWING_NEEDLE, DOLL_RIBBON);
 		});
 	}
 

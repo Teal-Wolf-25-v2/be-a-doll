@@ -36,7 +36,7 @@
 			"io.github.afamiliarquiet.be_a_doll.BeADoll"
 		],
 		"client": [
-			"io.github.afamiliarquiet.be_a_doll.BeADollClient"
+			"io.github.afamiliarquiet.be_a_doll.BeALocalDoll"
 		]
 	}
 }

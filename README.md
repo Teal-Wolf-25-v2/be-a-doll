@@ -8,7 +8,12 @@ a small toybox mod - become the toy, become a doll!
 ---
 
 would you be a doll? i certainly would, so i made this collection of toyful tweaks for #dollgamers at toybox
-- but could there be more?
+- dolls are small!
+- dolls don't always feel like speaking up
+- dolls can be used to play dress up!
+- dolls can be made of a variety(3) of materials
+- dolls can be secured to a player's shoulders with ribbon
+- but could there be more coming?
 
 ---
 

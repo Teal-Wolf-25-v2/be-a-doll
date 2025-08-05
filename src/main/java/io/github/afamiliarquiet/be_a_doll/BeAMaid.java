@@ -25,7 +25,7 @@ public class BeAMaid {
 	public static final Identifier DOLLIFIED_MODIFIER_ID = BeADoll.id("dollified");
 	public static final HashMultimap<RegistryEntry<EntityAttribute>, EntityAttributeModifier> DOLL_MODIFICATIONS = HashMultimap.create();
 	static {
-		DOLL_MODIFICATIONS.put(EntityAttributes.SCALE, new EntityAttributeModifier(DOLLIFIED_MODIFIER_ID, -0.6, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+		DOLL_MODIFICATIONS.put(EntityAttributes.SCALE, new EntityAttributeModifier(DOLLIFIED_MODIFIER_ID, -0.7, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 	}
 
 	public static void bestowApron() {
@@ -83,7 +83,8 @@ public class BeAMaid {
 			return originalMessage;
 		}
 
-		Set<Character> material = Set.of('a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'');
+		// todo - add more. but also maybe make it configurable, that'd be kinda fun
+		Set<Character> material = Set.of('a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\''); // todo - g and h don't really belong for this style
 		List<Character> spool = new ArrayList<>(material.size());
 		Random random = new Random(); // todo: maybe not idk. figure out where i want to source my random
 		StringBuilder smashed = new StringBuilder();
@@ -103,6 +104,7 @@ public class BeAMaid {
 				smashed.append(Character.toLowerCase(current));
 				clarity += 1.3;
 			} else if (random.nextDouble() < 0.31 + (clarity / (1 + smashed.length()))) { // not normal text? good luck
+				// todo - actually i think having a random chance for this is bad. consider this more when adding more keysmash styles
 				smashed.append(current);
 			}
 		}

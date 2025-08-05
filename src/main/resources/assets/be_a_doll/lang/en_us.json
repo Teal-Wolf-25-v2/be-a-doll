@@ -6,5 +6,8 @@
 	"lore.be_a_doll.modeling_tool": "A tool that can be used to repair porcelain dolls or become a porcelain doll.",
 
 	"item.be_a_doll.sewing_needle": "Sewing Needle",
-	"lore.be_a_doll.sewing_needle": "A tool that can be used to repair rag dolls or become a rag doll."
+	"lore.be_a_doll.sewing_needle": "A tool that can be used to repair rag dolls or become a rag doll.",
+
+	"item.be_a_doll.ribbon": "Ribbon",
+	"lore.be_a_doll.ribbon": "A tool that can be used to safely secure a doll for riding on your shoulder."
 }

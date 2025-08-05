@@ -30,6 +30,10 @@ dependencies {
 
 	modImplementation libs.fl
 	modImplementation libs.fapi
+
+	// give me expression i want expression
+	implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.5.0"))
+	include("io.github.llamalad7:mixinextras-fabric:0.5.0:slim")
 }
 
 processResources {
