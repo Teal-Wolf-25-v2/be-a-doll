@@ -16,7 +16,7 @@ public class DollcraftItem extends Item {
 	public ActionResult use(World world, PlayerEntity user, Hand hand) {
 		// much todo here but certainly remember to give it a reasonably long cooldown
 		if (!world.isClient()) {
-			BeAMaid.setDoll(user, !BeAMaid.isDoll(user));
+			BeAMaid.setDoll(user, !BeAMaid.isDoll(user)); // probably should force dolls to dismount too
 			return ActionResult.SUCCESS;
 		} else {
 			return ActionResult.SUCCESS_SERVER;

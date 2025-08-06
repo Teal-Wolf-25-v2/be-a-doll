@@ -16,6 +16,7 @@ public class RibbonItem extends Item {
 
 	@Override
 	public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
+		// todo - sounds, like lead?
 		if (entity instanceof PlayerEntity doll && BeAMaid.isDoll(doll)) {
 			doll.startRiding(user, false);
 			return ActionResult.SUCCESS;

@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "equipment",
+	"key": {
+		"#": "minecraft:string",
+		"O": "minecraft:stick"
+	},
+	"pattern": [
+		" # ",
+		"#O#",
+		" # "
+	],
+	"result": {
+		"count": 1,
+		"id": "be_a_doll:ribbon"
+	}
+}
