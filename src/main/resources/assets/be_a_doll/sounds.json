@@ -1,0 +1,18 @@
+{
+	"item.familiar_magic.ribbon.tied": {
+		"sounds": [
+			"entity/leashknot/leash1",
+			"entity/leashknot/leash2",
+			"entity/leashknot/leash3"
+		],
+		"subtitle": "subtitles.item.be_a_doll.ribbon.tied"
+	},
+	"item.familiar_magic.ribbon.untied": {
+		"sounds": [
+			"entity/leashknot/unleash1",
+			"entity/leashknot/unleash2",
+			"entity/leashknot/unleash3"
+		],
+		"subtitle": "subtitles.item.be_a_doll.ribbon.untied"
+	}
+}

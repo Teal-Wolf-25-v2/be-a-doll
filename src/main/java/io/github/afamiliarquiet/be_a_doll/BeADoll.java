@@ -1,5 +1,6 @@
 package io.github.afamiliarquiet.be_a_doll;
 
+import io.github.afamiliarquiet.be_a_doll.diary.BeABirdwatcher;
 import io.github.afamiliarquiet.be_a_doll.diary.BeACollector;
 import io.github.afamiliarquiet.be_a_doll.diary.BeAPenPal;
 import net.fabricmc.api.ModInitializer;
@@ -17,6 +18,7 @@ public class BeADoll implements ModInitializer {
 		BeAMaid.bestowApron();
 		BeACollector.inquireAboutTheCollection();
 		BeAPenPal.initialize();
+		BeABirdwatcher.initialize();
 	}
 
 	public static Identifier id(String thing) {
