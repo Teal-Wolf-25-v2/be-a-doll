@@ -35,4 +35,6 @@ they can tie you onto their shoulder with it!
 oh, and uhh.. as a doll, if you want others to hear you in chat, you may need to SPEAK UP a bit.
 (or bypass this system with a \ in front of your message, but that's less fun and makes me sad)
 
+---
+
 ### [![Made for ModFest: Toybox](https://raw.githubusercontent.com/ModFest/art/v2/badge/svg/toybox/compact.svg)](https://modfest.net/toybox)

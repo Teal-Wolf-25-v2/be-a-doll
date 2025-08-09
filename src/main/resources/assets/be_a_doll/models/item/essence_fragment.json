@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "be_a_doll:item/essence_fragment"
+	}
+}

@@ -30,6 +30,7 @@ public class RibbonItem extends Item {
 
 	@Override
 	public ActionResult use(World world, PlayerEntity user, Hand hand) {
+		// todo - maybe consume it while in use like lead? but then need a different force dismount option
 		// todone - verify isclient is fine here
 		// yeah no lol. did you not see the C2SDollDismountLetter i had to make? client's gotta hear about this
 		if (/*!user.getWorld().isClient && */!user.getPassengerList().isEmpty() && user.shouldCancelInteraction()) {

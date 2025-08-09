@@ -6,7 +6,9 @@
 	"item.be_a_doll.sewing_needle": "Sewing Needle",
 	"lore.be_a_doll.sewing_needle": "A tool that can be used to repair rag dolls or become a rag doll.",
 	"item.be_a_doll.ribbon": "Ribbon",
-	"lore.be_a_doll.ribbon": "A tool that can be used to safely secure a doll for riding on your shoulder.",
+	"lore.be_a_doll.ribbon": "An item that can be used on dolls to safely secure them for riding on your shoulder.",
+	"item.be_a_doll.essence_fragment": "Essence Fragment",
+	"lore.be_a_doll.essence_fragment": "A strange item that can be reshaped to alter the self. You should put this back.",
 
 	"subtitles.item.be_a_doll.ribbon.tied": "Ribbon tied",
 	"subtitles.item.be_a_doll.ribbon.untied": "Ribbon untied"

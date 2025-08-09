@@ -10,7 +10,7 @@ import net.minecraft.network.packet.CustomPayload;
 import java.util.List;
 
 public class BeAPenPal {
-	public static void initialize() {
+	public static void fillPen() {
 		PayloadTypeRegistry.playS2C().register(C2SDollDismountLetter.ID, C2SDollDismountLetter.PACKET_CODEC);
 	}
 

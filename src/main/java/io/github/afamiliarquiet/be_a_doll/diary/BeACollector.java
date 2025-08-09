@@ -1,9 +1,11 @@
 package io.github.afamiliarquiet.be_a_doll.diary;
 
 import io.github.afamiliarquiet.be_a_doll.BeADoll;
-import io.github.afamiliarquiet.be_a_doll.item.RibbonItem;
 import io.github.afamiliarquiet.be_a_doll.item.DollcraftItem;
+import io.github.afamiliarquiet.be_a_doll.item.RibbonItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.component.ComponentType;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -16,8 +18,10 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.util.Rarity;
 
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 public class BeACollector {
 	// todo - figure out why enchanting table only gives unbreaking and not sharpstuffs :( anvil works fine though
@@ -29,6 +33,16 @@ public class BeACollector {
 		.repairable(Items.IRON_INGOT).maxDamage(310).enchantable(17).attributeModifiers(weapon(3, -2f)));
 
 	public static final Item DOLL_RIBBON = register("ribbon", RibbonItem::new, new Item.Settings());
+
+	public static final ComponentType<BeADoll.Variant> DOLL_VARIANT_COMPONENT = register(
+		"doll_variant", builder -> builder.codec(BeADoll.Variant.CODEC).packetCodec(BeADoll.Variant.PACKET_CODEC)
+	);
+	public static final Item ESSENCE_FRAGMENT = register("essence_fragment", Item::new, new Item.Settings()
+		.maxCount(1)
+		.rarity(Rarity.EPIC)
+		.component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)
+		.component(DOLL_VARIANT_COMPONENT, BeADoll.Variant.REPRESSED)
+	);
 
 	public static void inquireAboutTheCollection() {
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(itemGroup -> {
@@ -51,6 +65,10 @@ public class BeACollector {
 
 	public static RegistryKey<Item> key(String thing) {
 		return RegistryKey.of(RegistryKeys.ITEM, BeADoll.id(thing));
+	}
+
+	private static <T> ComponentType<T> register(String id, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
+		return Registry.register(Registries.DATA_COMPONENT_TYPE, BeADoll.id(id), builderOperator.apply(ComponentType.builder()).build());
 	}
 
 	public static AttributeModifiersComponent weapon(float attackDamage, float attackSpeed) {

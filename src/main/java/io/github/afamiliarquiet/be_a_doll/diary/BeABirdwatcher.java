@@ -10,7 +10,7 @@ public class BeABirdwatcher {
 	public static final SoundEvent RAVEN_CHIRP = registerSound("item.familiar_magic.ribbon.tied");
 	public static final SoundEvent RAVEN_CRY = registerSound("item.familiar_magic.ribbon.untied");
 
-	public static void initialize() {
+	public static void offerTea() {
 		// have you heard their songs? listen a little, i've got a small catalogue
 	}
 
