@@ -1,32 +1,24 @@
 package io.github.afamiliarquiet.be_a_doll.diary;
 
-import io.github.afamiliarquiet.be_a_doll.BeADoll;
-import io.netty.buffer.ByteBuf;
+import io.github.afamiliarquiet.be_a_doll.BeASelf;
+import io.github.afamiliarquiet.be_a_doll.letters.C2SEssenceAlterationLetter;
+import io.github.afamiliarquiet.be_a_doll.letters.S2CDollDismountLetter;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
-import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.codec.PacketCodecs;
-import net.minecraft.network.packet.CustomPayload;
-
-import java.util.List;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.item.ItemStack;
+import net.minecraft.screen.PlayerScreenHandler;
 
 public class BeAPenPal {
 	public static void fillPen() {
-		PayloadTypeRegistry.playS2C().register(C2SDollDismountLetter.ID, C2SDollDismountLetter.PACKET_CODEC);
-	}
+		PayloadTypeRegistry.playS2C().register(S2CDollDismountLetter.ID, S2CDollDismountLetter.PACKET_CODEC);
+		PayloadTypeRegistry.playC2S().register(C2SEssenceAlterationLetter.ID, C2SEssenceAlterationLetter.PACKET_CODEC);
 
-	// i'll move this into its own file if i make any more. but i don't think i will
-	public record C2SDollDismountLetter(List<Integer> dismountingDollIds) implements CustomPayload {
-		public static final CustomPayload.Id<C2SDollDismountLetter> ID = new Id<>(BeADoll.id("doll_dismount_letter"));
-
-		public static final PacketCodec<ByteBuf, C2SDollDismountLetter> PACKET_CODEC = PacketCodec.tuple(
-			PacketCodecs.INTEGER.collect(PacketCodecs.toList()),
-			C2SDollDismountLetter::dismountingDollIds,
-			C2SDollDismountLetter::new
-		);
-
-		@Override
-		public Id<? extends CustomPayload> getId() {
-			return ID;
-		}
+		ServerPlayNetworking.registerGlobalReceiver(C2SEssenceAlterationLetter.ID, ((letter, context) -> {
+			PlayerScreenHandler handler = context.player().playerScreenHandler;
+			ItemStack clickProcessedStack = BeASelf.clickSelf(handler.getCursorStack(), letter.inserting());
+			if (clickProcessedStack != null) {
+				handler.setCursorStack(clickProcessedStack);
+			}
+		}));
 	}
 }

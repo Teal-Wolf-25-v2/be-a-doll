@@ -4,7 +4,9 @@
 	"compatibilityLevel": "JAVA_21",
 	"client": [
 		"IgnorePassengersLocatorBarMixin",
-		"Keysmash"
+		"Keysmash",
+		"SelfCreativeInventoryScreenMixin",
+		"SelfInventoryScreenMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

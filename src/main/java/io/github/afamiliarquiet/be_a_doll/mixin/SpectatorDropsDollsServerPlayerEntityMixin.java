@@ -1,7 +1,7 @@
 package io.github.afamiliarquiet.be_a_doll.mixin;
 
 import com.mojang.authlib.GameProfile;
-import io.github.afamiliarquiet.be_a_doll.diary.BeAPenPal;
+import io.github.afamiliarquiet.be_a_doll.letters.S2CDollDismountLetter;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -25,7 +25,7 @@ public abstract class SpectatorDropsDollsServerPlayerEntityMixin extends PlayerE
 	private void untieDolls(GameMode gameMode, CallbackInfoReturnable<Boolean> cir) {
 		List<Entity> passengers = this.getPassengerList();
 		if (!passengers.isEmpty()) {
-			ServerPlayNetworking.send((ServerPlayerEntity) (Object) this, new BeAPenPal.C2SDollDismountLetter(passengers.stream().map(Entity::getId).toList()));
+			ServerPlayNetworking.send((ServerPlayerEntity) (Object) this, new S2CDollDismountLetter(passengers.stream().map(Entity::getId).toList()));
 			this.removeAllPassengers();
 		}
 	}

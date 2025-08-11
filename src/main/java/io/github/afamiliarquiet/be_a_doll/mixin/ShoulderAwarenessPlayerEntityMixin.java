@@ -4,7 +4,7 @@ import com.llamalad7.mixinextras.expression.Definition;
 import com.llamalad7.mixinextras.expression.Expression;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import io.github.afamiliarquiet.be_a_doll.BeADecoration;
-import io.github.afamiliarquiet.be_a_doll.diary.BeAPenPal;
+import io.github.afamiliarquiet.be_a_doll.letters.S2CDollDismountLetter;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -34,7 +34,7 @@ public abstract class ShoulderAwarenessPlayerEntityMixin extends LivingEntity {
 		// for some reason the client has a hard time recognizing when a riding player wants to dismount.
 		// hopefully this  helps. wasn't able to track down the problem
 		if (this.getVehicle() instanceof ServerPlayerEntity serverPlayer) {
-			ServerPlayNetworking.send(serverPlayer, new BeAPenPal.C2SDollDismountLetter(List.of(this.getId())));
+			ServerPlayNetworking.send(serverPlayer, new S2CDollDismountLetter(List.of(this.getId())));
 		}
 	}
 
