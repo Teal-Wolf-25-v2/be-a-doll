@@ -22,7 +22,7 @@ public abstract class Keysmash extends Screen {
 	private void smashKeys(ClientPlayNetworkHandler instance, String content, Operation<Void> original) {
 		// ok great glad you sent a message! sorry its keysmashing now if you're a doll
 		if (this.client != null && BeAMaid.isDoll(this.client.player)) {
-			original.call(instance, BeAMaid.dollishKeysmashing(content, this.client.player));
+			original.call(instance, BeAMaid.syntheticKeysmashing(content, this.client.player));
 		} else {
 			original.call(instance, content);
 		}

@@ -7,6 +7,7 @@ import io.github.afamiliarquiet.be_a_doll.diary.BeALibrarian;
 import io.github.afamiliarquiet.be_a_doll.diary.BeAPenPal;
 import io.netty.buffer.ByteBuf;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.util.Identifier;
@@ -21,9 +22,11 @@ public class BeADoll implements ModInitializer {
 	public static final String MOD_ID = "be_a_doll";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
+	public static final BeATinkerer TINKERER = BeATinkerer.createToml(FabricLoader.getInstance().getConfigDir(), "", MOD_ID, BeATinkerer.class);
+
 	@Override
 	public void onInitialize() {
-		log(BeAMaid.dollishKeysmashing("oh are we logging?! HELLO WORLD! I'M READY TO MAKE SOME MORE DOLLS!", null));
+		log(BeAMaid.syntheticKeysmashing("oh are we logging?! HELLO WORLD! I'M READY TO MAKE SOME MORE DOLLS!", null));
 		BeAMaid.bestowApron();
 		BeACollector.inquireAboutTheCollection();
 		BeAPenPal.fillPen();

@@ -16,7 +16,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
+
+import static io.github.afamiliarquiet.be_a_doll.BeADoll.TINKERER;
 
 public class BeAMaid {
 	// to be completely honest, most of this is probably better suited to BeADoll in name
@@ -83,37 +84,40 @@ public class BeAMaid {
 		}
 	}
 
-	public static @NotNull String dollishKeysmashing(@NotNull String originalMessage, @Nullable PlayerEntity keySmasher) {
+	public static @NotNull String syntheticKeysmashing(@NotNull String originalMessage, @Nullable PlayerEntity keySmasher) {
 		// if you want to try doll-to-doll communication later, try a mixin at PlayerManager#824 or so
 		// this is entirely limited to whatever lowercase can detect, and subject to what My Keyboard looks like.
 		// thats just how it is
-		if (!originalMessage.isEmpty() && originalMessage.charAt(0) == '\\') {
+		if (!originalMessage.isEmpty() && originalMessage.charAt(0) == '\\' || !TINKERER.useKeysmashing) {
 			return originalMessage;
 		}
 
-		// todo - add more. but also maybe make it configurable, that'd be kinda fun
-		Set<Character> material = Set.of('a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\''); // todo - g and h don't really belong for this style
-		List<Character> spool = new ArrayList<>(material.size());
-		Random random = new Random(); // todo: maybe not idk. figure out where i want to source my random
+		// todo - add more? change how it works? eh.
+
+		String material = !TINKERER.letterPoolOverride.isEmpty() ? TINKERER.letterPoolOverride : "asdfjkl;";
+		List<Character> spool = new ArrayList<>(material.length());
+		Random random = new Random();
 		StringBuilder smashed = new StringBuilder();
-		double clarity = 1;
+		double clarity = TINKERER.startingClarityScore;
 
 		for (int i = 0; i < originalMessage.length(); i++) {
-			if (spool.size() < material.size() * 0.13) {
+			if (spool.size() < material.length() * TINKERER.restockThreshold) {
 				spool.clear();
-				spool.addAll(material);
+				for (int j = 0; j < material.length(); j++) {
+					spool.add(material.charAt(j));
+				}
 			}
 
 			char current = originalMessage.charAt(i);
 			if (Character.isLowerCase(current)) {
 				smashed.append(spool.remove(random.nextInt(spool.size())));
-				clarity *= 0.8;
+				clarity *= TINKERER.keysmashedMultiplier;
 			} else if (Character.isUpperCase(current)) {
 				smashed.append(Character.toLowerCase(current));
-				clarity += 1.3;
-			} else if (random.nextDouble() < 0.31 + (clarity / (1 + smashed.length()))) { // not normal text? good luck
-				// todo - actually i think having a random chance for this is bad. consider this more when adding more keysmash styles
+				clarity += TINKERER.spokenLoudlyClarity;
+			} else if (random.nextDouble() < TINKERER.baseClarityChance + (clarity / (1 + smashed.length()))) { // not normal text? good luck
 				smashed.append(current);
+				clarity += TINKERER.nonletterClarity;
 			}
 		}
 
