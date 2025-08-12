@@ -1,23 +1,32 @@
 package io.github.afamiliarquiet.be_a_doll;
 
 import io.github.afamiliarquiet.be_a_doll.diary.BeACollector;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 public class BeASelf {
 	// todone - make more mixins where player is rendered, like creative inv and horse i think
 	// nevermind not doing horse it'd be annoying to do it there and there's no need to play w/ essence on a horse
-	public static @Nullable ItemStack clickSelf(ItemStack cursorStack, boolean inserting) {
+	// todo - something weird is happening w/ an extra essence showing up after closing inv, only in creative?
+	public static @Nullable ItemStack clickSelf(ItemStack cursorStack, PlayerEntity player, boolean inserting) {
 		if (inserting) {
+			BeADoll.log("inserting..");
+			BeADoll.log(String.valueOf(cursorStack.isEmpty()));
 			if (cursorStack.isOf(BeACollector.ESSENCE_FRAGMENT)) {
+				BeADoll.log("inserting.. halfway there");
 				BeADoll.Variant variant = cursorStack.get(BeACollector.DOLL_VARIANT_COMPONENT);
 				if (variant != null) {
 					// todo.. benefits n tfy stuff
 					BeADoll.log("Congrats! You're a " + variant.asString() + " doll now!");
+					if (!player.getWorld().isClient()) {
+						BeAMaid.setDoll(player, variant);
+					}
 					return ItemStack.EMPTY;
 				}
 			}
 		} else {
+			BeADoll.log("extracting..");
 			if (cursorStack.isEmpty()) {
 				// todo.. wooziness n sparkly essence stuff n also the appropriate doll component
 				// todo wait crap. i have to store the doll type somewhere now crap this sucks

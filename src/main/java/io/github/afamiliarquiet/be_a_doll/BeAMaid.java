@@ -1,6 +1,7 @@
 package io.github.afamiliarquiet.be_a_doll;
 
 import com.google.common.collect.HashMultimap;
+import io.github.afamiliarquiet.be_a_doll.diary.BeALibrarian;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
@@ -31,7 +32,7 @@ public class BeAMaid {
 	public static void bestowApron() {
 		ServerPlayerEvents.COPY_FROM.register(((oldPlayer, newPlayer, alive) ->
 				// todo - should i care about alive? in theory maybe but it doesn't really matter
-				BeAMaid.setDoll(newPlayer, BeAMaid.isDoll(oldPlayer))
+				BeAMaid.setDoll(newPlayer, BeAMaid.isDoll(oldPlayer) ? BeALibrarian.inspectDollMaterial(oldPlayer) : BeADoll.Variant.REPRESSED)
 		));
 	}
 
@@ -55,14 +56,19 @@ public class BeAMaid {
 		// but in spirit that's what i want to do
 	}
 
-	public static void setDoll(@Nullable PlayerEntity player, boolean beADoll) {
+	public static void setDoll(@Nullable PlayerEntity player, BeADoll.Variant variant) {
 		// todo - maybe throw in an isClient check so client and server don't try to desync? idk if that'll happen
-		if (player == null || beADoll == isDoll(player)) {
+		// todo - the material check doesn't work because default is wooden even when doll isn't tfed yet
+		if (player == null) {
+			return;
+		}
+		boolean isDoll = isDoll(player);
+		if ((variant == BeADoll.Variant.REPRESSED && !isDoll) || isDoll && BeALibrarian.inspectDollMaterial(player) == variant) {
 			// nothing to do boss, that doll is doll! or that.. not doll is not doll, i guess.
 			return;
 		}
 
-		if (beADoll) {
+		if (variant != BeADoll.Variant.REPRESSED) {
 			// add persistent instead of add temporary. because doll is a persistent fact of life
 			DOLL_MODIFICATIONS.forEach((attribute, modifier) -> {
 				EntityAttributeInstance instance = player.getAttributes().getCustomInstance(attribute);
@@ -70,8 +76,10 @@ public class BeAMaid {
 					instance.addPersistentModifier(modifier);
 				}
 			});
+			BeALibrarian.reshapeDoll(player, variant);
 		} else {
 			player.getAttributes().removeModifiers(DOLL_MODIFICATIONS);
+			BeALibrarian.repress(player);
 		}
 	}
 

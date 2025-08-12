@@ -5,6 +5,7 @@
 	"client": [
 		"IgnorePassengersLocatorBarMixin",
 		"Keysmash",
+		"NameablePlayerEntityRenderer",
 		"SelfCreativeInventoryScreenMixin",
 		"SelfInventoryScreenMixin"
 	],

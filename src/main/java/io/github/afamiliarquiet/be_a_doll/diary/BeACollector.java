@@ -25,6 +25,8 @@ import java.util.function.UnaryOperator;
 
 public class BeACollector {
 	// todo - figure out why enchanting table only gives unbreaking and not sharpstuffs :( anvil works fine though
+	// todo - it might make more sense for there to be a doll.. .variant component..... i already have that
+	//  but wait i can't add that component to a diamond pickaxe. guh
 	public static final Item CARVING_KNIFE = register("carving_knife", DollcraftItem::new, new Item.Settings()
 		.repairable(Items.IRON_INGOT).maxDamage(310).enchantable(17).attributeModifiers(weapon(4, -2.4f)));
 	public static final Item MODELING_TOOL = register("modeling_tool", DollcraftItem::new, new Item.Settings()

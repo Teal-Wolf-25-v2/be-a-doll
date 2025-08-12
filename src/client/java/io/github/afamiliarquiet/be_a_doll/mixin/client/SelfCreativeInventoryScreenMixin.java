@@ -27,16 +27,16 @@ public abstract class SelfCreativeInventoryScreenMixin extends HandledScreen<Cre
 	@Inject(method = "mouseReleased", at = @At("HEAD"), cancellable = true)
 	private void clicky(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
 		// injecting at head seems fine here. i could've injected at mouseClicked instead here, but.. consistency
-		if (BeASelf.isMouseInCreativeSelf(mouseX, mouseY, this.x, this.y)) {
+		if (BeASelf.isMouseInCreativeSelf(mouseX, mouseY, this.x, this.y) && this.client != null && this.client.player != null) {
 			ItemStack cursorStack = this.handler.getCursorStack();
 			ItemStack clickProcessedStack = null;
 
 			if (button == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
 				ClientPlayNetworking.send(new C2SEssenceAlterationLetter(true));
-				clickProcessedStack = BeASelf.clickSelf(cursorStack, true);
+				clickProcessedStack = BeASelf.clickSelf(cursorStack, this.client.player, true);
 			} else if (button == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
 				ClientPlayNetworking.send(new C2SEssenceAlterationLetter(false));
-				clickProcessedStack = BeASelf.clickSelf(cursorStack, false);
+				clickProcessedStack = BeASelf.clickSelf(cursorStack, this.client.player, false);
 			}
 
 			if (clickProcessedStack != null) {
