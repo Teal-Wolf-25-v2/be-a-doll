@@ -1,6 +1,7 @@
 package io.github.afamiliarquiet.be_a_doll.diary;
 
 import io.github.afamiliarquiet.be_a_doll.BeADoll;
+import io.github.afamiliarquiet.be_a_doll.BeAMaid;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentSyncPredicate;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
@@ -44,6 +45,15 @@ public class BeALibrarian {
 	public static @NotNull BeADoll.Variant inspectDollMaterial(@NotNull PlayerEntity doll) {
 		BeADoll.log("i am in the inspectDollMaterial function");
 		return doll.getAttachedOrCreate(DOLL_VARIANT);
+	}
+
+	// okay so it looks bad now that i'm not using the above one at all. it's interesting yeah
+	// listen okay i need isDoll to be authoritative because it relies on the attributes
+	// and i don't ever want a doll to lose their attributes
+	// so if they lose their attributes then they must not be a doll anymore, ergo a doll has not lost their attributes
+	// being lopsided is no good so this avoids that
+	public static @NotNull BeADoll.Variant inspectSupposedPlayer(@NotNull PlayerEntity supposedPlayer) {
+		return BeAMaid.isDoll(supposedPlayer) ? inspectDollMaterial(supposedPlayer) : BeADoll.Variant.REPRESSED;
 	}
 
 	// yeah we're just washing off the experimental api smell here

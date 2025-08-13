@@ -33,7 +33,7 @@ public class BeAMaid {
 	public static void bestowApron() {
 		ServerPlayerEvents.COPY_FROM.register(((oldPlayer, newPlayer, alive) ->
 				// todo - should i care about alive? in theory maybe but it doesn't really matter
-				BeAMaid.setDoll(newPlayer, BeAMaid.isDoll(oldPlayer) ? BeALibrarian.inspectDollMaterial(oldPlayer) : BeADoll.Variant.REPRESSED)
+				BeAMaid.setDoll(newPlayer, BeALibrarian.inspectSupposedPlayer(oldPlayer))
 		));
 	}
 
@@ -59,12 +59,10 @@ public class BeAMaid {
 
 	public static void setDoll(@Nullable PlayerEntity player, BeADoll.Variant variant) {
 		// todo - maybe throw in an isClient check so client and server don't try to desync? idk if that'll happen
-		// todo - the material check doesn't work because default is wooden even when doll isn't tfed yet
-		if (player == null) {
+		if (player == null || player.getWorld().isClient()) {
 			return;
 		}
-		boolean isDoll = isDoll(player);
-		if ((variant == BeADoll.Variant.REPRESSED && !isDoll) || isDoll && BeALibrarian.inspectDollMaterial(player) == variant) {
+		if (variant == BeALibrarian.inspectSupposedPlayer(player)) {
 			// nothing to do boss, that doll is doll! or that.. not doll is not doll, i guess.
 			return;
 		}

@@ -1,7 +1,7 @@
 package io.github.afamiliarquiet.be_a_doll.mixin.client;
 
 import io.github.afamiliarquiet.be_a_doll.BeASelf;
-import io.github.afamiliarquiet.be_a_doll.letters.C2SEssenceAlterationLetter;
+import io.github.afamiliarquiet.be_a_doll.letters.C2SCreativeEssenceAlterationLetter;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
@@ -32,10 +32,10 @@ public abstract class SelfCreativeInventoryScreenMixin extends HandledScreen<Cre
 			ItemStack clickProcessedStack = null;
 
 			if (button == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
-				ClientPlayNetworking.send(new C2SEssenceAlterationLetter(true));
+				ClientPlayNetworking.send(new C2SCreativeEssenceAlterationLetter(true, cursorStack));
 				clickProcessedStack = BeASelf.clickSelf(cursorStack, this.client.player, true);
 			} else if (button == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
-				ClientPlayNetworking.send(new C2SEssenceAlterationLetter(false));
+				ClientPlayNetworking.send(new C2SCreativeEssenceAlterationLetter(false, cursorStack));
 				clickProcessedStack = BeASelf.clickSelf(cursorStack, this.client.player, false);
 			}
 

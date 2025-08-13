@@ -50,6 +50,8 @@ public abstract class NameablePlayerEntityRenderer extends LivingEntityRenderer<
 
 	@WrapMethod(method = "renderLabelIfPresent(Lnet/minecraft/client/render/entity/state/PlayerEntityRenderState;Lnet/minecraft/text/Text;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V")
 	private void butDollsAreNoDifferent(PlayerEntityRenderState playerEntityRenderState, Text text, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, Operation<Void> original) {
+		// todo - i kinda want to have dolls render their names in first person so they can see their tag?
+		//  dolls should probably be able to write their own names too. just 'cause... blank text boxes and multiplayer.
 		if (be_a_doll$isDoll && !MinecraftClient.getInstance().getDebugHud().shouldShowDebugHud()) {
 			if (be_a_doll$dollDisplayName != null) {
 				original.call(playerEntityRenderState, be_a_doll$dollDisplayName, matrixStack, vertexConsumerProvider, i);
