@@ -3,6 +3,7 @@
 	"package": "io.github.afamiliarquiet.be_a_doll.mixin.client",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
+		"DollsNeedNoAirInGameHudMixin",
 		"IgnorePassengersLocatorBarMixin",
 		"Keysmash",
 		"NameablePlayerEntityRenderer",

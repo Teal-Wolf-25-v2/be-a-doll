@@ -1,4 +1,4 @@
-package io.github.afamiliarquiet.be_a_doll.mixin;
+package io.github.afamiliarquiet.be_a_doll.mixin.shoulder_riding;
 
 import com.mojang.authlib.GameProfile;
 import io.github.afamiliarquiet.be_a_doll.letters.S2CDollDismountLetter;

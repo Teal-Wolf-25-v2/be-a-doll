@@ -1,4 +1,4 @@
-package io.github.afamiliarquiet.be_a_doll.mixin;
+package io.github.afamiliarquiet.be_a_doll.mixin.shoulder_riding;
 
 import com.llamalad7.mixinextras.expression.Definition;
 import com.llamalad7.mixinextras.expression.Expression;

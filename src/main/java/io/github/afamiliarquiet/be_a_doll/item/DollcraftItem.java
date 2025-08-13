@@ -7,6 +7,7 @@ public class DollcraftItem extends Item {
 		super(settings);
 	}
 
+	// todo - im hungry lets get something that's REALLY tasty
 //	@Override
 //	public ActionResult use(World world, PlayerEntity user, Hand hand) {
 //		// much todo here but certainly remember to give it a reasonably long cooldown

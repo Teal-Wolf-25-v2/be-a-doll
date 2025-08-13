@@ -5,6 +5,7 @@ import io.github.afamiliarquiet.be_a_doll.diary.BeACollector;
 import io.github.afamiliarquiet.be_a_doll.diary.BeACook;
 import io.github.afamiliarquiet.be_a_doll.diary.BeALibrarian;
 import io.github.afamiliarquiet.be_a_doll.diary.BeAPenPal;
+import io.github.afamiliarquiet.be_a_doll.diary.BeAResearcher;
 import io.netty.buffer.ByteBuf;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
@@ -33,6 +34,7 @@ public class BeADoll implements ModInitializer {
 		BeABirdwatcher.offerTea();
 		BeACook.placeOrders();
 		BeALibrarian.lookForABook();
+		BeAResearcher.grantFunding();
 	}
 
 	public static Identifier id(String thing) {

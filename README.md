@@ -14,6 +14,7 @@ would you be a doll? i certainly would, so i made this collection of toyful twea
 - dolls can be made of a variety(3) of materials
 - dolls can be secured to a player's shoulders with ribbon
 - dolls can be renamed (only in world) with a nametag
+- dolls are immune to drowning and freezing
 - but could there be more coming?
 
 ---
@@ -38,7 +39,8 @@ they can tie you onto their shoulder with it!
 (right click a doll to tie on, shift+rclick to untie all dolls)
 
 oh, and uhh.. as a doll, if you want others to hear you in chat, you may need to SPEAK UP a bit.
-(or bypass this system with a \ in front of your message, but that's less fun and makes me sad)
+(or bypass this system with a \ in front of your message, but that's less fun and makes me sad.
+there's also config to customize or disable this, which makes me happy!)
 
 ---
 

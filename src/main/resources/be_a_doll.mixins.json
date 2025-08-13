@@ -5,10 +5,13 @@
 	"mixins": [
 		"DollNameTagItemMixin",
 		"DressUpDollEntityMixin",
-		"RiptideIgnorePassengersLivingEntityMixin",
-		"ShoulderAwarenessPlayerEntityMixin",
-		"ShoulderRidingEntityMixin",
-		"SpectatorDropsDollsServerPlayerEntityMixin"
+		"shoulder_riding.RiptideIgnorePassengersLivingEntityMixin",
+		"shoulder_riding.ShoulderAwarenessPlayerEntityMixin",
+		"shoulder_riding.ShoulderRidingEntityMixin",
+		"shoulder_riding.SpectatorDropsDollsServerPlayerEntityMixin",
+		"synthetic_treats.DollsCantFreezeLivingEntityMixin",
+		"synthetic_treats.LightweightDollPowderSnowBlockMixin",
+		"synthetic_treats.SyntheticResistancePlayerEntityMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
