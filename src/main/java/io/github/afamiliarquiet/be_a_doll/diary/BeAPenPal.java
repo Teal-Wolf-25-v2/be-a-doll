@@ -18,13 +18,13 @@ public class BeAPenPal {
 		ServerPlayNetworking.registerGlobalReceiver(C2SEssenceAlterationLetter.ID, ((letter, context) -> {
 			PlayerScreenHandler handler = context.player().playerScreenHandler;
 			ItemStack clickProcessedStack = BeASelf.clickSelf(handler.getCursorStack(), context.player(), letter.inserting());
-			if (clickProcessedStack != null && !context.player().isCreative()) {
+			if (clickProcessedStack != null && !context.player().isInCreativeMode()) {
 				handler.setCursorStack(clickProcessedStack);
 			}
 		}));
 
 		ServerPlayNetworking.registerGlobalReceiver(C2SCreativeEssenceAlterationLetter.ID, ((letter, context) -> {
-			if (!context.player().isCreative()) {
+			if (!context.player().isInCreativeMode()) {
 				return; // how dare you. this is for creative only
 			}
 			// fire this off still for the tf effects n such to happen on server

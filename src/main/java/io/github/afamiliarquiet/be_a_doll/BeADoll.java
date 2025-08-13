@@ -9,8 +9,11 @@ import io.github.afamiliarquiet.be_a_doll.diary.BeAResearcher;
 import io.netty.buffer.ByteBuf;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.item.Item;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.function.ValueLists;
@@ -47,10 +50,10 @@ public class BeADoll implements ModInitializer {
 	}
 
 	public enum Variant implements StringIdentifiable {
-		REPRESSED(0, "player"),
-		WOODEN(1, "wooden"),
-		PORCELAIN(2, "porcelain"),
-		CLOTH(3, "cloth");
+		REPRESSED(0, "player", ItemTags.ANVIL), // gonna look really silly in your throat.
+		WOODEN(1, "wooden", BeAResearcher.WOODEN_DOLL_CARE_MATERIALS),
+		PORCELAIN(2, "porcelain", BeAResearcher.PORCELAIN_DOLL_CARE_MATERIALS),
+		CLOTH(3, "cloth", BeAResearcher.CLOTH_DOLL_CARE_MATERIALS);
 
 		public static final BeADoll.Variant DEFAULT = WOODEN;
 		public static final StringIdentifiable.EnumCodec<BeADoll.Variant> CODEC = StringIdentifiable.createCodec(BeADoll.Variant::values);
@@ -60,10 +63,12 @@ public class BeADoll implements ModInitializer {
 		public static final PacketCodec<ByteBuf, BeADoll.Variant> PACKET_CODEC = PacketCodecs.indexed(INDEX_MAPPER, BeADoll.Variant::getIndex);
 		private final int index;
 		private final String id;
+		private final TagKey<Item> careMaterial;
 
-		private Variant(final int index, final String id) {
+		Variant(final int index, final String id, TagKey<Item> careMaterial) {
 			this.index = index;
 			this.id = id;
+			this.careMaterial = careMaterial;
 		}
 
 		@Override
@@ -77,6 +82,10 @@ public class BeADoll implements ModInitializer {
 
 		public static BeADoll.Variant byIndex(int index) {
 			return (BeADoll.Variant)INDEX_MAPPER.apply(index);
+		}
+
+		public TagKey<Item> getCareMaterialTag() {
+			return this.careMaterial;
 		}
 	}
 }

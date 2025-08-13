@@ -11,5 +11,9 @@
 	"lore.be_a_doll.essence_fragment": "A strange item that can be reshaped to alter the self. You should put this back.",
 
 	"subtitles.item.be_a_doll.ribbon.tied": "Ribbon tied",
-	"subtitles.item.be_a_doll.ribbon.untied": "Ribbon untied"
+	"subtitles.item.be_a_doll.ribbon.untied": "Ribbon untied",
+
+	"tag.item.be_a_doll.wooden_doll_care_materials": "Wooden Doll Care Materials",
+	"tag.item.be_a_doll.porcelain_doll_care_materials": "Porcelain Doll Care Materials",
+	"tag.item.be_a_doll.cloth_doll_care_materials": "Cloth Doll Care Materials"
 }

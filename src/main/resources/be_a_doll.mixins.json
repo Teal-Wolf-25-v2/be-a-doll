@@ -9,6 +9,7 @@
 		"shoulder_riding.ShoulderAwarenessPlayerEntityMixin",
 		"shoulder_riding.ShoulderRidingEntityMixin",
 		"shoulder_riding.SpectatorDropsDollsServerPlayerEntityMixin",
+		"synthetic_treats.DollsCantEatPlayerEntityMixin",
 		"synthetic_treats.DollsCantFreezeLivingEntityMixin",
 		"synthetic_treats.LightweightDollPowderSnowBlockMixin",
 		"synthetic_treats.SyntheticResistancePlayerEntityMixin"

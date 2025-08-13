@@ -15,6 +15,8 @@ would you be a doll? i certainly would, so i made this collection of toyful twea
 - dolls can be secured to a player's shoulders with ribbon
 - dolls can be renamed (only in world) with a nametag
 - dolls are immune to drowning and freezing
+- dolls are sustained by repairs instead of food (use your dollcraft item with sticks/clay/string in inventory)
+- dolls can be repaired by others
 - but could there be more coming?
 
 ---

@@ -28,6 +28,8 @@ public class BeAMaid {
 	public static final HashMultimap<RegistryEntry<EntityAttribute>, EntityAttributeModifier> DOLL_MODIFICATIONS = HashMultimap.create();
 	static {
 		DOLL_MODIFICATIONS.put(EntityAttributes.SCALE, new EntityAttributeModifier(DOLLIFIED_MODIFIER_ID, -0.7, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+		DOLL_MODIFICATIONS.put(EntityAttributes.MAX_HEALTH, new EntityAttributeModifier(DOLLIFIED_MODIFIER_ID, -0.6, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+		DOLL_MODIFICATIONS.put(EntityAttributes.ATTACK_DAMAGE, new EntityAttributeModifier(DOLLIFIED_MODIFIER_ID, -1, EntityAttributeModifier.Operation.ADD_VALUE));
 	}
 
 	public static void bestowApron() {

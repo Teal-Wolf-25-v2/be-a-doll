@@ -20,30 +20,36 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Rarity;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 public class BeACollector {
 	// todo - it might make more sense for there to be a doll.. .variant component..... i already have that
 	//  but wait i can't add that component to a diamond pickaxe. guh
-	public static final Item CARVING_KNIFE = register("carving_knife", DollcraftItem::new, new Item.Settings()
-		.repairable(Items.IRON_INGOT).maxDamage(310).attributeModifiers(weapon(4, -2.4f)));
-	public static final Item MODELING_TOOL = register("modeling_tool", DollcraftItem::new, new Item.Settings()
-		.repairable(Items.IRON_INGOT).maxDamage(310).attributeModifiers(weapon(2, -1.3f)));
-	public static final Item SEWING_NEEDLE = register("sewing_needle", DollcraftItem::new, new Item.Settings()
-		.repairable(Items.IRON_INGOT).maxDamage(310).attributeModifiers(weapon(3, -2f)));
+	public static final Item CARVING_KNIFE = registerDollcraft("carving_knife", DollcraftItem::new, new Item.Settings()
+		.repairable(Items.IRON_INGOT).maxDamage(310).attributeModifiers(weapon(4, -2.4f)),
+		BeADoll.Variant.WOODEN);
+	public static final Item MODELING_TOOL = registerDollcraft("modeling_tool", DollcraftItem::new, new Item.Settings()
+		.repairable(Items.IRON_INGOT).maxDamage(310).attributeModifiers(weapon(2, -1.3f)),
+		BeADoll.Variant.PORCELAIN);
+	public static final Item SEWING_NEEDLE = registerDollcraft("sewing_needle", DollcraftItem::new, new Item.Settings()
+		.repairable(Items.IRON_INGOT).maxDamage(310).attributeModifiers(weapon(3, -2f)),
+		BeADoll.Variant.CLOTH);
 
-	public static final Item DOLL_RIBBON = register("ribbon", RibbonItem::new, new Item.Settings());
+	public static final Item DOLL_RIBBON = registerItem("ribbon", RibbonItem::new, new Item.Settings());
 
-	public static final ComponentType<BeADoll.Variant> DOLL_VARIANT_COMPONENT = register(
+	public static final ComponentType<BeADoll.Variant> DOLL_VARIANT_COMPONENT = registerComponent(
 		"doll_variant", builder -> builder.codec(BeADoll.Variant.CODEC).packetCodec(BeADoll.Variant.PACKET_CODEC)
 	);
-	public static final Item ESSENCE_FRAGMENT = register("essence_fragment", Item::new, new Item.Settings()
+	public static final Item ESSENCE_FRAGMENT = registerItem("essence_fragment", Item::new, new Item.Settings()
 		.maxCount(1)
 		.rarity(Rarity.EPIC)
 		.component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)
 		.component(DOLL_VARIANT_COMPONENT, BeADoll.Variant.REPRESSED)
 	);
+
+
 
 	public static void inquireAboutTheCollection() {
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(itemGroup -> {
@@ -51,7 +57,9 @@ public class BeACollector {
 		});
 	}
 
-	public static Item register(RegistryKey<Item> key, Function<Item.Settings, Item> factory, Item.Settings settings) {
+
+
+	public static Item registerItem(RegistryKey<Item> key, Function<Item.Settings, Item> factory, Item.Settings settings) {
 		Item item = factory.apply(settings.registryKey(key));
 		if (item instanceof BlockItem blockItem) {
 			blockItem.appendBlocks(Item.BLOCK_ITEMS, item);
@@ -60,17 +68,32 @@ public class BeACollector {
 		return Registry.register(Registries.ITEM, key, item);
 	}
 
-	public static Item register(String id, Function<Item.Settings, Item> factory, Item.Settings settings) {
-		return register(key(id), factory, settings);
+	public static Item registerItem(String id, Function<Item.Settings, Item> factory, Item.Settings settings) {
+		return registerItem(key(id), factory, settings);
 	}
 
 	public static RegistryKey<Item> key(String thing) {
 		return RegistryKey.of(RegistryKeys.ITEM, BeADoll.id(thing));
 	}
 
-	private static <T> ComponentType<T> register(String id, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
+
+
+	public static Item registerDollcraft(RegistryKey<Item> key, BiFunction<Item.Settings, BeADoll.Variant, Item> factory, Item.Settings settings, BeADoll.Variant variant) {
+		Item item = factory.apply(settings.registryKey(key), variant);
+		return Registry.register(Registries.ITEM, key, item);
+	}
+
+	public static Item registerDollcraft(String id, BiFunction<Item.Settings, BeADoll.Variant, Item> factory, Item.Settings settings, BeADoll.Variant variant) {
+		return registerDollcraft(key(id), factory, settings, variant);
+	}
+
+
+
+	private static <T> ComponentType<T> registerComponent(String id, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
 		return Registry.register(Registries.DATA_COMPONENT_TYPE, BeADoll.id(id), builderOperator.apply(ComponentType.builder()).build());
 	}
+
+
 
 	public static AttributeModifiersComponent weapon(float attackDamage, float attackSpeed) {
 		return AttributeModifiersComponent.builder()
