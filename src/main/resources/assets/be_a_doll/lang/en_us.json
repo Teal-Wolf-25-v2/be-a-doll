@@ -12,6 +12,12 @@
 
 	"subtitles.item.be_a_doll.ribbon.tied": "Ribbon tied",
 	"subtitles.item.be_a_doll.ribbon.untied": "Ribbon untied",
+	"subtitles.entity.be_a_doll.doll.care.wooden": "Wooden doll tends to itself",
+	"subtitles.entity.be_a_doll.doll.care.porcelain": "Porcelain doll tends to itself",
+	"subtitles.entity.be_a_doll.doll.care.cloth": "Cloth doll tends to itself",
+	"subtitles.entity.be_a_doll.doll.care.complete": "Doll brushes off",
+	"subtitles.entity.be_a_doll.doll.essence.take": "Essence fragments",
+	"subtitles.entity.be_a_doll.doll.essence.place": "Essence consumes",
 
 	"tag.item.be_a_doll.wooden_doll_care_materials": "Wooden Doll Care Materials",
 	"tag.item.be_a_doll.porcelain_doll_care_materials": "Porcelain Doll Care Materials",

@@ -20,7 +20,7 @@ public class RibbonItem extends Item {
 	public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
 		if (entity instanceof PlayerEntity doll && BeAMaid.isDoll(doll)) {
 			doll.startRiding(user, false);
-			user.getWorld().playSound(user, user.getX(), user.getY(), user.getZ(), BeABirdwatcher.RAVEN_CHIRP, SoundCategory.PLAYERS, 1f, 1f);
+			user.playSound(BeABirdwatcher.RAVEN_CHIRP, 1f, 1f);
 			return ActionResult.SUCCESS;
 		}
 		return super.useOnEntity(stack, user, entity, hand);
@@ -32,7 +32,7 @@ public class RibbonItem extends Item {
 		// yeah no lol. did you not see the C2SDollDismountLetter i had to make? client's gotta hear about this
 		if (/*!user.getWorld().isClient && */!user.getPassengerList().isEmpty() && user.shouldCancelInteraction()) {
 			user.removeAllPassengers();
-			user.getWorld().playSound(user, user.getX(), user.getY(), user.getZ(), BeABirdwatcher.RAVEN_CRY, SoundCategory.PLAYERS, 1f, 1f);
+			user.playSound(BeABirdwatcher.RAVEN_CRY, 1f, 1f);
 			return ActionResult.SUCCESS;
 		} else {
 			return super.use(world, user, hand);

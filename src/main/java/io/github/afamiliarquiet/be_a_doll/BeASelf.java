@@ -1,5 +1,6 @@
 package io.github.afamiliarquiet.be_a_doll;
 
+import io.github.afamiliarquiet.be_a_doll.diary.BeABirdwatcher;
 import io.github.afamiliarquiet.be_a_doll.diary.BeACollector;
 import io.github.afamiliarquiet.be_a_doll.diary.BeALibrarian;
 import net.minecraft.entity.player.PlayerEntity;
@@ -14,10 +15,11 @@ public class BeASelf {
 			if (cursorStack.isOf(BeACollector.ESSENCE_FRAGMENT)) {
 				BeADoll.Variant variant = cursorStack.get(BeACollector.DOLL_VARIANT_COMPONENT);
 				if (variant != null) {
-					// todo.. benefits n tfy stuff
+					// todo.. benefits n tfy stuff.
 					if (!player.getWorld().isClient()) {
 						BeAMaid.setDoll(player, variant);
 					}
+					player.playSound(BeABirdwatcher.ESSENCE_PLACE, 1f, player.getRandom().nextFloat() * 0.2f + 0.9f);
 					return ItemStack.EMPTY;
 				}
 			}
@@ -26,6 +28,7 @@ public class BeASelf {
 				// todo.. wooziness n sparkly essence stuff
 				ItemStack fragment = BeACollector.ESSENCE_FRAGMENT.getDefaultStack();
 				fragment.set(BeACollector.DOLL_VARIANT_COMPONENT, BeALibrarian.inspectSupposedPlayer(player));
+				player.playSound(BeABirdwatcher.ESSENCE_TAKE, 1f, player.getRandom().nextFloat() * 0.2f + 0.9f);
 				return fragment;
 			}
 		}

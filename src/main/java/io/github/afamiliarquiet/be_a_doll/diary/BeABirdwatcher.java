@@ -7,8 +7,16 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 
 public class BeABirdwatcher {
-	public static final SoundEvent RAVEN_CHIRP = registerSound("item.familiar_magic.ribbon.tied");
-	public static final SoundEvent RAVEN_CRY = registerSound("item.familiar_magic.ribbon.untied");
+	public static final SoundEvent RAVEN_CHIRP = registerSound("item.be_a_doll.ribbon.tied");
+	public static final SoundEvent RAVEN_CRY = registerSound("item.be_a_doll.ribbon.untied");
+
+	public static final SoundEvent CARE_WOODEN = registerSound("entity.be_a_doll.doll.care.wooden");
+	public static final SoundEvent CARE_PORCELAIN = registerSound("entity.be_a_doll.doll.care.porcelain");
+	public static final SoundEvent CARE_CLOTH = registerSound("entity.be_a_doll.doll.care.cloth");
+	public static final SoundEvent CARE_COMPLETE = registerSound("entity.be_a_doll.doll.care.complete");
+
+	public static final SoundEvent ESSENCE_TAKE = registerSound("entity.be_a_doll.doll.essence.take");
+	public static final SoundEvent ESSENCE_PLACE = registerSound("entity.be_a_doll.doll.essence.place");
 
 	public static void offerTea() {
 		// have you heard their songs? listen a little, i've got a small catalogue

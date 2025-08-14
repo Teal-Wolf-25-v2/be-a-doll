@@ -1,5 +1,5 @@
 {
-	"item.familiar_magic.ribbon.tied": {
+	"item.be_a_doll.ribbon.tied": {
 		"sounds": [
 			"entity/leashknot/leash1",
 			"entity/leashknot/leash2",
@@ -7,12 +7,160 @@
 		],
 		"subtitle": "subtitles.item.be_a_doll.ribbon.tied"
 	},
-	"item.familiar_magic.ribbon.untied": {
+	"item.be_a_doll.ribbon.untied": {
 		"sounds": [
 			"entity/leashknot/unleash1",
 			"entity/leashknot/unleash2",
 			"entity/leashknot/unleash3"
 		],
 		"subtitle": "subtitles.item.be_a_doll.ribbon.untied"
+	},
+	"entity.be_a_doll.doll.care.wooden": {
+		"sounds": [
+			{
+				"name": "item/axe/strip1",
+				"volume": 0.9
+			},
+			{
+				"name": "item/axe/strip1",
+				"pitch": 0.85,
+				"volume": 0.9
+			},
+			{
+				"name": "item/axe/strip2",
+				"volume": 0.9
+			},
+			{
+				"name": "item/axe/strip2",
+				"pitch": 0.85,
+				"volume": 0.9
+			},
+			{
+				"name": "item/axe/strip3",
+				"volume": 0.9
+			},
+			{
+				"name": "item/axe/strip3",
+				"pitch": 0.85,
+				"volume": 0.9
+			},
+			{
+				"name": "item/axe/strip4",
+				"volume": 0.9
+			},
+			{
+				"name": "item/axe/strip4",
+				"pitch": 0.85,
+				"volume": 0.9
+			}
+		],
+		"subtitle": "subtitles.entity.be_a_doll.doll.care.wooden"
+	},
+	"entity.be_a_doll.doll.care.porcelain": {
+		"sounds": [
+			{
+				"name": "block/packed_mud/break1",
+				"volume": 0.3
+			},
+			{
+				"name": "block/packed_mud/break2",
+				"volume": 0.3
+			},
+			{
+				"name": "block/packed_mud/break3",
+				"volume": 0.3
+			},
+			{
+				"name": "block/packed_mud/break4",
+				"volume": 0.3
+			},
+			{
+				"name": "block/packed_mud/break5",
+				"volume": 0.3
+			},
+			{
+				"name": "block/packed_mud/break6",
+				"volume": 0.3
+			}
+		],
+		"subtitle": "subtitles.entity.be_a_doll.doll.care.porcelain"
+	},
+	"entity.be_a_doll.doll.care.cloth": {
+		"sounds": [
+			"block/cobweb/break1",
+			"block/cobweb/break2",
+			"block/cobweb/break3",
+			"block/cobweb/break4",
+			"block/cobweb/break5",
+			"block/cobweb/break6"
+		],
+		"subtitle": "subtitles.entity.be_a_doll.doll.care.cloth"
+	},
+	"entity.be_a_doll.doll.care.complete": {
+		"sounds": [
+			{
+				"name": "item/brush/brushing_generic1",
+				"pitch": 0.8
+			},
+			{
+				"name": "item/brush/brushing_generic2",
+				"pitch": 0.8
+			},
+			{
+				"name": "item/brush/brushing_generic3",
+				"pitch": 0.8
+			},
+			{
+				"name": "item/brush/brushing_generic4",
+				"pitch": 0.8
+			}
+		],
+		"subtitle": "subtitles.entity.be_a_doll.doll.care.complete"
+	},
+	"entity.be_a_doll.doll.essence.take": {
+		"sounds": [
+			{
+				"name": "mob/allay/idle_without_item1",
+				"volume": 0.25
+			},
+			{
+				"name": "mob/allay/idle_without_item2",
+				"volume": 0.25
+			},
+			{
+				"name": "mob/allay/idle_without_item3",
+				"volume": 0.25
+			},
+			{
+				"name": "mob/allay/idle_without_item4",
+				"volume": 0.25
+			}
+		],
+		"subtitle": "subtitles.entity.be_a_doll.doll.essence.take"
+	},
+	"entity.be_a_doll.doll.essence.place": {
+		"sounds": [
+			{
+				"name": "mob/allay/idle_with_item1",
+				"pitch": 1.25,
+				"volume": 0.3
+			},
+			{
+				"name": "mob/allay/idle_with_item2",
+				"pitch": 1.25,
+				"volume": 0.3
+			},
+			{
+				"name": "mob/allay/idle_with_item3",
+				"pitch": 1.25,
+				"volume": 0.3
+			},
+			{
+				"name": "mob/allay/idle_with_item4",
+				"pitch": 1.25,
+				"volume": 0.3
+			}
+		],
+		"subtitle": "subtitles.entity.be_a_doll.doll.essence.place"
 	}
 }
