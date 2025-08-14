@@ -11,6 +11,10 @@ public class BeAResearcher {
 		RegistryKeys.DAMAGE_TYPE, BeADoll.id("doll_immune")
 	);
 
+	public static final TagKey<DamageType> DOLL_MODIFIES_MESSAGE = TagKey.of(
+		RegistryKeys.DAMAGE_TYPE, BeADoll.id("doll_modifies_message")
+	);
+
 	public static final TagKey<Item> WOODEN_DOLL_CARE_MATERIALS = TagKey.of(
 		RegistryKeys.ITEM, BeADoll.id("wooden_doll_care_materials")
 	);

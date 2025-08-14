@@ -15,6 +15,9 @@ import org.jetbrains.annotations.Nullable;
 public class BeALibrarian {
 	// how does this librarian differ from the maid? this one handles the forbidden (experimental) knowledge!
 
+	// TODO IMPORTANT - death in singleplayer leads to receiving attachment change for unknown target kick
+	//  (likely from the copy on death thing, poke at that)
+	//  happens in multiplayer too. oooops..
 	public static final AttachmentType<BeADoll.Variant> DOLL_VARIANT = AttachmentRegistry.create(
 		BeADoll.id("doll_variant"),
 		builder -> builder

@@ -1,0 +1,14 @@
+{
+	"values": [
+		"minecraft:drown",
+		"minecraft:generic",
+		"minecraft:generic_kill",
+		"minecraft:indirect_magic",
+		"minecraft:in_wall",
+		"minecraft:magic",
+		"minecraft:mob_attack",
+		"minecraft:player_attack",
+		"minecraft:starve",
+		"minecraft:thorns"
+	]
+}

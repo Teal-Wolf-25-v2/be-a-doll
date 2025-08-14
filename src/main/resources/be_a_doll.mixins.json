@@ -10,8 +10,9 @@
 		"shoulder_riding.ShoulderRidingEntityMixin",
 		"shoulder_riding.SpectatorDropsDollsServerPlayerEntityMixin",
 		"synthetic_treats.DollsCantEatPlayerEntityMixin",
-		"synthetic_treats.SyntheticResistanceLivingEntityMixin",
 		"synthetic_treats.LightweightDollPowderSnowBlockMixin",
+		"synthetic_treats.SyntheticDeathMessagesDamageSourceMixin",
+		"synthetic_treats.SyntheticResistanceLivingEntityMixin",
 		"synthetic_treats.SyntheticResistancePlayerEntityMixin"
 	],
 	"injectors": {

@@ -17,5 +17,26 @@
 	"tag.item.be_a_doll.porcelain_doll_care_materials": "Porcelain Doll Care Materials",
 	"tag.item.be_a_doll.cloth_doll_care_materials": "Cloth Doll Care Materials",
 
-	"effect.be_a_doll.cared_for": "Cared For"
+	"effect.be_a_doll.cared_for": "Cared For",
+
+	"death.attack.doll.drown": "%1$s sank to the depths",
+	"death.attack.doll.drown.player": "%1$s sank to the depths while trying to escape %2$s",
+	"death.attack.doll.generic": "%1$s became inanimate",
+	"death.attack.doll.generic.player": "%1$s became inanimate because of %2$s",
+	"death.attack.doll.genericKill": "%1$s was broken",
+	"death.attack.doll.genericKill.player": "%1$s was broken while fighting %2$s",
+	"death.attack.doll.indirectMagic": "%1$s was broken by %2$s using magic",
+	"death.attack.doll.indirectMagic.item": "%1$s was broken by %2$s using %3$s",
+	"death.attack.doll.inWall": "%1$s was squished in a wall",
+	"death.attack.doll.inWall.player": "%1$s was squished in a wall while fighting %2$s",
+	"death.attack.doll.magic": "%1$s was broken by magic",
+	"death.attack.doll.magic.player": "%1$s was broken by magic while trying to escape %2$s",
+	"death.attack.doll.mob": "%1$s was taken apart by %2$s",
+	"death.attack.doll.mob.item": "%1$s was taken apart by %2$s using %3$s",
+	"death.attack.doll.player": "%1$s was taken apart by %2$s",
+	"death.attack.doll.player.item": "%1$s was taken apart by %2$s using %3$s",
+	"death.attack.doll.starve": "%1$s fell apart",
+	"death.attack.doll.starve.player": "%1$s fell apart while fighting %2$s",
+	"death.attack.doll.thorns": "%1$s was broken while trying to hurt %2$s",
+	"death.attack.doll.thorns.item": "%1$s was broken by %3$s while trying to hurt %2$s"
 }
