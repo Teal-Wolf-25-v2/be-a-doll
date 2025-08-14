@@ -46,4 +46,23 @@ there's also config to customize or disable this, which makes me happy!)
 
 ---
 
+### tweaks:
+
+launching with the mod will generate a config at `<minecraft folder>/config/be_a_doll.toml`, which can be used to tweak
+the chat interference that comes with being a doll.
+
+you can also modify a few of the tags:
+
+`.../tags/item/<material>_doll_care_materials` controls which items are usable as consumable care materials
+for dolls of that <material> type
+
+`.../tags/damage_type/doll_immune` makes dolls immune to all damage types within (by default just freezing and drowning)
+
+`.../tags/damage_type/doll_modifies_message` will add new death message translation keys for when dolls die
+of that damage type - if you add more, be sure to also add translations in your lang file.
+this only works on damage types of the format `death.attack.<more...>`, 
+and their dollified copies will follow the format `death.attack.doll.<more...>`
+
+---
+
 ### [![Made for ModFest: Toybox](https://raw.githubusercontent.com/ModFest/art/v2/badge/svg/toybox/compact.svg)](https://modfest.net/toybox)

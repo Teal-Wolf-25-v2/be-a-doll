@@ -44,7 +44,7 @@ public class DollcraftItem extends Item {
 	public int getMaxUseTime(ItemStack stack, LivingEntity user) {
 		return 62;
 	}
-
+	// todo - maybe cooldown?
 	@Override
 	public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
 		if (user instanceof PlayerEntity doll) {
