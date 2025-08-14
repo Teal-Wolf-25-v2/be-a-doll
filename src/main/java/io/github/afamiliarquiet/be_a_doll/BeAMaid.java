@@ -2,6 +2,7 @@ package io.github.afamiliarquiet.be_a_doll;
 
 import com.google.common.collect.HashMultimap;
 import io.github.afamiliarquiet.be_a_doll.diary.BeALibrarian;
+import io.github.afamiliarquiet.be_a_doll.diary.BeAWitch;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
@@ -29,7 +30,7 @@ public class BeAMaid {
 	static {
 		DOLL_MODIFICATIONS.put(EntityAttributes.SCALE, new EntityAttributeModifier(DOLLIFIED_MODIFIER_ID, -0.7, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 		DOLL_MODIFICATIONS.put(EntityAttributes.MAX_HEALTH, new EntityAttributeModifier(DOLLIFIED_MODIFIER_ID, -0.6, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
-		DOLL_MODIFICATIONS.put(EntityAttributes.ATTACK_DAMAGE, new EntityAttributeModifier(DOLLIFIED_MODIFIER_ID, -1, EntityAttributeModifier.Operation.ADD_VALUE));
+		DOLL_MODIFICATIONS.put(EntityAttributes.ATTACK_DAMAGE, new EntityAttributeModifier(DOLLIFIED_MODIFIER_ID, -0.8, EntityAttributeModifier.Operation.ADD_VALUE));
 	}
 
 	public static void bestowApron() {
@@ -73,14 +74,15 @@ public class BeAMaid {
 			// add persistent instead of add temporary. because doll is a persistent fact of life
 			DOLL_MODIFICATIONS.forEach((attribute, modifier) -> {
 				EntityAttributeInstance instance = player.getAttributes().getCustomInstance(attribute);
-				if (instance != null) {
+				if (instance != null && !instance.hasModifier(modifier.id())) {
 					instance.addPersistentModifier(modifier);
 				}
 			});
 			BeALibrarian.reshapeDoll(player, variant);
 		} else {
-			player.getAttributes().removeModifiers(DOLL_MODIFICATIONS);
 			BeALibrarian.repress(player);
+			player.removeStatusEffect(BeAWitch.CARED_FOR);
+			player.getAttributes().removeModifiers(DOLL_MODIFICATIONS);
 		}
 	}
 

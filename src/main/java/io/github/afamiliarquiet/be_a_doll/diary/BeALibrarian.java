@@ -43,7 +43,6 @@ public class BeALibrarian {
 	 * @return the doll's variant, or the default doll type (which is NOT a normal player and is still a doll type)
 	 */
 	public static @NotNull BeADoll.Variant inspectDollMaterial(@NotNull PlayerEntity doll) {
-		BeADoll.log("i am in the inspectDollMaterial function");
 		return doll.getAttachedOrCreate(DOLL_VARIANT);
 	}
 
@@ -58,22 +57,18 @@ public class BeALibrarian {
 
 	// yeah we're just washing off the experimental api smell here
 	public static void reshapeDoll(@NotNull PlayerEntity doll, @NotNull BeADoll.Variant variant) {
-		BeADoll.log("i am in the reshapeDoll function");
 		doll.setAttached(DOLL_VARIANT, variant);
 	}
 
 	public static @Nullable Text inspectDollLabel(@NotNull PlayerEntity doll) {
-		BeADoll.log("i am in the inspectDollLabel function");
 		return doll.getAttached(DOLL_NAME);
 	}
 
 	public static void relabelDoll(@NotNull PlayerEntity doll, @NotNull Text name) {
-		BeADoll.log("i am in the relabelDoll function");
 		doll.setAttached(DOLL_NAME, name);
 	}
 
 	public static void repress(@NotNull PlayerEntity player) {
-		BeADoll.log("i am in the repress function");
 		player.removeAttached(DOLL_VARIANT);
 		player.removeAttached(DOLL_NAME);
 	}

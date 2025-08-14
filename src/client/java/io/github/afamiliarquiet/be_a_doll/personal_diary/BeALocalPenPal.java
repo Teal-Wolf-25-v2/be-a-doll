@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.entity.Entity;
 
 public class BeALocalPenPal {
-	public static void initialize() {
+	public static void fillPen() {
 		ClientPlayNetworking.registerGlobalReceiver(S2CDollDismountLetter.ID, ((letter, context) -> {
 			letter.dismountingDollIds().forEach(id -> {
 				Entity ridingDoll = context.player().getWorld().getEntityById(id);

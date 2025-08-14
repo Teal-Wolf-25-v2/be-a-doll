@@ -24,6 +24,7 @@ loom {
 		}
 	}
 
+	accessWidenerPath = file("src/main/resources/be_a_doll.accesswidener") // is this for neo? maybe.
 }
 
 dependencies {

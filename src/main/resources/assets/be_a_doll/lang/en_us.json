@@ -15,5 +15,7 @@
 
 	"tag.item.be_a_doll.wooden_doll_care_materials": "Wooden Doll Care Materials",
 	"tag.item.be_a_doll.porcelain_doll_care_materials": "Porcelain Doll Care Materials",
-	"tag.item.be_a_doll.cloth_doll_care_materials": "Cloth Doll Care Materials"
+	"tag.item.be_a_doll.cloth_doll_care_materials": "Cloth Doll Care Materials",
+
+	"effect.be_a_doll.cared_for": "Cared For"
 }

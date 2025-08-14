@@ -24,6 +24,7 @@
 			"environment": "client"
 		}
 	],
+	"accessWidener": "be_a_doll.accesswidener",
 	"depends": {
 		"minecraft": ">=${mc}",
 		"fabricloader": ">=${fl}",

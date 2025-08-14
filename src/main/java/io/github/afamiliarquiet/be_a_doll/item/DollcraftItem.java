@@ -3,9 +3,9 @@ package io.github.afamiliarquiet.be_a_doll.item;
 import io.github.afamiliarquiet.be_a_doll.BeADoll;
 import io.github.afamiliarquiet.be_a_doll.BeAMaid;
 import io.github.afamiliarquiet.be_a_doll.diary.BeALibrarian;
+import io.github.afamiliarquiet.be_a_doll.diary.BeAWitch;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -42,7 +42,7 @@ public class DollcraftItem extends Item {
 
 	@Override
 	public int getMaxUseTime(ItemStack stack, LivingEntity user) {
-		return 130;
+		return 62;
 	}
 
 	@Override
@@ -90,10 +90,9 @@ public class DollcraftItem extends Item {
 		//  if i do the retexture stuff per-doll it's gonna be annoying. i'd have to retexture all the hearts basically,
 		//  cause absorption isn't specific to source and then if all absorption is that why not all hearts..
 		//  but retexturing all the hearts and food isn't terrible.
-		// todo - but yeah i should do that because i need to remove this absorption when they stop being a doll
 		// todo - particles n sound here, maybe a usage tick too
 		doll.getHungerManager().add(4, 5);
-		doll.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, -1, 2, false, false));
+		doll.addStatusEffect(new StatusEffectInstance(BeAWitch.CARED_FOR, -1, 2, false, false));
 	}
 
 	/**
