@@ -34,9 +34,9 @@ public class BeAMaid {
 	}
 
 	public static void bestowApron() {
-		ServerPlayerEvents.COPY_FROM.register(((oldPlayer, newPlayer, alive) ->
-				// todo - should i care about alive? in theory maybe but it doesn't really matter
-				BeAMaid.setDoll(newPlayer, BeALibrarian.inspectSupposedPlayer(oldPlayer))
+		ServerPlayerEvents.AFTER_RESPAWN.register(((oldPlayer, newPlayer, alive) ->
+			// todo - should i care about alive? in theory maybe but it doesn't really matter
+			BeAMaid.setDoll(newPlayer, BeALibrarian.inspectSupposedPlayer(oldPlayer))
 		));
 	}
 
@@ -95,6 +95,7 @@ public class BeAMaid {
 		}
 
 		// todo - add more? change how it works? eh.
+		// todo - maybe add a wick of sorts? to start with asdf or sdf or such more often
 
 		String material = !TINKERER.letterPoolOverride.isEmpty() ? TINKERER.letterPoolOverride : "asdfjkl;";
 		List<Character> spool = new ArrayList<>(material.length());
