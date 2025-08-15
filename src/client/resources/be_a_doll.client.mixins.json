@@ -1,20 +1,21 @@
 {
-	"required": true,
-	"package": "io.github.afamiliarquiet.be_a_doll.mixin.client",
-	"compatibilityLevel": "JAVA_21",
-	"client": [
-		"DollRetexturedInGameHudMixin",
-		"DollsNeedNoAirInGameHudMixin",
-		"IgnorePassengersLocatorBarMixin",
-		"Keysmash",
-		"NameablePlayerEntityRenderer",
-		"SelfCreativeInventoryScreenMixin",
-		"SelfInventoryScreenMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
-	},
-	"mixinextras": {
-		"minVersion": "0.5.0"
+  "required": true,
+  "package": "io.github.afamiliarquiet.be_a_doll.mixin.client",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "DollReadableNameLivingEntityRendererMixin",
+    "DollRetexturedInGameHudMixin",
+    "DollsNeedNoAirInGameHudMixin",
+    "IgnorePassengersLocatorBarMixin",
+    "Keysmash",
+    "NameablePlayerEntityRenderer",
+    "SelfCreativeInventoryScreenMixin",
+    "SelfInventoryScreenMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixinextras": {
+    "minVersion": "0.5.0"
 	}
 }
