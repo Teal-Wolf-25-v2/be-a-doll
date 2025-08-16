@@ -12,7 +12,7 @@ would you be a doll? i certainly would, so i made this collection of toyful twea
 - dolls don't always feel like speaking up
 - dolls can be used to play dress up!
 - dolls can be made of a variety(3) of materials
-- dolls can be secured to a player's shoulders with ribbon
+- dolls can be secured to a player's shoulders with ribbon (shift+rclick ribbon to force dolls off)
 - dolls can be renamed (only in world) with a nametag (dolls can see their own in f5 too) (this is cleared when you become not-doll)
 - dolls are immune to drowning and freezing
 - dolls are sustained by repairs instead of food (use your dollcraft item with sticks/clay/string in inventory)

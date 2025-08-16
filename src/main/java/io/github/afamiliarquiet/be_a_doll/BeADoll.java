@@ -1,6 +1,7 @@
 package io.github.afamiliarquiet.be_a_doll;
 
 import io.github.afamiliarquiet.be_a_doll.diary.BeABirdwatcher;
+import io.github.afamiliarquiet.be_a_doll.diary.BeABug;
 import io.github.afamiliarquiet.be_a_doll.diary.BeACollector;
 import io.github.afamiliarquiet.be_a_doll.diary.BeACook;
 import io.github.afamiliarquiet.be_a_doll.diary.BeALibrarian;
@@ -40,6 +41,7 @@ public class BeADoll implements ModInitializer {
 		BeALibrarian.lookForABook();
 		BeAResearcher.grantFunding();
 		BeAWitch.putOnHat();
+		BeABug.lookAtBug();
 	}
 
 	public static Identifier id(String thing) {

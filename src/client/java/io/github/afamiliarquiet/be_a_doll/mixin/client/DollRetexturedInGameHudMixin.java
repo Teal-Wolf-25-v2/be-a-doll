@@ -4,22 +4,28 @@ import com.llamalad7.mixinextras.expression.Definition;
 import com.llamalad7.mixinextras.expression.Expression;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
+import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import io.github.afamiliarquiet.be_a_doll.BeACurator;
 import io.github.afamiliarquiet.be_a_doll.BeAMaid;
 import io.github.afamiliarquiet.be_a_doll.diary.BeALibrarian;
+import io.github.afamiliarquiet.be_a_doll.diary.BeAWitch;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(InGameHud.class)
 public class DollRetexturedInGameHudMixin {
+	@Shadow
+	private int ticks;
+
 	@Inject(method = "renderFood", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/HungerManager;getSaturationLevel()F"))
 	private void alterHungerTextures(DrawContext context, PlayerEntity player, int top, int right, CallbackInfo ci,
 									 @Local(name = "identifier") LocalRef<Identifier> emptyId,
@@ -66,6 +72,29 @@ public class DollRetexturedInGameHudMixin {
 					return BeACurator.CARED_HEART_FULL;
 				}
 			}
+		} else {
+			return original;
+		}
+	}
+
+	@Definition(id = "hasStatusEffect", method = "Lnet/minecraft/entity/player/PlayerEntity;hasStatusEffect(Lnet/minecraft/registry/entry/RegistryEntry;)Z")
+	@Expression("?.hasStatusEffect(?)")
+	@ModifyExpressionValue(method = "renderStatusBars", at = @At("MIXINEXTRAS:EXPRESSION"))
+	private boolean orOverflowing(boolean original, @Local(name = "playerEntity") PlayerEntity player) {
+		return original || player.hasStatusEffect(BeAWitch.OVERFLOWING);
+	}
+
+	@Definition(id = "getSaturationLevel", method = "Lnet/minecraft/entity/player/HungerManager;getSaturationLevel()F")
+	@Expression("?.getSaturationLevel() <= ?")
+	@ModifyExpressionValue(method = "renderFood", at = @At("MIXINEXTRAS:EXPRESSION"))
+	private boolean resaturatingWave(boolean original, @Local(argsOnly = true) PlayerEntity player, @Local(name="j") int index, @Local(name="k") LocalIntRef yPos) {
+		if (player.hasStatusEffect(BeAWitch.OVERFLOWING) && BeAMaid.isDoll(player)) {
+			// if i was a super optimizer i could put the ticks % 15 outside the for loop.
+			if (index == this.ticks % 25) {
+				yPos.set(yPos.get() - 2);
+			}
+
+			return false; // basically cancels the if statement for random bobs
 		} else {
 			return original;
 		}

@@ -24,6 +24,8 @@
 	"tag.item.be_a_doll.cloth_doll_care_materials": "Cloth Doll Care Materials",
 
 	"effect.be_a_doll.cared_for": "Cared For",
+	"effect.be_a_doll.fragmented": "Fragmented",
+	"effect.be_a_doll.overflowing": "Overflowing",
 
 	"death.attack.doll.drown": "%1$s sank to the depths",
 	"death.attack.doll.drown.player": "%1$s sank to the depths while trying to escape %2$s",

@@ -7,6 +7,7 @@ import io.github.afamiliarquiet.be_a_doll.diary.BeALibrarian;
 import io.github.afamiliarquiet.be_a_doll.diary.BeAWitch;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.UseCooldownComponent;
+import net.minecraft.component.type.WeaponComponent;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
@@ -25,7 +26,7 @@ public class DollcraftItem extends Item {
 	protected BeADoll.Variant variant;
 
 	public DollcraftItem(Settings settings, BeADoll.Variant variant) {
-		super(settings.useCooldown(1.3f));
+		super(settings.useCooldown(1.3f).component(DataComponentTypes.WEAPON, new WeaponComponent(1)));
 		this.variant = variant;
 	}
 
@@ -42,6 +43,7 @@ public class DollcraftItem extends Item {
 
 	@Override
 	public UseAction getUseAction(ItemStack stack) {
+		// todo - looks wonky in off hand because of transforms. copy brush model/itemstuffs
 		return UseAction.BRUSH;
 	}
 
@@ -53,7 +55,7 @@ public class DollcraftItem extends Item {
 	@Override
 	public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
 		if (user instanceof PlayerEntity praiseTheDoll) {
-			if (remainingUseTicks < 6) {
+			if (remainingUseTicks < 6 && remainingUseTicks > -6) { // trying to account for latency lag with the -6
 				if (remainingUseTicks % 4 == 3) {
 					praiseTheDoll.playSound(BeABirdwatcher.CARE_COMPLETE, 1f, praiseTheDoll.getRandom().nextFloat() * 0.2f + 0.9f);
 				}
@@ -119,6 +121,7 @@ public class DollcraftItem extends Item {
 	private void caringIsCaring(PlayerEntity doll) {
 		// dolls get full saturation and some absorption every time because i love them (because they are love)
 		// todo - particles here, maybe a usage tick too
+		//  weaving particle is nice for cloth dolls
 		doll.playSound(BeABirdwatcher.CARE_COMPLETE, 1f, doll.getRandom().nextFloat() * 0.2f + 0.9f);
 		doll.getHungerManager().add(4, 5);
 		doll.addStatusEffect(new StatusEffectInstance(BeAWitch.CARED_FOR, -1, 2, false, false));
@@ -129,12 +132,14 @@ public class DollcraftItem extends Item {
 	 * however dolls have varied materials that don't matter, please check creative elsewhere
 	 */
 	public ItemStack findCareMaterial(PlayerEntity user) {
-		Predicate<ItemStack> predicate = stack -> stack.isIn(this.variant.getCareMaterialTag());
+		if (this.variant == BeALibrarian.inspectDollMaterial(user)) {
+			Predicate<ItemStack> predicate = stack -> stack.isIn(this.variant.getCareMaterialTag());
 
-		for (int i = 0; i < user.getInventory().size(); i++) {
-			ItemStack current = user.getInventory().getStack(i);
-			if (predicate.test(current)) {
-				return current;
+			for (int i = 0; i < user.getInventory().size(); i++) {
+				ItemStack current = user.getInventory().getStack(i);
+				if (predicate.test(current)) {
+					return current;
+				}
 			}
 		}
 

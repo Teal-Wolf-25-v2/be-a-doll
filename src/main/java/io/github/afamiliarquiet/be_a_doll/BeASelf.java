@@ -3,6 +3,8 @@ package io.github.afamiliarquiet.be_a_doll;
 import io.github.afamiliarquiet.be_a_doll.diary.BeABirdwatcher;
 import io.github.afamiliarquiet.be_a_doll.diary.BeACollector;
 import io.github.afamiliarquiet.be_a_doll.diary.BeALibrarian;
+import io.github.afamiliarquiet.be_a_doll.diary.BeAWitch;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
@@ -15,26 +17,40 @@ public class BeASelf {
 			if (cursorStack.isOf(BeACollector.ESSENCE_FRAGMENT)) {
 				BeADoll.Variant variant = cursorStack.get(BeACollector.DOLL_VARIANT_COMPONENT);
 				if (variant != null) {
-					// todo.. benefits n tfy stuff.
-					if (!player.getWorld().isClient()) {
-						BeAMaid.setDoll(player, variant);
-					}
-					player.playSound(BeABirdwatcher.ESSENCE_PLACE, 1f, player.getRandom().nextFloat() * 0.2f + 0.9f);
+					doEssencePlaceEffects(player, variant);
 					return ItemStack.EMPTY;
 				}
 			}
 		} else {
 			if (cursorStack.isEmpty()) {
-				// todo.. wooziness n sparkly essence stuff
+				doEssenceTakeEffects(player);
 				ItemStack fragment = BeACollector.ESSENCE_FRAGMENT.getDefaultStack();
 				fragment.set(BeACollector.DOLL_VARIANT_COMPONENT, BeALibrarian.inspectSupposedPlayer(player));
-				player.playSound(BeABirdwatcher.ESSENCE_TAKE, 1f, player.getRandom().nextFloat() * 0.2f + 0.9f);
 				return fragment;
 			}
 		}
 
 		// all else fails..
 		return null;
+	}
+
+	private static void doEssencePlaceEffects(PlayerEntity player, BeADoll.Variant variant) {
+		// todo.. maybe a splash of particles here and on take
+		player.addStatusEffect(new StatusEffectInstance(BeAWitch.OVERFLOWING, 300, 1));
+		player.playSound(BeABirdwatcher.ESSENCE_PLACE, 1f, player.getRandom().nextFloat() * 0.2f + 0.9f);
+		if (!player.getWorld().isClient()) {
+			BeAMaid.setDoll(player, variant);
+		}
+	}
+
+	private static void doEssenceTakeEffects(PlayerEntity player) {
+		StatusEffectInstance fragmentation = player.getStatusEffect(BeAWitch.FRAGMENTED);
+		player.addStatusEffect(new StatusEffectInstance(
+			BeAWitch.FRAGMENTED,
+			1200 + (fragmentation != null ? fragmentation.getDuration() : 0),
+			(fragmentation != null ? fragmentation.getAmplifier() + 1 : 0)
+		));
+		player.playSound(BeABirdwatcher.ESSENCE_TAKE, 1f, player.getRandom().nextFloat() * 0.2f + 0.9f);
 	}
 
 	public static boolean isMouseInSurvivalSelf(double mouseX, double mouseY, int screenX, int screenY) {

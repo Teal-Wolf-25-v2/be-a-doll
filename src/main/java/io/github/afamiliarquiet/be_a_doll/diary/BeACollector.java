@@ -25,7 +25,7 @@ import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 public class BeACollector {
-	// todo - it might make more sense for there to be a doll.. .variant component..... i already have that
+	// notodo - it might make more sense for there to be a doll.. .variant component..... i already have that
 	//  but wait i can't add that component to a diamond pickaxe. guh
 	public static final Item CARVING_KNIFE = registerDollcraft("carving_knife", DollcraftItem::new, new Item.Settings()
 		.repairable(Items.IRON_INGOT).maxDamage(310).attributeModifiers(weapon(4, -2.4f)),

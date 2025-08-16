@@ -35,7 +35,7 @@ public class BeAMaid {
 
 	public static void bestowApron() {
 		ServerPlayerEvents.AFTER_RESPAWN.register(((oldPlayer, newPlayer, alive) ->
-			// todo - should i care about alive? in theory maybe but it doesn't really matter
+			// should i care about alive? in theory maybe but it doesn't really matter
 			BeAMaid.setDoll(newPlayer, BeALibrarian.inspectSupposedPlayer(oldPlayer))
 		));
 	}
@@ -61,7 +61,6 @@ public class BeAMaid {
 	}
 
 	public static void setDoll(@Nullable PlayerEntity player, BeADoll.Variant variant) {
-		// todo - maybe throw in an isClient check so client and server don't try to desync? idk if that'll happen
 		if (player == null || player.getWorld().isClient()) {
 			return;
 		}
@@ -94,7 +93,6 @@ public class BeAMaid {
 			return originalMessage;
 		}
 
-		// todo - add more? change how it works? eh.
 		// todo - maybe add a wick of sorts? to start with asdf or sdf or such more often
 
 		String material = !TINKERER.letterPoolOverride.isEmpty() ? TINKERER.letterPoolOverride : "asdfjkl;";
