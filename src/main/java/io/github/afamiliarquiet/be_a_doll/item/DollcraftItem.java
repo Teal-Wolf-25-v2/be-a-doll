@@ -43,7 +43,6 @@ public class DollcraftItem extends Item {
 
 	@Override
 	public UseAction getUseAction(ItemStack stack) {
-		// todo - looks wonky in off hand because of transforms. copy brush model/itemstuffs
 		return UseAction.BRUSH;
 	}
 

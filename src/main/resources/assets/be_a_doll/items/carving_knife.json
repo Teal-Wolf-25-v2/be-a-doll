@@ -1,6 +1,14 @@
 {
 	"model": {
-		"type": "minecraft:model",
-		"model": "be_a_doll:item/carving_knife"
+		"type": "minecraft:condition",
+		"on_true": {
+			"type": "minecraft:model",
+			"model": "be_a_doll:item/carving_knife_caring"
+		},
+		"on_false": {
+			"type": "minecraft:model",
+			"model": "be_a_doll:item/carving_knife"
+		},
+		"property": "minecraft:using_item"
 	}
 }
