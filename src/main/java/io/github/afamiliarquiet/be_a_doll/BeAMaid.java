@@ -34,10 +34,11 @@ public class BeAMaid {
 	}
 
 	public static void bestowApron() {
-		ServerPlayerEvents.AFTER_RESPAWN.register(((oldPlayer, newPlayer, alive) ->
+		ServerPlayerEvents.AFTER_RESPAWN.register(((oldPlayer, newPlayer, alive) -> {
 			// should i care about alive? in theory maybe but it doesn't really matter
-			BeAMaid.setDoll(newPlayer, BeALibrarian.inspectSupposedPlayer(oldPlayer))
-		));
+			BeAMaid.setDoll(newPlayer, BeALibrarian.inspectSupposedPlayer(oldPlayer));
+			BeALibrarian.relabelDoll(newPlayer, BeALibrarian.inspectDollLabel(oldPlayer));
+		}));
 	}
 
 	public static boolean isDoll(@Nullable PlayerEntity player) {
@@ -73,7 +74,7 @@ public class BeAMaid {
 			// add persistent instead of add temporary. because doll is a persistent fact of life
 			DOLL_MODIFICATIONS.forEach((attribute, modifier) -> {
 				EntityAttributeInstance instance = player.getAttributes().getCustomInstance(attribute);
-				if (instance != null && !instance.hasModifier(modifier.id())) {
+				if (instance != null && modifier != null && !instance.hasModifier(modifier.id())) {
 					instance.addPersistentModifier(modifier);
 				}
 			});
@@ -92,8 +93,6 @@ public class BeAMaid {
 		if (!originalMessage.isEmpty() && originalMessage.charAt(0) == '\\' || !TINKERER.useKeysmashing) {
 			return originalMessage;
 		}
-
-		// todo - maybe add a wick of sorts? to start with asdf or sdf or such more often
 
 		String material = !TINKERER.letterPoolOverride.isEmpty() ? TINKERER.letterPoolOverride : "asdfjkl;";
 		List<Character> spool = new ArrayList<>(material.length());

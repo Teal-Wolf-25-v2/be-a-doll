@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(NameTagItem.class)
 public class DollNameTagItemMixin {
-	@Inject(at = @At(shift = At.Shift.AFTER, value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;get(Lnet/minecraft/component/ComponentType;)Ljava/lang/Object;"), method = "useOnEntity", cancellable = true)
+	@Inject(at = @At("HEAD"), method = "useOnEntity", cancellable = true)
 	private void useOnDoll(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
 		// todo - maybe let dolls write on their own tags. in case someone writes something bad
 		if (entity instanceof PlayerEntity doll && BeAMaid.isDoll(doll)) {

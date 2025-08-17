@@ -6,6 +6,7 @@
     "DollNameTagItemMixin",
     "DressUpDollEntityMixin",
     "FragmentedDamageLivingEntityMixin",
+    "ThrowNameSelfServerPlayerEntityMixin",
     "shoulder_riding.RiptideIgnorePassengersLivingEntityMixin",
     "shoulder_riding.ShoulderAwarenessPlayerEntityMixin",
     "shoulder_riding.ShoulderRidingEntityMixin",

@@ -6,7 +6,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
@@ -28,7 +27,6 @@ public class RibbonItem extends Item {
 
 	@Override
 	public ActionResult use(World world, PlayerEntity user, Hand hand) {
-		// todo - maybe consume it while in use like lead? but then need a different force dismount option
 		// yeah no lol. did you not see the C2SDollDismountLetter i had to make? client's gotta hear about this
 		if (/*!user.getWorld().isClient && */!user.getPassengerList().isEmpty() && user.shouldCancelInteraction()) {
 			user.removeAllPassengers();

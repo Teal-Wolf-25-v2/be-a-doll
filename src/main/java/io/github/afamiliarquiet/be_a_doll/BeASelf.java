@@ -7,6 +7,7 @@ import io.github.afamiliarquiet.be_a_doll.diary.BeAWitch;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundCategory;
 import org.jetbrains.annotations.Nullable;
 
 public class BeASelf {
@@ -35,9 +36,8 @@ public class BeASelf {
 	}
 
 	private static void doEssencePlaceEffects(PlayerEntity player, BeADoll.Variant variant) {
-		// todo.. maybe a splash of particles here and on take
 		player.addStatusEffect(new StatusEffectInstance(BeAWitch.OVERFLOWING, 300, 1));
-		player.playSound(BeABirdwatcher.ESSENCE_PLACE, 1f, player.getRandom().nextFloat() * 0.2f + 0.9f);
+		player.getWorld().playSoundClient(BeABirdwatcher.ESSENCE_PLACE, SoundCategory.PLAYERS, 1f, player.getRandom().nextFloat() * 0.2f + 0.9f);
 		if (!player.getWorld().isClient()) {
 			BeAMaid.setDoll(player, variant);
 		}
@@ -50,7 +50,7 @@ public class BeASelf {
 			1200 + (fragmentation != null ? fragmentation.getDuration() : 0),
 			(fragmentation != null ? fragmentation.getAmplifier() + 1 : 0)
 		));
-		player.playSound(BeABirdwatcher.ESSENCE_TAKE, 1f, player.getRandom().nextFloat() * 0.2f + 0.9f);
+		player.getWorld().playSoundClient(BeABirdwatcher.ESSENCE_TAKE, SoundCategory.PLAYERS, 1f, player.getRandom().nextFloat() * 0.2f + 0.9f);
 	}
 
 	public static boolean isMouseInSurvivalSelf(double mouseX, double mouseY, int screenX, int screenY) {

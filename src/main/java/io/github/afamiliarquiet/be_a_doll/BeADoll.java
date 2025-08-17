@@ -42,6 +42,7 @@ public class BeADoll implements ModInitializer {
 		BeAResearcher.grantFunding();
 		BeAWitch.putOnHat();
 		BeABug.lookAtBug();
+		// todo - hey quiet, you made it! one last check over all the sounds n textures please
 	}
 
 	public static Identifier id(String thing) {

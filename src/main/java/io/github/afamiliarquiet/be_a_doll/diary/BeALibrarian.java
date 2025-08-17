@@ -63,7 +63,7 @@ public class BeALibrarian {
 		return doll.getAttached(DOLL_NAME);
 	}
 
-	public static void relabelDoll(@NotNull PlayerEntity doll, @NotNull Text name) {
+	public static void relabelDoll(@NotNull PlayerEntity doll, @Nullable Text name) {
 		doll.setAttached(DOLL_NAME, name);
 	}
 

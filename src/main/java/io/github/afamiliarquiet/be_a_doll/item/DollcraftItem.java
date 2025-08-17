@@ -98,7 +98,6 @@ public class DollcraftItem extends Item {
 	// care for other
 	@Override
 	public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-		// todo - maybe make this more like self-use, take a little bit of time (but less)
 		if (entity instanceof PlayerEntity doll && !user.getItemCooldownManager().isCoolingDown(stack)) {
 			ActionResult careResult = performCare(user, doll, stack, hand);
 			if (careResult.isAccepted()) {
