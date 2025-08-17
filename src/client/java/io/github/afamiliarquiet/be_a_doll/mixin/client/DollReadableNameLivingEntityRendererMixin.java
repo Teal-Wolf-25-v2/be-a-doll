@@ -15,7 +15,7 @@ public class DollReadableNameLivingEntityRendererMixin {
 	@Definition(id = "getCameraEntity", method = "Lnet/minecraft/client/MinecraftClient;getCameraEntity()Lnet/minecraft/entity/Entity;")
 	@Expression("? != ?.getCameraEntity()")
 	@ModifyExpressionValue(method = "hasLabel(Lnet/minecraft/entity/LivingEntity;D)Z", at = @At("MIXINEXTRAS:EXPRESSION"))
-	private boolean orDoll(boolean original, @Local(name = "clientPlayerEntity") ClientPlayerEntity protagonist) {
+	private boolean orDoll(boolean original, @Local(name = "clientPlayerEntity", ordinal = 0) ClientPlayerEntity protagonist) {
 		return original || BeAMaid.isDoll(protagonist);
 	}
 }

@@ -28,9 +28,9 @@ public class DollRetexturedInGameHudMixin {
 
 	@Inject(method = "renderFood", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/HungerManager;getSaturationLevel()F"))
 	private void alterHungerTextures(DrawContext context, PlayerEntity player, int top, int right, CallbackInfo ci,
-									 @Local(name = "identifier") LocalRef<Identifier> emptyId,
-									 @Local(name = "identifier2") LocalRef<Identifier> fullId,
-									 @Local(name = "identifier3") LocalRef<Identifier> halfId
+									 @Local(name = "identifier", ordinal = 0) LocalRef<Identifier> emptyId,
+									 @Local(name = "identifier2", ordinal = 1) LocalRef<Identifier> fullId,
+									 @Local(name = "identifier3", ordinal = 2) LocalRef<Identifier> halfId
 	) {
 		// if this has an impact on fps then SUFFER
 		if (BeAMaid.isDoll(player)) {
@@ -80,14 +80,14 @@ public class DollRetexturedInGameHudMixin {
 	@Definition(id = "hasStatusEffect", method = "Lnet/minecraft/entity/player/PlayerEntity;hasStatusEffect(Lnet/minecraft/registry/entry/RegistryEntry;)Z")
 	@Expression("?.hasStatusEffect(?)")
 	@ModifyExpressionValue(method = "renderStatusBars", at = @At("MIXINEXTRAS:EXPRESSION"))
-	private boolean orOverflowing(boolean original, @Local(name = "playerEntity") PlayerEntity player) {
+	private boolean orOverflowing(boolean original, @Local(name = "playerEntity", ordinal = 0) PlayerEntity player) {
 		return original || player.hasStatusEffect(BeAWitch.OVERFLOWING);
 	}
 
 	@Definition(id = "getSaturationLevel", method = "Lnet/minecraft/entity/player/HungerManager;getSaturationLevel()F")
 	@Expression("?.getSaturationLevel() <= ?")
 	@ModifyExpressionValue(method = "renderFood", at = @At("MIXINEXTRAS:EXPRESSION"))
-	private boolean resaturatingWave(boolean original, @Local(argsOnly = true) PlayerEntity player, @Local(name="j") int index, @Local(name="k") LocalIntRef yPos) {
+	private boolean resaturatingWave(boolean original, @Local(argsOnly = true) PlayerEntity player, @Local(name="j", ordinal = 1) int index, @Local(name="k", ordinal = 2) LocalIntRef yPos) {
 		if (player.hasStatusEffect(BeAWitch.OVERFLOWING) && BeAMaid.isDoll(player)) {
 			// if i was a super optimizer i could put the ticks % 15 outside the for loop.
 			if (index == this.ticks % 25) {

@@ -52,7 +52,7 @@ public abstract class ShoulderRidingEntityMixin {
 
 	// `this` is the doll
 	@ModifyExpressionValue(method = "startRiding(Lnet/minecraft/entity/Entity;Z)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/EntityType;isSaveable()Z"))
-	private boolean forPorcelainsSakeJustLetMeRideOtherPlayers(boolean original, @Local(name="entity") Entity mount) {
+	private boolean forPorcelainsSakeJustLetMeRideOtherPlayers(boolean original, @Local(argsOnly = true) Entity mount) {
 		// i've seen you do this before intellij. and you've gotta stop it
 		//noinspection ConstantValue
 		if (mount instanceof PlayerEntity && (Object)this instanceof PlayerEntity doll && BeAMaid.isDoll(doll)) {

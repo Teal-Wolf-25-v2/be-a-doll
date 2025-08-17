@@ -20,7 +20,7 @@ public abstract class RiptideIgnorePassengersLivingEntityMixin extends Entity {
 	@Definition(id = "LivingEntity", type = LivingEntity.class)
 	@Expression("? instanceof LivingEntity")
 	@ModifyExpressionValue(method = "tickRiptide", at = @At("MIXINEXTRAS:EXPRESSION"))
-	private boolean isTarget(boolean original, @Local(name = "entity") Entity possibleTarget) {
+	private boolean isTarget(boolean original, @Local(ordinal = 0) Entity possibleTarget) {
 		return original && !this.equals(possibleTarget.getVehicle());
 	}
 }

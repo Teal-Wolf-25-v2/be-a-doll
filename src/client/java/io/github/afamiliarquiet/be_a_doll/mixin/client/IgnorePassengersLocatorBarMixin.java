@@ -23,7 +23,7 @@ public abstract class IgnorePassengersLocatorBarMixin {
 	@Definition(id = "equals", method = "Ljava/util/UUID;equals(Ljava/lang/Object;)Z")
 	@Expression("?.equals(?)")
 	@ModifyExpressionValue(method = "method_70873", at = @At("MIXINEXTRAS:EXPRESSION")) // ah hey that's how you mixin to a lambda
-	private boolean shouldIgnoreMarker(boolean markerIsCameraEntity, @Local(name="uuid") UUID uuid) {
+	private boolean shouldIgnoreMarker(boolean markerIsCameraEntity, @Local(name = "uuid", ordinal = 0, argsOnly = true) UUID uuid) {
 		// notodo - locator bar still shows even when this filters out all waypoints. minor issue, maybe fix
 		if (markerIsCameraEntity) { // fail fast
 			return true;
