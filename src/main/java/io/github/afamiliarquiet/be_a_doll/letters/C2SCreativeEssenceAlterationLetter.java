@@ -1,6 +1,8 @@
 package io.github.afamiliarquiet.be_a_doll.letters;
 
 import io.github.afamiliarquiet.be_a_doll.BeADoll;
+import io.github.afamiliarquiet.be_a_doll.BeASelf;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
@@ -19,6 +21,14 @@ public record C2SCreativeEssenceAlterationLetter(boolean inserting, ItemStack st
 		C2SCreativeEssenceAlterationLetter::statedCursorStack,
 		C2SCreativeEssenceAlterationLetter::new
 	);
+
+	public static void receive(C2SCreativeEssenceAlterationLetter letter, ServerPlayNetworking.Context context) {
+		if (!context.player().isInCreativeMode()) {
+			return; // how dare you. this is for creative only
+		}
+		// fire this off still for the tf effects n such to happen on server
+		BeASelf.clickSelf(letter.statedCursorStack(), context.player(), letter.inserting());
+	}
 
 	@Override
 	public Id<? extends CustomPayload> getId() {
