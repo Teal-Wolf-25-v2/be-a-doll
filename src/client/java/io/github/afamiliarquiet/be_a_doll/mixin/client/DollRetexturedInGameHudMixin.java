@@ -40,10 +40,10 @@ public class DollRetexturedInGameHudMixin {
 					halfId.set(BeACurator.WOODEN_FOOD_HALF);
 					fullId.set(BeACurator.WOODEN_FOOD_FULL);
 					break;
-				case PORCELAIN:
-					emptyId.set(BeACurator.PORCELAIN_FOOD_EMPTY);
-					halfId.set(BeACurator.PORCELAIN_FOOD_HALF);
-					fullId.set(BeACurator.PORCELAIN_FOOD_FULL);
+				case CLAY:
+					emptyId.set(BeACurator.CLAY_FOOD_EMPTY);
+					halfId.set(BeACurator.CLAY_FOOD_HALF);
+					fullId.set(BeACurator.CLAY_FOOD_FULL);
 					break;
 				case CLOTH:
 					emptyId.set(BeACurator.CLOTH_FOOD_EMPTY);
@@ -87,7 +87,7 @@ public class DollRetexturedInGameHudMixin {
 	@Definition(id = "getSaturationLevel", method = "Lnet/minecraft/entity/player/HungerManager;getSaturationLevel()F")
 	@Expression("?.getSaturationLevel() <= ?")
 	@ModifyExpressionValue(method = "renderFood", at = @At("MIXINEXTRAS:EXPRESSION"))
-	private boolean resaturatingWave(boolean original, @Local(argsOnly = true) PlayerEntity player, @Local(name="j", ordinal = 1) int index, @Local(name="k", ordinal = 2) LocalIntRef yPos) {
+	private boolean resaturatingWave(boolean original, @Local(argsOnly = true) PlayerEntity player, @Local(name="j", ordinal = 3) int index, @Local(name="k", ordinal = 4) LocalIntRef yPos) {
 		if (player.hasStatusEffect(BeAWitch.OVERFLOWING) && BeAMaid.isDoll(player)) {
 			// if i was a super optimizer i could put the ticks % 15 outside the for loop.
 			if (index == this.ticks % 25) {

@@ -17,46 +17,14 @@
 	},
 	"entity.be_a_doll.doll.care.wooden": {
 		"sounds": [
-			{
-				"name": "item/axe/strip1",
-				"volume": 0.9
-			},
-			{
-				"name": "item/axe/strip1",
-				"pitch": 0.85,
-				"volume": 0.9
-			},
-			{
-				"name": "item/axe/strip2",
-				"volume": 0.9
-			},
-			{
-				"name": "item/axe/strip2",
-				"pitch": 0.85,
-				"volume": 0.9
-			},
-			{
-				"name": "item/axe/strip3",
-				"volume": 0.9
-			},
-			{
-				"name": "item/axe/strip3",
-				"pitch": 0.85,
-				"volume": 0.9
-			},
-			{
-				"name": "item/axe/strip4",
-				"volume": 0.9
-			},
-			{
-				"name": "item/axe/strip4",
-				"pitch": 0.85,
-				"volume": 0.9
-			}
+			"entity/itemframe/place1",
+			"entity/itemframe/place2",
+			"entity/itemframe/place3",
+			"entity/itemframe/place4"
 		],
 		"subtitle": "subtitles.entity.be_a_doll.doll.care.wooden"
 	},
-	"entity.be_a_doll.doll.care.porcelain": {
+	"entity.be_a_doll.doll.care.clay": {
 		"sounds": [
 			{
 				"name": "block/packed_mud/break1",
@@ -83,7 +51,7 @@
 				"volume": 0.3
 			}
 		],
-		"subtitle": "subtitles.entity.be_a_doll.doll.care.porcelain"
+		"subtitle": "subtitles.entity.be_a_doll.doll.care.clay"
 	},
 	"entity.be_a_doll.doll.care.cloth": {
 		"sounds": [
@@ -162,5 +130,12 @@
 			}
 		],
 		"subtitle": "subtitles.entity.be_a_doll.doll.essence.place"
+	},
+	"entity.be_a_doll.essence.stop_it_dont_do_that": {
+		"sounds": [
+			"block/respawn_anchor/deplete1",
+			"block/respawn_anchor/deplete2"
+		],
+		"subtitle": "subtitles.entity.be_a_doll.doll.essence.no_what_im_not_describing_this"
 	}
 }

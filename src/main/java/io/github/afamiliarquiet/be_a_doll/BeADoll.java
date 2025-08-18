@@ -57,7 +57,7 @@ public class BeADoll implements ModInitializer {
 	public enum Variant implements StringIdentifiable {
 		REPRESSED(0, "player", ItemTags.ANVIL), // gonna look really silly in your throat.
 		WOODEN(1, "wooden", BeAResearcher.WOODEN_DOLL_CARE_MATERIALS),
-		PORCELAIN(2, "porcelain", BeAResearcher.PORCELAIN_DOLL_CARE_MATERIALS),
+		CLAY(2, "clay", BeAResearcher.CLAY_DOLL_CARE_MATERIALS),
 		CLOTH(3, "cloth", BeAResearcher.CLOTH_DOLL_CARE_MATERIALS);
 
 		public static final BeADoll.Variant DEFAULT = WOODEN;

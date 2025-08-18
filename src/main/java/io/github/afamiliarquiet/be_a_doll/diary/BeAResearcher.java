@@ -19,8 +19,8 @@ public class BeAResearcher {
 		RegistryKeys.ITEM, BeADoll.id("wooden_doll_care_materials")
 	);
 
-	public static final TagKey<Item> PORCELAIN_DOLL_CARE_MATERIALS = TagKey.of(
-		RegistryKeys.ITEM, BeADoll.id("porcelain_doll_care_materials")
+	public static final TagKey<Item> CLAY_DOLL_CARE_MATERIALS = TagKey.of(
+		RegistryKeys.ITEM, BeADoll.id("clay_doll_care_materials")
 	);
 
 	public static final TagKey<Item> CLOTH_DOLL_CARE_MATERIALS = TagKey.of(

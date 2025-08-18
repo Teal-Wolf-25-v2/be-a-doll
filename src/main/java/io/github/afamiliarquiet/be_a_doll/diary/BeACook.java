@@ -87,7 +87,7 @@ public class BeACook {
 							return ItemStack.EMPTY;
 						}
 
-						dollVariant = BeADoll.Variant.PORCELAIN;
+						dollVariant = BeADoll.Variant.CLAY;
 					} else if (current.isOf(BeACollector.SEWING_NEEDLE)) {
 						if (dollVariant != null) {
 							return ItemStack.EMPTY;

@@ -2,12 +2,13 @@
 <center><img alt="mod preview" src="https://cdn.modrinth.com/data/MAd0Z2MD/images/bd6c08ac189a07ee4ce15a19e7a0983ff85a9b51.png"/></center>
 
 <center>
-a small toybox mod - become the toy, become a doll!
+Would you be a doll? I certainly would, so I made this collection of toyful tweaks for #dollgamers at ModFest: Toybox
 </center>
 
 ---
 
-would you be a doll? i certainly would, so i made this collection of toyful tweaks for #dollgamers at toybox
+### Doll Facts
+
 - dolls are small!
 - dolls don't always feel like speaking up
 - dolls can be used to play dress up!
@@ -17,12 +18,13 @@ would you be a doll? i certainly would, so i made this collection of toyful twea
 - dolls can also rename themselves by throwing the nametag into position (look straight up)
 - dolls are immune to drowning and freezing
 - dolls are sustained by repairs instead of food (use your dollcraft item with sticks/clay/string in inventory)
-- dolls can be repaired by others
-- but could there be more coming?
+- dolls can also be repaired by others with the right tool and material
+
+There's also two potion effects you may see along the way - one's effect is reasonably obvious, and the other makes you hurt more.
 
 ---
 
-### how to:
+### How to:
 
 you'll need to craft one of the three dollcraft items to become a doll!
 * carving knife - like an iron sword but with iron nuggets

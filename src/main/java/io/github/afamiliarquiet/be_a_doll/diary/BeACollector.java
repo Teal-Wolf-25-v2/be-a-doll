@@ -8,18 +8,27 @@ import net.minecraft.component.ComponentType;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
+import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.Items;
+import net.minecraft.item.consume.ApplyEffectsConsumeEffect;
+import net.minecraft.item.consume.PlaySoundConsumeEffect;
+import net.minecraft.item.consume.UseAction;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Rarity;
 
+import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
@@ -32,7 +41,7 @@ public class BeACollector {
 		BeADoll.Variant.WOODEN);
 	public static final Item MODELING_TOOL = registerDollcraft("modeling_tool", DollcraftItem::new, new Item.Settings()
 		.repairable(Items.IRON_INGOT).maxDamage(310).attributeModifiers(weapon(2, -1.3f)),
-		BeADoll.Variant.PORCELAIN);
+		BeADoll.Variant.CLAY);
 	public static final Item SEWING_NEEDLE = registerDollcraft("sewing_needle", DollcraftItem::new, new Item.Settings()
 		.repairable(Items.IRON_INGOT).maxDamage(310).attributeModifiers(weapon(3, -2f)),
 		BeADoll.Variant.CLOTH);
@@ -47,6 +56,14 @@ public class BeACollector {
 		.rarity(Rarity.EPIC)
 		.component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)
 		.component(DOLL_VARIANT_COMPONENT, BeADoll.Variant.REPRESSED)
+		.component(DataComponentTypes.CONSUMABLE, new ConsumableComponent(
+			3.1f, UseAction.EAT, SoundEvents.ENTITY_GENERIC_EAT, true,
+			List.of(
+				new ApplyEffectsConsumeEffect(new StatusEffectInstance(BeAWitch.FRAGMENTED, 7200, 5)),
+				new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.INSTANT_DAMAGE, 1, 0)),
+				new PlaySoundConsumeEffect(RegistryEntry.of(BeABirdwatcher.ESSENCE_EAT_HEY_WAIT_WHAT_DO_YOU_MEAN_EATEN))
+			)
+		))
 	);
 
 

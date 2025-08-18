@@ -21,6 +21,7 @@ import net.minecraft.item.consume.UseAction;
 import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -73,12 +74,7 @@ public class DollcraftItem extends Item {
 					}
 				} else if (remainingUseTicks % 10 == 7) {
 					spawnRepairParticles(praiseTheDoll, material, 5);
-					SoundEvent careSound = switch (BeALibrarian.inspectDollMaterial(praiseTheDoll)) {
-						case WOODEN -> BeABirdwatcher.CARE_WOODEN;
-						case PORCELAIN -> BeABirdwatcher.CARE_PORCELAIN;
-						case CLOTH -> BeABirdwatcher.CARE_CLOTH;
-						case REPRESSED -> SoundEvents.BLOCK_ANVIL_FALL;
-					};
+					SoundEvent careSound = getCareSound(praiseTheDoll);
 					praiseTheDoll.playSound(careSound, 1f, praiseTheDoll.getRandom().nextFloat() * 0.2f + 0.9f);
 				}
 			}
@@ -106,6 +102,8 @@ public class DollcraftItem extends Item {
 					PlayerLookup.tracking(doll).forEach(player -> ServerPlayNetworking.send(player, letter));
 					ServerPlayNetworking.send((ServerPlayerEntity) doll, letter);
 				}
+				SoundEvent careSound = getCareSound(doll);
+				user.getWorld().playSound(user, doll.getX(), doll.getY(), doll.getZ(), careSound, SoundCategory.PLAYERS, 1f, doll.getRandom().nextFloat() * 0.2f + 0.9f);
 				spawnRepairParticles(doll, findCareMaterial(user), 16);
 				UseCooldownComponent cooldownComponent = stack.get(DataComponentTypes.USE_COOLDOWN);
 				if (cooldownComponent != null) {
@@ -143,7 +141,7 @@ public class DollcraftItem extends Item {
 		if (user.isInCreativeMode() || user.getWorld().isClient() && !user.isMainPlayer()) { // otherclientplayers have no inv, so cheat for particles
 			return switch(this.variant) {
 				case WOODEN -> Items.STICK.getDefaultStack();
-				case PORCELAIN -> Items.CLAY_BALL.getDefaultStack();
+				case CLAY -> Items.CLAY_BALL.getDefaultStack();
 				case CLOTH -> Items.STRING.getDefaultStack();
 				default -> ItemStack.EMPTY;
 			};
@@ -159,6 +157,15 @@ public class DollcraftItem extends Item {
 
 			return ItemStack.EMPTY;
 		}
+	}
+
+	private static SoundEvent getCareSound(PlayerEntity praiseTheDoll) {
+		return switch (BeALibrarian.inspectDollMaterial(praiseTheDoll)) {
+			case WOODEN -> BeABirdwatcher.CARE_WOODEN;
+			case CLAY -> BeABirdwatcher.CARE_CLAY;
+			case CLOTH -> BeABirdwatcher.CARE_CLOTH;
+			case REPRESSED -> SoundEvents.BLOCK_ANVIL_FALL;
+		};
 	}
 
 	public static void spawnRepairParticles(PlayerEntity doll, ItemStack material, int count) {
