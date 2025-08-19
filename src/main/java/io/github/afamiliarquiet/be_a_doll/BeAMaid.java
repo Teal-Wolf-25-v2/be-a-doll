@@ -70,7 +70,7 @@ public class BeAMaid {
 			return;
 		}
 
-		if (variant != BeADoll.Variant.REPRESSED) {
+		if (variant.isDollish()) {
 			// add persistent instead of add temporary. because doll is a persistent fact of life
 			DOLL_MODIFICATIONS.forEach((attribute, modifier) -> {
 				EntityAttributeInstance instance = player.getAttributes().getCustomInstance(attribute);

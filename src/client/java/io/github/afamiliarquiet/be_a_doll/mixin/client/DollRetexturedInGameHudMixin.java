@@ -6,7 +6,8 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
-import io.github.afamiliarquiet.be_a_doll.BeACurator;
+import io.github.afamiliarquiet.be_a_doll.BeADoll;
+import io.github.afamiliarquiet.be_a_doll.diary.BeACurator;
 import io.github.afamiliarquiet.be_a_doll.BeAMaid;
 import io.github.afamiliarquiet.be_a_doll.diary.BeALibrarian;
 import io.github.afamiliarquiet.be_a_doll.diary.BeAWitch;
@@ -34,23 +35,10 @@ public class DollRetexturedInGameHudMixin {
 	) {
 		// if this has an impact on fps then SUFFER
 		if (BeAMaid.isDoll(player)) {
-			switch(BeALibrarian.inspectDollMaterial(player)) {
-				case WOODEN:
-					emptyId.set(BeACurator.WOODEN_FOOD_EMPTY);
-					halfId.set(BeACurator.WOODEN_FOOD_HALF);
-					fullId.set(BeACurator.WOODEN_FOOD_FULL);
-					break;
-				case CLAY:
-					emptyId.set(BeACurator.CLAY_FOOD_EMPTY);
-					halfId.set(BeACurator.CLAY_FOOD_HALF);
-					fullId.set(BeACurator.CLAY_FOOD_FULL);
-					break;
-				case CLOTH:
-					emptyId.set(BeACurator.CLOTH_FOOD_EMPTY);
-					halfId.set(BeACurator.CLOTH_FOOD_HALF);
-					fullId.set(BeACurator.CLOTH_FOOD_FULL);
-					break;
-			}
+			BeADoll.Variant variant = BeALibrarian.inspectDollMaterial(player);
+			emptyId.set(variant.getFoodSpriteEmpty());
+			halfId.set(variant.getFoodSpriteHalf());
+			fullId.set(variant.getFoodSpritFull());
 		}
 	}
 

@@ -3,6 +3,7 @@ package io.github.afamiliarquiet.be_a_doll.item;
 import io.github.afamiliarquiet.be_a_doll.BeADoll;
 import io.github.afamiliarquiet.be_a_doll.BeAMaid;
 import io.github.afamiliarquiet.be_a_doll.diary.BeABirdwatcher;
+import io.github.afamiliarquiet.be_a_doll.diary.BeACollector;
 import io.github.afamiliarquiet.be_a_doll.diary.BeALibrarian;
 import io.github.afamiliarquiet.be_a_doll.diary.BeAWitch;
 import io.github.afamiliarquiet.be_a_doll.letters.S2CDollRepairedLetter;
@@ -16,14 +17,12 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.item.consume.UseAction;
 import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Box;
@@ -33,11 +32,10 @@ import net.minecraft.world.World;
 import java.util.function.Predicate;
 
 public class DollcraftItem extends Item {
-	protected BeADoll.Variant variant;
 
-	public DollcraftItem(Settings settings, BeADoll.Variant variant) {
-		super(settings.useCooldown(1.3f).component(DataComponentTypes.WEAPON, new WeaponComponent(1)));
-		this.variant = variant;
+	public DollcraftItem(Settings settings) {
+		super(settings.useCooldown(1.3f)
+			.component(DataComponentTypes.WEAPON, new WeaponComponent(1)));
 	}
 
 	// care for self
@@ -74,7 +72,7 @@ public class DollcraftItem extends Item {
 					}
 				} else if (remainingUseTicks % 10 == 7) {
 					spawnRepairParticles(praiseTheDoll, material, 5);
-					SoundEvent careSound = getCareSound(praiseTheDoll);
+					SoundEvent careSound = BeALibrarian.inspectDollMaterial(praiseTheDoll).getCareSound();
 					praiseTheDoll.playSound(careSound, 1f, praiseTheDoll.getRandom().nextFloat() * 0.2f + 0.9f);
 				}
 			}
@@ -102,7 +100,7 @@ public class DollcraftItem extends Item {
 					PlayerLookup.tracking(doll).forEach(player -> ServerPlayNetworking.send(player, letter));
 					ServerPlayNetworking.send((ServerPlayerEntity) doll, letter);
 				}
-				SoundEvent careSound = getCareSound(doll);
+				SoundEvent careSound = BeALibrarian.inspectDollMaterial(doll).getCareSound();
 				user.getWorld().playSound(user, doll.getX(), doll.getY(), doll.getZ(), careSound, SoundCategory.PLAYERS, 1f, doll.getRandom().nextFloat() * 0.2f + 0.9f);
 				spawnRepairParticles(doll, findCareMaterial(user), 16);
 				UseCooldownComponent cooldownComponent = stack.get(DataComponentTypes.USE_COOLDOWN);
@@ -118,7 +116,7 @@ public class DollcraftItem extends Item {
 	}
 
 	public ActionResult performCare(PlayerEntity user, PlayerEntity doll, ItemStack dollcraftStack, Hand hand) {
-		if (BeAMaid.isDoll(doll) && BeALibrarian.inspectDollMaterial(doll) == this.variant) {
+		if (BeAMaid.isDoll(doll) && BeALibrarian.inspectDollMaterial(doll) == this.getVariant()) {
 			ItemStack material = findCareMaterial(user);
 			if (!material.isEmpty()) {
 				caringIsCaring(doll);
@@ -139,14 +137,9 @@ public class DollcraftItem extends Item {
 
 	public ItemStack findCareMaterial(PlayerEntity user) {
 		if (user.isInCreativeMode() || user.getWorld().isClient() && !user.isMainPlayer()) { // otherclientplayers have no inv, so cheat for particles
-			return switch(this.variant) {
-				case WOODEN -> Items.STICK.getDefaultStack();
-				case CLAY -> Items.CLAY_BALL.getDefaultStack();
-				case CLOTH -> Items.STRING.getDefaultStack();
-				default -> ItemStack.EMPTY;
-			};
+			return this.getVariant().getDefaultCareMaterial().getDefaultStack();
 		} else {
-			Predicate<ItemStack> predicate = stack -> stack.isIn(this.variant.getCareMaterialTag());
+			Predicate<ItemStack> predicate = stack -> stack.isIn(this.getVariant().getCareMaterialTag());
 
 			for (int i = 0; i < user.getInventory().size(); i++) {
 				ItemStack current = user.getInventory().getStack(i);
@@ -157,15 +150,6 @@ public class DollcraftItem extends Item {
 
 			return ItemStack.EMPTY;
 		}
-	}
-
-	private static SoundEvent getCareSound(PlayerEntity praiseTheDoll) {
-		return switch (BeALibrarian.inspectDollMaterial(praiseTheDoll)) {
-			case WOODEN -> BeABirdwatcher.CARE_WOODEN;
-			case CLAY -> BeABirdwatcher.CARE_CLAY;
-			case CLOTH -> BeABirdwatcher.CARE_CLOTH;
-			case REPRESSED -> SoundEvents.BLOCK_ANVIL_FALL;
-		};
 	}
 
 	public static void spawnRepairParticles(PlayerEntity doll, ItemStack material, int count) {
@@ -185,5 +169,9 @@ public class DollcraftItem extends Item {
 
 			doll.getWorld().addParticleClient(new ItemStackParticleEffect(ParticleTypes.ITEM, material), pos.x, pos.y, pos.z, vel.x, vel.y + 0.05, vel.z);
 		}
+	}
+
+	public BeADoll.Variant getVariant() {
+		return getComponents().getOrDefault(BeACollector.DOLL_VARIANT_COMPONENT, BeADoll.Variant.DEFAULT);
 	}
 }

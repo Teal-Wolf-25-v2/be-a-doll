@@ -29,28 +29,24 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Rarity;
 
 import java.util.List;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 public class BeACollector {
-	// notodo - it might make more sense for there to be a doll.. .variant component..... i already have that
-	//  but wait i can't add that component to a diamond pickaxe. guh
-	public static final Item CARVING_KNIFE = registerDollcraft("carving_knife", DollcraftItem::new, new Item.Settings()
-		.repairable(Items.IRON_INGOT).maxDamage(310).attributeModifiers(weapon(4, -2.4f)),
-		BeADoll.Variant.WOODEN);
-	public static final Item MODELING_TOOL = registerDollcraft("modeling_tool", DollcraftItem::new, new Item.Settings()
-		.repairable(Items.IRON_INGOT).maxDamage(310).attributeModifiers(weapon(2, -1.3f)),
-		BeADoll.Variant.CLAY);
-	public static final Item SEWING_NEEDLE = registerDollcraft("sewing_needle", DollcraftItem::new, new Item.Settings()
-		.repairable(Items.IRON_INGOT).maxDamage(310).attributeModifiers(weapon(3, -2f)),
-		BeADoll.Variant.CLOTH);
-
-	public static final Item DOLL_RIBBON = registerItem("ribbon", RibbonItem::new, new Item.Settings());
-
 	public static final ComponentType<BeADoll.Variant> DOLL_VARIANT_COMPONENT = registerComponent(
 		"doll_variant", builder -> builder.codec(BeADoll.Variant.CODEC).packetCodec(BeADoll.Variant.PACKET_CODEC)
 	);
+
+	public static final Item CARVING_KNIFE = registerItem("carving_knife", DollcraftItem::new, new Item.Settings()
+		.repairable(Items.IRON_INGOT).maxDamage(310).attributeModifiers(weapon(4, -2.4f))
+		.component(BeACollector.DOLL_VARIANT_COMPONENT, BeADoll.Variant.WOODEN));
+	public static final Item MODELING_TOOL = registerItem("modeling_tool", DollcraftItem::new, new Item.Settings()
+		.repairable(Items.IRON_INGOT).maxDamage(310).attributeModifiers(weapon(2, -1.3f))
+		.component(BeACollector.DOLL_VARIANT_COMPONENT, BeADoll.Variant.CLAY));
+	public static final Item SEWING_NEEDLE = registerItem("sewing_needle", DollcraftItem::new, new Item.Settings()
+		.repairable(Items.IRON_INGOT).maxDamage(310).attributeModifiers(weapon(3, -2f))
+		.component(BeACollector.DOLL_VARIANT_COMPONENT, BeADoll.Variant.CLOTH));
+
 	public static final Item ESSENCE_FRAGMENT = registerItem("essence_fragment", Item::new, new Item.Settings()
 		.maxCount(1)
 		.rarity(Rarity.EPIC)
@@ -65,6 +61,8 @@ public class BeACollector {
 			)
 		))
 	);
+
+	public static final Item DOLL_RIBBON = registerItem("ribbon", RibbonItem::new, new Item.Settings());
 
 
 
@@ -91,17 +89,6 @@ public class BeACollector {
 
 	public static RegistryKey<Item> key(String thing) {
 		return RegistryKey.of(RegistryKeys.ITEM, BeADoll.id(thing));
-	}
-
-
-
-	public static Item registerDollcraft(RegistryKey<Item> key, BiFunction<Item.Settings, BeADoll.Variant, Item> factory, Item.Settings settings, BeADoll.Variant variant) {
-		Item item = factory.apply(settings.registryKey(key), variant);
-		return Registry.register(Registries.ITEM, key, item);
-	}
-
-	public static Item registerDollcraft(String id, BiFunction<Item.Settings, BeADoll.Variant, Item> factory, Item.Settings settings, BeADoll.Variant variant) {
-		return registerDollcraft(key(id), factory, settings, variant);
 	}
 
 

@@ -1,5 +1,6 @@
-package io.github.afamiliarquiet.be_a_doll;
+package io.github.afamiliarquiet.be_a_doll.diary;
 
+import io.github.afamiliarquiet.be_a_doll.BeADoll;
 import net.minecraft.util.Identifier;
 
 public class BeACurator {

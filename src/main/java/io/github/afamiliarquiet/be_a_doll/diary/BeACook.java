@@ -70,36 +70,24 @@ public class BeACook {
 			for (int i = 0; i < input.size(); i++) {
 				ItemStack current = input.getStackInSlot(i);
 				if (!current.isEmpty()) {
-					if (current.isOf(Items.DIAMOND_PICKAXE)) {
-						if (dollVariant != null) {
-							return ItemStack.EMPTY;
-						}
-
-						dollVariant = BeADoll.Variant.REPRESSED;
-					} else if (current.isOf(BeACollector.CARVING_KNIFE)) {
-						if (dollVariant != null) {
-							return ItemStack.EMPTY;
-						}
-
-						dollVariant = BeADoll.Variant.WOODEN;
-					} else if (current.isOf(BeACollector.MODELING_TOOL)) {
-						if (dollVariant != null) {
-							return ItemStack.EMPTY;
-						}
-
-						dollVariant = BeADoll.Variant.CLAY;
-					} else if (current.isOf(BeACollector.SEWING_NEEDLE)) {
-						if (dollVariant != null) {
-							return ItemStack.EMPTY;
-						}
-
-						dollVariant = BeADoll.Variant.CLOTH;
-					} else if (current.isOf(BeACollector.ESSENCE_FRAGMENT)) {
+					if (current.isOf(BeACollector.ESSENCE_FRAGMENT)) {
 						if (!essenceFragment.isEmpty()) { // no mass fabrication, one at a time
 							return ItemStack.EMPTY;
 						}
 
 						essenceFragment = current;
+					} else if (current.isOf(Items.DIAMOND_PICKAXE)) {
+						if (dollVariant != null) {
+							return ItemStack.EMPTY;
+						}
+
+						dollVariant = BeADoll.Variant.REPRESSED;
+					} else if (current.get(BeACollector.DOLL_VARIANT_COMPONENT) != null) {
+						if (dollVariant != null) {
+							return ItemStack.EMPTY;
+						}
+
+						dollVariant = current.get(BeACollector.DOLL_VARIANT_COMPONENT);
 					} else {
 						// not either of the items i want? then perish
 						return ItemStack.EMPTY;

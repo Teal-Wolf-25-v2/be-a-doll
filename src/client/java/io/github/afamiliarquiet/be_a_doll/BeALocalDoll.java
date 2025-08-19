@@ -9,7 +9,6 @@ public class BeALocalDoll implements ClientModInitializer {
 	public void onInitializeClient() {
 		// This entrypoint is suitable for setting up client-specific logic, such as rendering.
 		BeALocalPenPal.fillPen();
-		BeACurator.payAVisit(); // this isn't necessary but it's cute
 		BeALocalBug.lookAtBug();
 	}
 }
