@@ -136,6 +136,10 @@ public class DollcraftItem extends Item {
 	}
 
 	public ItemStack findCareMaterial(PlayerEntity user) {
+		if (this.getVariant() != BeALibrarian.inspectDollMaterial(user)) {
+			return ItemStack.EMPTY;
+		}
+
 		if (user.isInCreativeMode() || user.getWorld().isClient() && !user.isMainPlayer()) { // otherclientplayers have no inv, so cheat for particles
 			return this.getVariant().getDefaultCareMaterial().getDefaultStack();
 		} else {
