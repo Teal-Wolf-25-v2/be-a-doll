@@ -23,6 +23,10 @@ public class BeACurator {
 	public static final Identifier CLOTH_FOOD_HALF = BeADoll.id("hud/cloth_food_full");
 	public static final Identifier CLOTH_FOOD_FULL = BeADoll.id("hud/cloth_food_half");
 
+	public static final Identifier PLASTIC_FOOD_EMPTY = BeADoll.id("hud/plastic_food_empty");
+	public static final Identifier PLASTIC_FOOD_HALF = BeADoll.id("hud/plastic_food_full");
+	public static final Identifier PLASTIC_FOOD_FULL = BeADoll.id("hud/plastic_food_half");
+
 	public static void payAVisit() {
 
 	}

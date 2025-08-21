@@ -39,7 +39,7 @@ public class BeACook {
 				for (int i = 0; i < input.size(); i++) {
 					ItemStack current = input.getStackInSlot(i);
 					if (!current.isEmpty()) {
-						if (current.isOf(BeACollector.CARVING_KNIFE) || current.isOf(BeACollector.MODELING_TOOL) || current.isOf(BeACollector.SEWING_NEEDLE) || current.isOf(Items.DIAMOND_PICKAXE)) {
+						if (current.isIn(BeAResearcher.DOLLCRAFT_ITEMS) || current.isOf(Items.DIAMOND_PICKAXE)) {
 							if (hasOneDollcraftItem) {
 								return false;
 							}
@@ -113,7 +113,7 @@ public class BeACook {
 				ItemStack weirdAndUnlikelyRemainder = current.getItem().getRecipeRemainder();
 				if (!weirdAndUnlikelyRemainder.isEmpty()) {
 					remainders.set(i, weirdAndUnlikelyRemainder);
-				} else if (current.isOf(BeACollector.CARVING_KNIFE) || current.isOf(BeACollector.MODELING_TOOL) || current.isOf(BeACollector.SEWING_NEEDLE) || current.isOf(Items.DIAMOND_PICKAXE)) {
+				} else if (current.isIn(BeAResearcher.DOLLCRAFT_ITEMS) || current.isOf(Items.DIAMOND_PICKAXE)) {
 					remainders.set(i, current.copyWithCount(1));
 					break;
 				}

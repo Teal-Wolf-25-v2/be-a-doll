@@ -1,0 +1,14 @@
+{
+	"model": {
+		"type": "minecraft:condition",
+		"on_true": {
+			"type": "minecraft:model",
+			"model": "be_a_doll:item/flush_cutter_caring"
+		},
+		"on_false": {
+			"type": "minecraft:model",
+			"model": "be_a_doll:item/flush_cutter"
+		},
+		"property": "minecraft:using_item"
+	}
+}

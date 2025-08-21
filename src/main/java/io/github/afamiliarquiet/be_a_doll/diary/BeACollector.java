@@ -46,6 +46,9 @@ public class BeACollector {
 	public static final Item SEWING_NEEDLE = registerItem("sewing_needle", DollcraftItem::new, new Item.Settings()
 		.repairable(Items.IRON_INGOT).maxDamage(310).attributeModifiers(weapon(3, -2f))
 		.component(BeACollector.DOLL_VARIANT_COMPONENT, BeADoll.Variant.CLOTH));
+	public static final Item FLUSH_CUTTER = registerItem("flush_cutter", DollcraftItem::new, new Item.Settings()
+		.repairable(Items.IRON_INGOT).maxDamage(310).attributeModifiers(weapon(3.5f, -1.6f))
+		.component(BeACollector.DOLL_VARIANT_COMPONENT, BeADoll.Variant.PLASTIC));
 
 	public static final Item ESSENCE_FRAGMENT = registerItem("essence_fragment", Item::new, new Item.Settings()
 		.maxCount(1)
@@ -68,7 +71,7 @@ public class BeACollector {
 
 	public static void inquireAboutTheCollection() {
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(itemGroup -> {
-			itemGroup.addAfter(Items.BRUSH, CARVING_KNIFE, MODELING_TOOL, SEWING_NEEDLE, DOLL_RIBBON);
+			itemGroup.addAfter(Items.BRUSH, CARVING_KNIFE, MODELING_TOOL, SEWING_NEEDLE, FLUSH_CUTTER, DOLL_RIBBON);
 		});
 	}
 

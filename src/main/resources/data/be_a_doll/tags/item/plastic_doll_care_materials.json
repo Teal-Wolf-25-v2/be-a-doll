@@ -1,0 +1,23 @@
+{
+	"values": [
+		"minecraft:resin_brick",
+		{"id": "mr_scoot:plastic_granules", "required": false},
+		{"id": "toy_bricks:plastic_brick", "required": false},
+		{"id": "toy_bricks:white_toy_brick", "required": false},
+		{"id": "toy_bricks:light_gray_toy_brick", "required": false},
+		{"id": "toy_bricks:gray_toy_brick", "required": false},
+		{"id": "toy_bricks:black_toy_brick", "required": false},
+		{"id": "toy_bricks:brown_toy_brick", "required": false},
+		{"id": "toy_bricks:red_toy_brick", "required": false},
+		{"id": "toy_bricks:orange_toy_brick", "required": false},
+		{"id": "toy_bricks:yellow_toy_brick", "required": false},
+		{"id": "toy_bricks:lime_toy_brick", "required": false},
+		{"id": "toy_bricks:green_toy_brick", "required": false},
+		{"id": "toy_bricks:cyan_toy_brick", "required": false},
+		{"id": "toy_bricks:light_blue_toy_brick", "required": false},
+		{"id": "toy_bricks:blue_toy_brick", "required": false},
+		{"id": "toy_bricks:purple_toy_brick", "required": false},
+		{"id": "toy_bricks:magenta_toy_brick", "required": false},
+		{"id": "toy_bricks:pink_toy_brick", "required": false}
+	]
+}

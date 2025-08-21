@@ -27,6 +27,14 @@ public class BeAResearcher {
 		RegistryKeys.ITEM, BeADoll.id("cloth_doll_care_materials")
 	);
 
+	public static final TagKey<Item> PLASTIC_DOLL_CARE_MATERIALS = TagKey.of(
+		RegistryKeys.ITEM, BeADoll.id("plastic_doll_care_materials")
+	);
+
+	public static final TagKey<Item> DOLLCRAFT_ITEMS = TagKey.of(
+		RegistryKeys.ITEM, BeADoll.id("dollcraft_items")
+	);
+
 	public static void grantFunding() {
 
 	}

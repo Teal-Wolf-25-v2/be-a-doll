@@ -58,6 +58,7 @@ public class BeADoll implements ModInitializer {
 		LOGGER.info("[Be a doll!] {}", message);
 	}
 
+	// todo - turn this into interface/abstract w/ a registry
 	public enum Variant implements StringIdentifiable {
 		REPRESSED(0, "player",
 			ItemTags.ANVIL, Items.ANVIL,
@@ -69,12 +70,16 @@ public class BeADoll implements ModInitializer {
 			BeACurator.WOODEN_FOOD_EMPTY, BeACurator.WOODEN_FOOD_HALF, BeACurator.WOODEN_FOOD_FULL),
 		CLAY(2, "clay",
 			BeAResearcher.CLAY_DOLL_CARE_MATERIALS, Items.CLAY_BALL,
-			BeABirdwatcher.CARE_WOODEN,
+			BeABirdwatcher.CARE_CLAY,
 			BeACurator.CLAY_FOOD_EMPTY, BeACurator.CLAY_FOOD_HALF, BeACurator.CLAY_FOOD_FULL),
 		CLOTH(3, "cloth",
 			BeAResearcher.CLOTH_DOLL_CARE_MATERIALS, Items.STRING,
-			BeABirdwatcher.CARE_WOODEN,
-			BeACurator.CLOTH_FOOD_EMPTY, BeACurator.CLOTH_FOOD_HALF, BeACurator.CLOTH_FOOD_FULL);
+			BeABirdwatcher.CARE_CLOTH,
+			BeACurator.CLOTH_FOOD_EMPTY, BeACurator.CLOTH_FOOD_HALF, BeACurator.CLOTH_FOOD_FULL),
+		PLASTIC(4, "plastic",
+			BeAResearcher.PLASTIC_DOLL_CARE_MATERIALS, Items.RESIN_BRICK,
+			BeABirdwatcher.CARE_PLASTIC,
+			BeACurator.PLASTIC_FOOD_EMPTY, BeACurator.PLASTIC_FOOD_HALF, BeACurator.PLASTIC_FOOD_FULL);
 
 		public static final BeADoll.Variant DEFAULT = WOODEN;
 		public static final StringIdentifiable.EnumCodec<BeADoll.Variant> CODEC = StringIdentifiable.createCodec(BeADoll.Variant::values);
