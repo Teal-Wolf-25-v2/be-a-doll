@@ -11,13 +11,14 @@ import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
 @Mixin(ServerPlayerEntity.class)
-public abstract class SpectatorDropsDollsServerPlayerEntityMixin extends PlayerEntity {
-	public SpectatorDropsDollsServerPlayerEntityMixin(World world, GameProfile profile) {
+public abstract class DollsMustDropServerPlayerEntityMixin extends PlayerEntity {
+	public DollsMustDropServerPlayerEntityMixin(World world, GameProfile profile) {
 		super(world, profile);
 	}
 
@@ -27,6 +28,13 @@ public abstract class SpectatorDropsDollsServerPlayerEntityMixin extends PlayerE
 		if (!passengers.isEmpty()) {
 			ServerPlayNetworking.send((ServerPlayerEntity) (Object) this, new S2CDollDismountLetter(passengers.stream().map(Entity::getId).toList()));
 			this.removeAllPassengers();
+		}
+	}
+
+	@Inject(method = "dismountVehicle", at = @At("HEAD"))
+	private void letGoOfIt(CallbackInfo ci) {
+		if (this.getVehicle() instanceof ServerPlayerEntity serverPlayerMount) {
+			ServerPlayNetworking.send(serverPlayerMount, new S2CDollDismountLetter(List.of(this.getId())));
 		}
 	}
 }

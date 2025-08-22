@@ -11,7 +11,7 @@
 		"shoulder_riding.RiptideIgnorePassengersLivingEntityMixin",
 		"shoulder_riding.ShoulderAwarenessPlayerEntityMixin",
 		"shoulder_riding.ShoulderRidingEntityMixin",
-		"shoulder_riding.SpectatorDropsDollsServerPlayerEntityMixin",
+		"shoulder_riding.DollsMustDropServerPlayerEntityMixin",
 		"synthetic_treats.DollsCantEatPlayerEntityMixin",
 		"synthetic_treats.LightweightDollPowderSnowBlockMixin",
 		"synthetic_treats.SyntheticDeathMessagesDamageSourceMixin",
