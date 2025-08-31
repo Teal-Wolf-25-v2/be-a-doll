@@ -43,7 +43,7 @@ ah, if you wish to return to being a player and not a doll, do the same thing bu
 other players can play with you like an armor stand when they crouch,
 and if they craft a ribbon (four strings around a stick),
 they can tie you onto their shoulder with it!
-(right click a doll to tie on, shift+rclick to untie all dolls)
+(right click a doll to tie on, shift+rclick to untie a doll)
 
 oh, and uhh.. as a doll, if you want others to hear you in chat, you may need to SPEAK UP a bit.
 (or bypass this system with a \ in front of your message, but that's less fun and makes me sad.
