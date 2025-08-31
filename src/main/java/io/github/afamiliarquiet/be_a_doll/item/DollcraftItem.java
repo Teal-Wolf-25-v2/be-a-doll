@@ -41,7 +41,7 @@ public class DollcraftItem extends Item {
 	// care for self
 	@Override
 	public ActionResult use(World world, PlayerEntity user, Hand hand) {
-		if (BeAMaid.isDoll(user) && !findCareMaterial(user).isEmpty()) {
+		if (BeAMaid.isDoll(user) && !findCareMaterial(user, user).isEmpty()) {
 			user.setCurrentHand(hand);
 			return ActionResult.CONSUME;
 		}
@@ -62,7 +62,7 @@ public class DollcraftItem extends Item {
 	@Override
 	public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
 		if (user instanceof PlayerEntity praiseTheDoll) {
-			ItemStack material = findCareMaterial(praiseTheDoll);
+			ItemStack material = findCareMaterial(praiseTheDoll, praiseTheDoll);
 			if (material.isEmpty()) {
 				user.stopUsingItem();
 			} else {
@@ -102,7 +102,7 @@ public class DollcraftItem extends Item {
 				}
 				SoundEvent careSound = BeALibrarian.inspectDollMaterial(doll).getCareSound();
 				user.getWorld().playSound(user, doll.getX(), doll.getY(), doll.getZ(), careSound, SoundCategory.PLAYERS, 1f, doll.getRandom().nextFloat() * 0.2f + 0.9f);
-				spawnRepairParticles(doll, findCareMaterial(user), 16);
+				spawnRepairParticles(doll, findCareMaterial(user, doll), 16);
 				UseCooldownComponent cooldownComponent = stack.get(DataComponentTypes.USE_COOLDOWN);
 				if (cooldownComponent != null) {
 					cooldownComponent.set(stack, user);
@@ -117,7 +117,7 @@ public class DollcraftItem extends Item {
 
 	public ActionResult performCare(PlayerEntity user, PlayerEntity doll, ItemStack dollcraftStack, Hand hand) {
 		if (BeAMaid.isDoll(doll) && BeALibrarian.inspectDollMaterial(doll) == this.getVariant()) {
-			ItemStack material = findCareMaterial(user);
+			ItemStack material = findCareMaterial(user, doll);
 			if (!material.isEmpty()) {
 				caringIsCaring(doll);
 				material.split(1);
@@ -135,8 +135,8 @@ public class DollcraftItem extends Item {
 		doll.addStatusEffect(new StatusEffectInstance(BeAWitch.CARED_FOR, -1, 2, false, false));
 	}
 
-	public ItemStack findCareMaterial(PlayerEntity user) {
-		if (this.getVariant() != BeALibrarian.inspectDollMaterial(user)) {
+	public ItemStack findCareMaterial(PlayerEntity user, PlayerEntity doll) {
+		if (this.getVariant() != BeALibrarian.inspectDollMaterial(doll)) {
 			return ItemStack.EMPTY;
 		}
 
