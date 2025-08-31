@@ -47,8 +47,11 @@ public class BeACollector {
 		.repairable(Items.IRON_INGOT).maxDamage(310).attributeModifiers(weapon(3, -2f))
 		.component(BeACollector.DOLL_VARIANT_COMPONENT, BeADoll.Variant.CLOTH));
 	public static final Item FLUSH_CUTTER = registerItem("flush_cutter", DollcraftItem::new, new Item.Settings()
-		.repairable(Items.IRON_INGOT).maxDamage(310).attributeModifiers(weapon(3.5f, -1.6f))
+		.repairable(Items.IRON_INGOT).maxDamage(310).attributeModifiers(weapon(2.5f, -1.6f))
 		.component(BeACollector.DOLL_VARIANT_COMPONENT, BeADoll.Variant.PLASTIC));
+	public static final Item WATCHMAKERS_SCREWDRIVER = registerItem("watchmakers_screwdriver", DollcraftItem::new, new Item.Settings()
+		.repairable(Items.IRON_INGOT).maxDamage(310).attributeModifiers(weapon(3.5f, -2.4f))
+		.component(BeACollector.DOLL_VARIANT_COMPONENT, BeADoll.Variant.CLOCKWORK));
 
 	public static final Item ESSENCE_FRAGMENT = registerItem("essence_fragment", Item::new, new Item.Settings()
 		.maxCount(1)
@@ -71,7 +74,7 @@ public class BeACollector {
 
 	public static void inquireAboutTheCollection() {
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(itemGroup -> {
-			itemGroup.addAfter(Items.BRUSH, CARVING_KNIFE, MODELING_TOOL, SEWING_NEEDLE, FLUSH_CUTTER, DOLL_RIBBON);
+			itemGroup.addAfter(Items.BRUSH, CARVING_KNIFE, MODELING_TOOL, SEWING_NEEDLE, FLUSH_CUTTER, WATCHMAKERS_SCREWDRIVER, DOLL_RIBBON);
 		});
 	}
 

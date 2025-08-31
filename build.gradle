@@ -12,6 +12,20 @@ base.archivesName = project.slug
 repositories {
 	// for kaleido config
 	maven { url 'https://repo.sleeping.town/' }
+
+	// for occmy
+	exclusiveContent {
+		forRepository {
+			maven {
+				name = "Modrinth"
+				url = "https://api.modrinth.com/maven"
+			}
+		}
+
+		filter {
+			includeGroup "maven.modrinth"
+		}
+	}
 }
 
 loom {
@@ -37,6 +51,8 @@ dependencies {
 	// fer config, 'cause it's nice and simple
 	implementation 'folk.sisby:kaleido-config:0.3.1+1.3.1'
 	include 'folk.sisby:kaleido-config:0.3.1+1.3.1'
+
+	modCompileOnly "maven.modrinth:occipital-metonymy:C_"
 }
 
 processResources {

@@ -17,7 +17,7 @@ Would you be a doll? I certainly would, so I made this collection of toyful twea
 - dolls can be renamed (only in world) with a nametag (dolls can see their own in f5 too) (this is cleared when you become not-doll)
 - dolls can also rename themselves by throwing the nametag into position (look straight up)
 - dolls are immune to drowning and freezing
-- dolls are sustained by repairs instead of food (use your dollcraft item with sticks/clay/string in inventory)
+- dolls are sustained by repairs instead of food (use your dollcraft item with sticks/clay/string/resin brick/gold nugget in inventory)
 - dolls can also be repaired by others with the right tool and material
 
 There's also two potion effects you may see along the way - one's effect is reasonably obvious, and the other makes you hurt more.
@@ -30,6 +30,8 @@ you'll need to craft one of the three dollcraft items to become a doll!
 * carving knife - like an iron sword but with iron nuggets
 * modeling tool - like a carving knife but with two more nuggets on the sides
 * sewing needle - like a fishing rod without the string. and made of iron nuggets
+* flush cutter - a cross of sticks but with iron nuggets on the top and one of the sides
+* watchmaker's screwdriver - a stick with an iron nugget above and to the right
 
 once you've got that ready, just grab a fragment of your self's essence (conveniently works like a bundle - right click yourself!)
 and combine your dollcraft item with the essence fragment in crafting - congrats, you're crafting your essence now!

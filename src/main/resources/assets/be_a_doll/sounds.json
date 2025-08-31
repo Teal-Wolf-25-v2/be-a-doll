@@ -70,7 +70,17 @@
 			"block/resin_bricks/resin_brick_hit3",
 			"block/resin_bricks/resin_brick_hit4"
 		],
-		"subtitle": "subtitles.entity.be_a_doll.doll.care.cloth"
+		"subtitle": "subtitles.entity.be_a_doll.doll.care.plastic"
+	},
+	"entity.be_a_doll.doll.care.clockwork": {
+		"sounds": [
+			{
+				"name": "random/click",
+				"pitch": 1.6,
+				"volume": 0.5
+			}
+		],
+		"subtitle": "subtitles.entity.be_a_doll.doll.care.clockwork"
 	},
 	"entity.be_a_doll.doll.care.complete": {
 		"sounds": [

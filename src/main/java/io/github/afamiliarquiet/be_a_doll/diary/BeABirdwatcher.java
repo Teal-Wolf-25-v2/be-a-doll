@@ -14,6 +14,7 @@ public class BeABirdwatcher {
 	public static final SoundEvent CARE_CLAY = registerSound("entity.be_a_doll.doll.care.clay");
 	public static final SoundEvent CARE_CLOTH = registerSound("entity.be_a_doll.doll.care.cloth");
 	public static final SoundEvent CARE_PLASTIC = registerSound("entity.be_a_doll.doll.care.plastic");
+	public static final SoundEvent CARE_CLOCKWORK = registerSound("entity.be_a_doll.doll.care.clockwork");
 	public static final SoundEvent CARE_COMPLETE = registerSound("entity.be_a_doll.doll.care.complete");
 
 	public static final SoundEvent ESSENCE_TAKE = registerSound("entity.be_a_doll.doll.essence.take");

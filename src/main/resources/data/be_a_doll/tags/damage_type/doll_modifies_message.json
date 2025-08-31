@@ -9,6 +9,7 @@
 		"minecraft:mob_attack",
 		"minecraft:player_attack",
 		"minecraft:starve",
-		"minecraft:thorns"
+		"minecraft:thorns",
+		{"id": "occmy:hollowing", "required": false}
 	]
 }

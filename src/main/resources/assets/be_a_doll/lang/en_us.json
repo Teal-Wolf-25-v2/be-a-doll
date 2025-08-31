@@ -7,6 +7,8 @@
 	"lore.be_a_doll.sewing_needle": "A tool that can be used to repair cloth dolls or become a cloth doll.",
 	"item.be_a_doll.flush_cutter": "Flush Cutter",
 	"lore.be_a_doll.flush_cutter": "A tool that can be used to repair plastic dolls or become a plastic doll.",
+	"item.be_a_doll.watchmakers_screwdriver": "Watchmaker's Screwdriver",
+	"lore.be_a_doll.watchmakers_screwdriver": "A tool that can be used to repair clockwork dolls or become a clockwork doll.",
 	"item.be_a_doll.ribbon": "Ribbon",
 	"lore.be_a_doll.ribbon": "An item that can be used on dolls to safely secure them for riding on your shoulder.",
 	"item.be_a_doll.essence_fragment": "Essence Fragment",
@@ -17,6 +19,8 @@
 	"subtitles.entity.be_a_doll.doll.care.wooden": "Wooden doll repaired",
 	"subtitles.entity.be_a_doll.doll.care.clay": "Clay doll repaired",
 	"subtitles.entity.be_a_doll.doll.care.cloth": "Cloth doll repaired",
+	"subtitles.entity.be_a_doll.doll.care.plastic": "Plastic doll repaired",
+	"subtitles.entity.be_a_doll.doll.care.clockwork": "Clockwork doll repaired",
 	"subtitles.entity.be_a_doll.doll.care.complete": "Doll brushes off",
 	"subtitles.entity.be_a_doll.doll.essence.take": "Essence fragments",
 	"subtitles.entity.be_a_doll.doll.essence.place": "Essence consumes",
@@ -26,6 +30,7 @@
 	"tag.item.be_a_doll.clay_doll_care_materials": "Clay Doll Care Materials",
 	"tag.item.be_a_doll.cloth_doll_care_materials": "Cloth Doll Care Materials",
 	"tag.item.be_a_doll.plastic_doll_care_materials": "Plastic Doll Care Materials",
+	"tag.item.be_a_doll.clockwork_doll_care_materials": "Clockwork Doll Care Materials",
 	"tag.item.be_a_doll.dollcraft_items": "Dollcraft Tools",
 
 	"effect.be_a_doll.cared_for": "Cared For",
@@ -51,5 +56,6 @@
 	"death.attack.doll.starve": "%1$s fell apart",
 	"death.attack.doll.starve.player": "%1$s fell apart while fighting %2$s",
 	"death.attack.doll.thorns": "%1$s was broken while trying to hurt %2$s",
-	"death.attack.doll.thorns.item": "%1$s was broken by %3$s while trying to hurt %2$s"
+	"death.attack.doll.thorns.item": "%1$s was broken by %3$s while trying to hurt %2$s",
+	"death.attack.doll.hollowing": "%s was puppeteered"
 }

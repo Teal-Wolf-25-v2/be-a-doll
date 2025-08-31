@@ -79,7 +79,11 @@ public class BeADoll implements ModInitializer {
 		PLASTIC(4, "plastic",
 			BeAResearcher.PLASTIC_DOLL_CARE_MATERIALS, Items.RESIN_BRICK,
 			BeABirdwatcher.CARE_PLASTIC,
-			BeACurator.PLASTIC_FOOD_EMPTY, BeACurator.PLASTIC_FOOD_HALF, BeACurator.PLASTIC_FOOD_FULL);
+			BeACurator.PLASTIC_FOOD_EMPTY, BeACurator.PLASTIC_FOOD_HALF, BeACurator.PLASTIC_FOOD_FULL),
+		CLOCKWORK(5, "clockwork",
+			BeAResearcher.CLOCKWORK_DOLL_CARE_MATERIALS, Items.GOLD_NUGGET,
+			BeABirdwatcher.CARE_CLOCKWORK,
+			BeACurator.CLOCKWORK_FOOD_EMPTY, BeACurator.CLOCKWORK_FOOD_HALF, BeACurator.CLOCKWORK_FOOD_FULL);
 
 		public static final BeADoll.Variant DEFAULT = WOODEN;
 		public static final StringIdentifiable.EnumCodec<BeADoll.Variant> CODEC = StringIdentifiable.createCodec(BeADoll.Variant::values);

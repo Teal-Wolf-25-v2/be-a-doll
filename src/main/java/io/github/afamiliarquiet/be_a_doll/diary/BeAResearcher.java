@@ -7,35 +7,26 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 
 public class BeAResearcher {
-	public static final TagKey<DamageType> DOLL_IMMUNE = TagKey.of(
-		RegistryKeys.DAMAGE_TYPE, BeADoll.id("doll_immune")
-	);
+	public static final TagKey<DamageType> DOLL_IMMUNE = damage("doll_immune");
+	public static final TagKey<DamageType> DOLL_MODIFIES_MESSAGE = damage("doll_modifies_message");
 
-	public static final TagKey<DamageType> DOLL_MODIFIES_MESSAGE = TagKey.of(
-		RegistryKeys.DAMAGE_TYPE, BeADoll.id("doll_modifies_message")
-	);
+	public static final TagKey<Item> WOODEN_DOLL_CARE_MATERIALS = item("wooden_doll_care_materials");
+	public static final TagKey<Item> CLAY_DOLL_CARE_MATERIALS = item("clay_doll_care_materials");
+	public static final TagKey<Item> CLOTH_DOLL_CARE_MATERIALS = item("cloth_doll_care_materials");
+	public static final TagKey<Item> PLASTIC_DOLL_CARE_MATERIALS = item("plastic_doll_care_materials");
+	public static final TagKey<Item> CLOCKWORK_DOLL_CARE_MATERIALS = item("clockwork_doll_care_materials");
 
-	public static final TagKey<Item> WOODEN_DOLL_CARE_MATERIALS = TagKey.of(
-		RegistryKeys.ITEM, BeADoll.id("wooden_doll_care_materials")
-	);
-
-	public static final TagKey<Item> CLAY_DOLL_CARE_MATERIALS = TagKey.of(
-		RegistryKeys.ITEM, BeADoll.id("clay_doll_care_materials")
-	);
-
-	public static final TagKey<Item> CLOTH_DOLL_CARE_MATERIALS = TagKey.of(
-		RegistryKeys.ITEM, BeADoll.id("cloth_doll_care_materials")
-	);
-
-	public static final TagKey<Item> PLASTIC_DOLL_CARE_MATERIALS = TagKey.of(
-		RegistryKeys.ITEM, BeADoll.id("plastic_doll_care_materials")
-	);
-
-	public static final TagKey<Item> DOLLCRAFT_ITEMS = TagKey.of(
-		RegistryKeys.ITEM, BeADoll.id("dollcraft_items")
-	);
+	public static final TagKey<Item> DOLLCRAFT_ITEMS = item("dollcraft_items");
 
 	public static void grantFunding() {
 
+	}
+
+	public static TagKey<DamageType> damage(String thing) {
+		return TagKey.of(RegistryKeys.DAMAGE_TYPE, BeADoll.id(thing));
+	}
+
+	public static TagKey<Item> item(String thing) {
+		return TagKey.of(RegistryKeys.ITEM, BeADoll.id(thing));
 	}
 }

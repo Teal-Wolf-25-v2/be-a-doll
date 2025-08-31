@@ -3,6 +3,7 @@ package io.github.afamiliarquiet.be_a_doll.mixin.client;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import io.github.afamiliarquiet.be_a_doll.BeAMaid;
+import io.github.afamiliarquiet.be_a_doll.DollishState;
 import io.github.afamiliarquiet.be_a_doll.diary.BeALibrarian;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -14,48 +15,43 @@ import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.render.entity.state.PlayerEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerEntityRenderer.class)
 public abstract class NameablePlayerEntityRenderer extends LivingEntityRenderer<AbstractClientPlayerEntity, PlayerEntityRenderState, PlayerEntityModel> {
-	@Unique
-	private boolean be_a_doll$isDoll = false;
-
-	@Unique
-	@Nullable
-	private Text be_a_doll$dollDisplayName = null;
-
 	public NameablePlayerEntityRenderer(EntityRendererFactory.Context ctx, PlayerEntityModel model, float shadowRadius) {
 		super(ctx, model, shadowRadius);
 	}
 
 	@Inject(at = @At("HEAD"), method = "updateRenderState(Lnet/minecraft/client/network/AbstractClientPlayerEntity;Lnet/minecraft/client/render/entity/state/PlayerEntityRenderState;F)V")
 	private void alsoCheckDollness(AbstractClientPlayerEntity player, PlayerEntityRenderState state, float f, CallbackInfo ci) {
-		be_a_doll$isDoll = BeAMaid.isDoll(player);
-		if (be_a_doll$isDoll && state.squaredDistanceToCamera < 4096.0 && player == this.dispatcher.targetedEntity || player == MinecraftClient.getInstance().getCameraEntity()) {
+		DollishState dollishState = (DollishState)state;
+		dollishState.be_a_doll$setDoll(BeAMaid.isDoll(player));
+		// no need for now
+//		dollishState.be_a_doll$setVariant(BeALibrarian.inspectDollMaterial(player));
+		if (dollishState.be_a_doll$isDoll() && state.squaredDistanceToCamera < 4096.0 && player == this.dispatcher.targetedEntity || player == MinecraftClient.getInstance().getCameraEntity()) {
 			// todone - add f3 override for moderation + doll name from nametag
-			be_a_doll$dollDisplayName = BeALibrarian.inspectDollLabel(player);
-			if (be_a_doll$dollDisplayName == null) { // notodo - remove this probably? but... it seems like attachments are broken
-				be_a_doll$dollDisplayName = this.getDisplayName(player);
+			dollishState.be_a_doll$setDollName(BeALibrarian.inspectDollLabel(player));
+			if (dollishState.be_a_doll$getDollName() == null) { // notodo - remove this probably? but... it seems like attachments are broken
+				dollishState.be_a_doll$setDollName(this.getDisplayName(player));
 			}
 		} else {
-			be_a_doll$dollDisplayName = null;
+			dollishState.be_a_doll$setDollName(null);
 		}
 	}
 
 	@WrapMethod(method = "renderLabelIfPresent(Lnet/minecraft/client/render/entity/state/PlayerEntityRenderState;Lnet/minecraft/text/Text;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V")
-	private void butDollsAreNoDifferent(PlayerEntityRenderState playerEntityRenderState, Text text, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, Operation<Void> original) {
-		if (be_a_doll$isDoll && !MinecraftClient.getInstance().getDebugHud().shouldShowDebugHud()) {
-			if (be_a_doll$dollDisplayName != null) {
-				original.call(playerEntityRenderState, be_a_doll$dollDisplayName, matrixStack, vertexConsumerProvider, i);
+	private void butDollsAreNoDifferent(PlayerEntityRenderState state, Text text, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, Operation<Void> original) {
+		DollishState dollishState = (DollishState) state;
+		if (dollishState.be_a_doll$isDoll() && !MinecraftClient.getInstance().getDebugHud().shouldShowDebugHud()) {
+			if (dollishState.be_a_doll$getDollName() != null) {
+				original.call(state, dollishState.be_a_doll$getDollName(), matrixStack, vertexConsumerProvider, i);
 			}
 		} else {
-			original.call(playerEntityRenderState, text, matrixStack, vertexConsumerProvider, i);
+			original.call(state, text, matrixStack, vertexConsumerProvider, i);
 		}
 	}
 }
