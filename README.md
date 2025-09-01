@@ -14,6 +14,7 @@ Would you be a doll? I certainly would, so I made this collection of toyful twea
 - dolls can be used to play dress up!
 - dolls can be made of a variety(3) of materials
 - dolls can be secured to a player's shoulders with ribbon (shift+rclick ribbon to force dolls off)
+- dolls can ride entities friendly to them with ribbon (must be tamed and big enough to hold the doll)
 - dolls can be renamed (only in world) with a nametag (dolls can see their own in f5 too) (this is cleared when you become not-doll)
 - dolls can also rename themselves by throwing the nametag into position (look straight up)
 - dolls are immune to drowning and freezing

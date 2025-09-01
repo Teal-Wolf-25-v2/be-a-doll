@@ -2,10 +2,14 @@ package io.github.afamiliarquiet.be_a_doll.item;
 
 import io.github.afamiliarquiet.be_a_doll.BeAMaid;
 import io.github.afamiliarquiet.be_a_doll.diary.BeABirdwatcher;
+import io.github.afamiliarquiet.be_a_doll.mixin.synthetic_treats.FoxEntityTrustInvoker;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
+import net.minecraft.entity.LazyEntityReference;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.Tameable;
+import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -30,11 +34,40 @@ public class RibbonItem extends Item {
 	@Override
 	public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
 		if (entity instanceof PlayerEntity doll && BeAMaid.isDoll(doll)) {
-			doll.startRiding(user, false);
-			user.playSound(BeABirdwatcher.RAVEN_CHIRP, 1f, 1f);
-			return ActionResult.SUCCESS;
+			if (doll.startRiding(user, false)) {
+				user.playSound(BeABirdwatcher.RAVEN_CHIRP, 1f, 1f);
+				return ActionResult.SUCCESS;
+			}
+		} else {
+			ActionResult tried = useToTryRiding(stack, user, entity, hand);
+			if (tried.isAccepted()) {
+				return tried;
+			}
 		}
+
 		return super.useOnEntity(stack, user, entity, hand);
+	}
+
+	public ActionResult useToTryRiding(ItemStack stack, PlayerEntity user, Entity entity, Hand hand) {
+		if (BeAMaid.isDoll(user)) {
+			// ohh.. so the user was the doll!
+			boolean shouldRide = false;
+			if (entity instanceof Tameable tameable) {
+				LazyEntityReference<LivingEntity> ownerRef = tameable.getOwnerReference();
+				if (ownerRef != null && ownerRef.uuidEquals(user) && entity.getWidth() > user.getWidth()) {
+					shouldRide = true;
+				}
+			} else if (entity instanceof FoxEntity foxesAreSoCool && ((FoxEntityTrustInvoker)foxesAreSoCool).invokeCanTrust(user)) {
+				shouldRide = true;
+			}
+
+			if (shouldRide && user.startRiding(entity)) {
+				user.playSound(BeABirdwatcher.RAVEN_CHIRP, 1f, 1f);
+				return ActionResult.SUCCESS;
+			}
+		}
+
+		return ActionResult.PASS;
 	}
 
 	@Override
