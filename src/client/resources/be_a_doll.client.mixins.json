@@ -8,7 +8,7 @@
     "DollRetexturedInGameHudMixin",
     "DollsNeedNoAirInGameHudMixin",
     "IgnorePassengersLocatorBarMixin",
-    "NameablePlayerEntityRenderer",
+	  "NameablePlayerEntityRendererMixin",
     "SelfCreativeInventoryScreenMixin",
     "SelfInventoryScreenMixin"
   ],

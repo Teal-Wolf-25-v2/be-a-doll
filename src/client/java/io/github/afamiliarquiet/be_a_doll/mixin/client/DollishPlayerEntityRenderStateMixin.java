@@ -14,6 +14,8 @@ public class DollishPlayerEntityRenderStateMixin implements DollishState {
 	@Unique
 	private boolean be_a_doll$doll = false;
 	@Unique
+	private boolean be_a_doll$targeted = false;
+	@Unique
 	private Text be_a_doll$dollName = null;
 
 	@Override
@@ -34,6 +36,16 @@ public class DollishPlayerEntityRenderStateMixin implements DollishState {
 	@Override
 	public boolean be_a_doll$isDoll() {
 		return this.be_a_doll$doll;
+	}
+
+	@Override
+	public void be_a_doll$setTargeted(boolean targeted) {
+		this.be_a_doll$targeted = targeted;
+	}
+
+	@Override
+	public boolean be_a_doll$isTargeted() {
+		return this.be_a_doll$targeted;
 	}
 
 	@Override
