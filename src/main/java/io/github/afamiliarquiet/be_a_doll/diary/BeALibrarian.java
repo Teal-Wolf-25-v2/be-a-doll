@@ -2,6 +2,8 @@ package io.github.afamiliarquiet.be_a_doll.diary;
 
 import io.github.afamiliarquiet.be_a_doll.BeADoll;
 import io.github.afamiliarquiet.be_a_doll.BeAMaid;
+import io.github.afamiliarquiet.be_a_doll.letters.C2SKeysmashConfigSyncLetter;
+import io.github.afamiliarquiet.be_a_doll.letters.IntraLibraryMessageCacheLetter;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentSyncPredicate;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
@@ -30,6 +32,17 @@ public class BeALibrarian {
 		builder -> builder
 			.persistent(TextCodecs.CODEC)
 			.syncWith(TextCodecs.UNLIMITED_REGISTRY_PACKET_CODEC, AttachmentSyncPredicate.all())
+	);
+
+	// yep. keeping the letter, envelope and all. no sync needed. certainly no persistence.
+	public static final AttachmentType<C2SKeysmashConfigSyncLetter> KEYSMASH_CONFIG = AttachmentRegistry.create(
+		BeADoll.id("keysmash_config"),
+		builder -> builder
+			.initializer(() -> C2SKeysmashConfigSyncLetter.DEFAULT)
+	);
+
+	public static final AttachmentType<IntraLibraryMessageCacheLetter> MESSAGE_CACHE = AttachmentRegistry.create(
+		BeADoll.id("message_cache")
 	);
 
 
@@ -89,5 +102,25 @@ public class BeALibrarian {
 
 		player.removeAttached(DOLL_VARIANT);
 		player.removeAttached(DOLL_NAME);
+	}
+
+	public static void filePasswordManager(@NotNull PlayerEntity player, C2SKeysmashConfigSyncLetter letter) {
+		player.setAttached(KEYSMASH_CONFIG, letter);
+	}
+
+	public static @NotNull C2SKeysmashConfigSyncLetter checkFilesForPasswordManager(@NotNull PlayerEntity player) {
+		return player.getAttachedOrCreate(KEYSMASH_CONFIG);
+	}
+
+	public static void filePaperwork(@NotNull PlayerEntity player, IntraLibraryMessageCacheLetter letter) {
+		player.setAttached(MESSAGE_CACHE, letter);
+	}
+
+	public static @Nullable IntraLibraryMessageCacheLetter checkDocuments(@NotNull PlayerEntity player) {
+		return player.getAttached(MESSAGE_CACHE);
+	}
+
+	public static void shredDocuments(@NotNull PlayerEntity player) {
+		player.removeAttached(MESSAGE_CACHE);
 	}
 }

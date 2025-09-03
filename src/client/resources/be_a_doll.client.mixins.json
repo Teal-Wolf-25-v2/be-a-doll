@@ -8,7 +8,6 @@
     "DollRetexturedInGameHudMixin",
     "DollsNeedNoAirInGameHudMixin",
     "IgnorePassengersLocatorBarMixin",
-    "Keysmash",
     "NameablePlayerEntityRenderer",
     "SelfCreativeInventoryScreenMixin",
     "SelfInventoryScreenMixin"

@@ -3,6 +3,7 @@ package io.github.afamiliarquiet.be_a_doll;
 import com.google.common.collect.HashMultimap;
 import io.github.afamiliarquiet.be_a_doll.diary.BeALibrarian;
 import io.github.afamiliarquiet.be_a_doll.diary.BeAWitch;
+import io.github.afamiliarquiet.be_a_doll.letters.C2SKeysmashConfigSyncLetter;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
@@ -17,8 +18,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import static io.github.afamiliarquiet.be_a_doll.BeADoll.TINKERER;
 
 public class BeAMaid {
 	// to be completely honest, most of this is probably better suited to BeADoll in name
@@ -86,22 +85,33 @@ public class BeAMaid {
 		}
 	}
 
-	public static @NotNull String syntheticKeysmashing(@NotNull String originalMessage, @Nullable PlayerEntity keySmasher) {
+	public static @NotNull String syntheticKeysmashing(@NotNull String originalMessage) {
+		return syntheticKeysmashing(originalMessage, C2SKeysmashConfigSyncLetter.DEFAULT);
+	}
+
+	public static @NotNull String syntheticKeysmashing(@NotNull String originalMessage, @NotNull PlayerEntity keysmasher) {
+		return syntheticKeysmashing(originalMessage, BeALibrarian.checkFilesForPasswordManager(keysmasher));
+	}
+
+	public static @NotNull String syntheticKeysmashing(@NotNull String originalMessage, @NotNull C2SKeysmashConfigSyncLetter penpalsWishes) {
 		// if you want to try doll-to-doll communication later, try a mixin at PlayerManager#824 or so
 		// this is entirely limited to whatever lowercase can detect, and subject to what My Keyboard looks like.
 		// thats just how it is
-		if (!originalMessage.isEmpty() && originalMessage.charAt(0) == '\\' || !TINKERER.useKeysmashing) {
+		// wait. What if the player's keysmash config is synced to server,
+		// then server can choose whether to keysmashify or send pure to players depending on doll or not.
+		// this would work. this is Doll Power
+		if (!originalMessage.isEmpty() && originalMessage.charAt(0) == '\\' || !penpalsWishes.useKeysmashing()) {
 			return originalMessage;
 		}
 
-		String material = !TINKERER.letterPoolOverride.isEmpty() ? TINKERER.letterPoolOverride : "asdfjkl;";
+		String material = !penpalsWishes.letterPoolOverride().isEmpty() ? penpalsWishes.letterPoolOverride() : "asdfjkl;";
 		List<Character> spool = new ArrayList<>(material.length());
 		Random random = new Random();
 		StringBuilder smashed = new StringBuilder();
-		double clarity = TINKERER.startingClarityScore;
+		double clarity = penpalsWishes.startingClarityScore();
 
 		for (int i = 0; i < originalMessage.length(); i++) {
-			if (spool.size() < material.length() * TINKERER.restockThreshold) {
+			if (spool.size() < material.length() * penpalsWishes.restockThreshold()) {
 				spool.clear();
 				for (int j = 0; j < material.length(); j++) {
 					spool.add(material.charAt(j));
@@ -111,13 +121,13 @@ public class BeAMaid {
 			char current = originalMessage.charAt(i);
 			if (Character.isLowerCase(current)) {
 				smashed.append(spool.remove(random.nextInt(spool.size())));
-				clarity *= TINKERER.keysmashedMultiplier;
+				clarity *= penpalsWishes.keysmashedMultiplier();
 			} else if (Character.isUpperCase(current)) {
 				smashed.append(Character.toLowerCase(current));
-				clarity += TINKERER.spokenLoudlyClarity;
-			} else if (random.nextDouble() < TINKERER.baseClarityChance + (clarity / (1 + smashed.length()))) { // not normal text? good luck
+				clarity += penpalsWishes.spokenLoudlyClarity();
+			} else if (random.nextDouble() < penpalsWishes.baseClarityChance() + (clarity / (1 + smashed.length()))) { // not normal text? good luck
 				smashed.append(current);
-				clarity += TINKERER.nonletterClarity;
+				clarity += penpalsWishes.nonletterClarity();
 			}
 		}
 

@@ -11,7 +11,6 @@ import io.github.afamiliarquiet.be_a_doll.diary.BeAResearcher;
 import io.github.afamiliarquiet.be_a_doll.diary.BeAWitch;
 import io.netty.buffer.ByteBuf;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.network.codec.PacketCodec;
@@ -32,11 +31,9 @@ public class BeADoll implements ModInitializer {
 	public static final String MOD_ID = "be_a_doll";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-	public static final BeATinkerer TINKERER = BeATinkerer.createToml(FabricLoader.getInstance().getConfigDir(), "", MOD_ID, BeATinkerer.class);
-
 	@Override
 	public void onInitialize() {
-		log(BeAMaid.syntheticKeysmashing("oh are we logging?! HELLO WORLD! I'M READY TO MAKE SOME MORE DOLLS!", null));
+		log(BeAMaid.syntheticKeysmashing("oh are we logging?! HELLO WORLD! I'M READY TO MAKE SOME MORE DOLLS!"));
 		BeAMaid.bestowApron();
 		BeACollector.inquireAboutTheCollection();
 		BeAPenPal.fillPen();
@@ -56,6 +53,10 @@ public class BeADoll implements ModInitializer {
 	// probably a good habit to always log my id whenever i'm throwing things in the log, even if it's just a quick test
 	public static void log(String message) {
 		LOGGER.info("[Be a doll!] {}", message);
+	}
+
+	public static void warn(String message) {
+		LOGGER.warn("[Would you be a doll?] {}", message);
 	}
 
 	// todo - turn this into interface/abstract w/ a registry
