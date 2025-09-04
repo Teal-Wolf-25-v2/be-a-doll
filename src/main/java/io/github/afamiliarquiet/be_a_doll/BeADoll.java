@@ -33,7 +33,7 @@ public class BeADoll implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		log(BeAMaid.syntheticKeysmashing("oh are we logging?! HELLO WORLD! I'M READY TO MAKE SOME MORE DOLLS!"));
+		log(BeADollthing.syntheticKeysmashing("oh are we logging?! HELLO WORLD! I'M READY TO MAKE SOME MORE DOLLS!"));
 		BeAMaid.bestowApron();
 		BeACollector.inquireAboutTheCollection();
 		BeAPenPal.fillPen();

@@ -1,6 +1,7 @@
 package io.github.afamiliarquiet.be_a_doll.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
+import io.github.afamiliarquiet.be_a_doll.BeADollthing;
 import io.github.afamiliarquiet.be_a_doll.BeAMaid;
 import io.github.afamiliarquiet.be_a_doll.diary.BeALibrarian;
 import io.github.afamiliarquiet.be_a_doll.letters.IntraLibraryMessageCacheLetter;
@@ -10,9 +11,6 @@ import net.minecraft.network.message.SignedMessage;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.PlayerManager;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.PlainTextContent;
-import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -35,23 +33,7 @@ public class DollToDollCommunicationPlayerManagerMixin {
 		// this is, in my head, a helpful measure with large player counts.
 		// (also a late redecoration. i guess i could shave off one decorate with another mixin,
 		//  but i don't think i really need to worry that much about optimizing.)
-		if (sender != null) {
-			BeALibrarian.filePaperwork(sender, new IntraLibraryMessageCacheLetter(
-				BeAMaid.isDoll(sender) && BeALibrarian.checkFilesForPasswordManager(sender).useKeysmashing(),
-				SentMessage.of(message.withUnsignedContent(
-					this.server.getMessageDecorator().decorate(sender, Text.of(
-						BeAMaid.syntheticKeysmashing(message.getSignedContent(), sender)
-					))
-				)),
-				SentMessage.of(message.withUnsignedContent(
-					this.server.getMessageDecorator().decorate(sender, Text.of(
-						MutableText.of(PlainTextContent.of(message.getSignedContent())).styled(
-							style -> style.withColor(0xbca1a0).withItalic(true)
-						)
-					))
-				))
-			));
-		}
+		BeADollthing.prepareMessageSending(message, sender, this.server);
 	}
 
 	@ModifyArg(index = 0, at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerPlayerEntity;sendChatMessage(Lnet/minecraft/network/message/SentMessage;ZLnet/minecraft/network/message/MessageType$Parameters;)V"), method = "broadcast(Lnet/minecraft/network/message/SignedMessage;Ljava/util/function/Predicate;Lnet/minecraft/server/network/ServerPlayerEntity;Lnet/minecraft/network/message/MessageType$Parameters;)V")
