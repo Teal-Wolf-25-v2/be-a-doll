@@ -92,7 +92,7 @@ public class BeADollthing {
 		double clarity = penpalsWishes.startingClarityScore();
 
 		for (int i = 0; i < originalMessage.length(); i++) {
-			if (spool.size() < material.length() * penpalsWishes.restockThreshold()) {
+			if (spool.size() <= material.length() * penpalsWishes.restockThreshold() || spool.isEmpty()) {
 				spool.clear();
 				for (int j = 0; j < material.length(); j++) {
 					spool.add(material.charAt(j));
