@@ -30,12 +30,20 @@ public class BeALocalTinkerer extends ReflectiveConfig {
 
 	public C2SKeysmashConfigSyncLetter writtenForAFriend() {
 		// feels like there should be a way to not do this. but whatever
-		return new C2SKeysmashConfigSyncLetter(useKeysmashing.value(), letterPoolOverride.value(), restockThreshold.value(), baseClarityChance.value(), startingClarityScore.value(), keysmashedMultiplier.value(), spokenLoudlyClarity.value(), nonletterClarity.value());
+		BeADoll.log(String.valueOf(readableSelf.value()));
+		return new C2SKeysmashConfigSyncLetter(useKeysmashing.value(), readableSelf.value(), alwaysReadableOthers.value(), letterPoolOverride.value(), restockThreshold.value(), useOrderedSpooling.value(), baseClarityChance.value(), startingClarityScore.value(), keysmashedMultiplier.value(), spokenLoudlyClarity.value(), nonletterClarity.value());
 	}
 
 	@Comment("Set this to false if you do not want your speech inhibited as a doll.")
 	@Comment("Only affects the client's sent messages, not the messages of other players")
 	public final TrackedValue<Boolean> useKeysmashing = value(true);
+
+	@Comment("Set this to true if you want to read your own messages through the filter.")
+	public final TrackedValue<Boolean> readableSelf = value(false);
+
+	@Comment("Set this to false if you don't want to read others' messages through the filter.")
+	@Comment("This only affects the check for doll-to-doll communication, not the proximity check.")
+	public final TrackedValue<Boolean> alwaysReadableOthers = value(true);
 
 	@Comment("If not empty, this will be the pool of letters that your keysmashes consist of.")
 	@Comment("By default, there's a few different options that are selected from based on your UUID.")
@@ -44,6 +52,10 @@ public class BeALocalTinkerer extends ReflectiveConfig {
 	@Comment("Controls the percentage of your pool that must have been used in keysmash before letters can repeat")
 	@Comment("The pool must be this % full or less to trigger restock")
 	public final TrackedValue<Float> restockThreshold = value(0.13f);
+
+	@Comment("If true, your letter pool will be chosen from in order instead of randomly.")
+	@Comment("This will also trigger a restock every time the filter processes a non-letter.")
+	public final TrackedValue<Boolean> useOrderedSpooling = value(false);
 
 	@Comment("Any non-letter characters only have a chance to be included based on a 'clarity' level of your message.")
 	@Comment("This controls the minimum chance that non-letters are included")

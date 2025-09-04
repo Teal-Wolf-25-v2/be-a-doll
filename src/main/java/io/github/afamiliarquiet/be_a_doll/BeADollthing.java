@@ -55,8 +55,11 @@ public class BeADollthing {
 				ExtSignedMessage.setArg(dolledMessage, "override", StyledChatStyles.getChat(sender, dolledContent));
 			}
 
+			C2SKeysmashConfigSyncLetter passwordManager = BeALibrarian.checkFilesForPasswordManager(sender);
+			BeADoll.log(String.valueOf(passwordManager.readableSelf()));
 			BeALibrarian.filePaperwork(sender, new IntraLibraryMessageCacheLetter(
-				BeAMaid.isDoll(sender) && BeALibrarian.checkFilesForPasswordManager(sender).useKeysmashing(),
+				BeAMaid.isDoll(sender) && passwordManager.useKeysmashing(),
+				passwordManager.readableSelf(),
 				SentMessage.of(keysmashedMessage),
 				SentMessage.of(dolledMessage)
 			));
@@ -98,14 +101,19 @@ public class BeADollthing {
 
 			char current = originalMessage.charAt(i);
 			if (Character.isLowerCase(current)) {
-				smashed.append(spool.remove(random.nextInt(spool.size())));
+				smashed.append(spool.remove(penpalsWishes.useOrderedSpooling() ? 0 : random.nextInt(spool.size())));
 				clarity *= penpalsWishes.keysmashedMultiplier();
 			} else if (Character.isUpperCase(current)) {
 				smashed.append(Character.toLowerCase(current));
 				clarity += penpalsWishes.spokenLoudlyClarity();
-			} else if (random.nextDouble() < penpalsWishes.baseClarityChance() + (clarity / (1 + smashed.length()))) { // not normal text? good luck
-				smashed.append(current);
-				clarity += penpalsWishes.nonletterClarity();
+			} else {
+				if (random.nextDouble() < penpalsWishes.baseClarityChance() + (clarity / (1 + smashed.length()))) { // not normal text? good luck
+					smashed.append(current);
+					clarity += penpalsWishes.nonletterClarity();
+				}
+				if (penpalsWishes.useOrderedSpooling()) {
+					spool.clear(); // trigger restock
+				}
 			}
 		}
 

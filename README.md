@@ -10,7 +10,7 @@ Would you be a doll? I certainly would, so I made this collection of toyful twea
 ### Doll Facts
 
 - dolls are small!
-- dolls don't always feel like speaking up
+- dolls don't always feel like speaking up (sorta like a mixed team + proximity chat)
 - dolls can be used to play dress up!
 - dolls can be made of a variety(3) of materials
 - dolls can be secured to a player's shoulders with ribbon (shift+rclick ribbon to force dolls off)

@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import io.github.afamiliarquiet.be_a_doll.BeADollthing;
 import io.github.afamiliarquiet.be_a_doll.BeAMaid;
 import io.github.afamiliarquiet.be_a_doll.diary.BeALibrarian;
+import io.github.afamiliarquiet.be_a_doll.letters.C2SKeysmashConfigSyncLetter;
 import io.github.afamiliarquiet.be_a_doll.letters.IntraLibraryMessageCacheLetter;
 import net.minecraft.network.message.MessageType;
 import net.minecraft.network.message.SentMessage;
@@ -39,8 +40,9 @@ public class DollToDollCommunicationPlayerManagerMixin {
 	@ModifyArg(index = 0, at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerPlayerEntity;sendChatMessage(Lnet/minecraft/network/message/SentMessage;ZLnet/minecraft/network/message/MessageType$Parameters;)V"), method = "broadcast(Lnet/minecraft/network/message/SignedMessage;Ljava/util/function/Predicate;Lnet/minecraft/server/network/ServerPlayerEntity;Lnet/minecraft/network/message/MessageType$Parameters;)V")
 	private SentMessage distributeFliers(SentMessage message, @Local(argsOnly = true) SignedMessage signedMessage, @Local(ordinal = 0, argsOnly = true) ServerPlayerEntity sender, @Local(ordinal = 1) ServerPlayerEntity target) {
 		IntraLibraryMessageCacheLetter documents = BeALibrarian.checkDocuments(sender);
+		C2SKeysmashConfigSyncLetter passwords = BeALibrarian.checkFilesForPasswordManager(target);
 		if (documents != null && documents.senderSmashesKeys()) {
-			if (target != sender && (BeAMaid.isDoll(target) || target.getPos().isInRange(sender.getPos(), 13))) {
+			if (target != sender && (BeAMaid.isDoll(target) && passwords.readableOthers() || target.getPos().isInRange(sender.getPos(), 13)) || target == sender && documents.senderSeesClearly()) {
 				return documents.dolledMessage();
 			} else {
 				return documents.keysmashedMessage();
