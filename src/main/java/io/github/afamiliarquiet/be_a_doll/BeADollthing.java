@@ -56,7 +56,6 @@ public class BeADollthing {
 			}
 
 			C2SKeysmashConfigSyncLetter passwordManager = BeALibrarian.checkFilesForPasswordManager(sender);
-			BeADoll.log(String.valueOf(passwordManager.readableSelf()));
 			BeALibrarian.filePaperwork(sender, new IntraLibraryMessageCacheLetter(
 				BeAMaid.isDoll(sender) && passwordManager.useKeysmashing(),
 				passwordManager.readableSelf(),

@@ -31,6 +31,7 @@ public class BeAMaid {
 			// should i care about alive? in theory maybe but it doesn't really matter
 			BeAMaid.setDoll(newPlayer, BeALibrarian.inspectSupposedPlayer(oldPlayer));
 			BeALibrarian.relabelDoll(newPlayer, BeALibrarian.inspectDollLabel(oldPlayer));
+			BeALibrarian.filePasswordManager(newPlayer, BeALibrarian.checkFilesForPasswordManager(oldPlayer));
 		}));
 	}
 

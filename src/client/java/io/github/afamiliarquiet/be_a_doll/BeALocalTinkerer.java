@@ -30,7 +30,6 @@ public class BeALocalTinkerer extends ReflectiveConfig {
 
 	public C2SKeysmashConfigSyncLetter writtenForAFriend() {
 		// feels like there should be a way to not do this. but whatever
-		BeADoll.log(String.valueOf(readableSelf.value()));
 		return new C2SKeysmashConfigSyncLetter(useKeysmashing.value(), readableSelf.value(), alwaysReadableOthers.value(), letterPoolOverride.value(), restockThreshold.value(), useOrderedSpooling.value(), baseClarityChance.value(), startingClarityScore.value(), keysmashedMultiplier.value(), spokenLoudlyClarity.value(), nonletterClarity.value());
 	}
 
