@@ -157,6 +157,9 @@ public class DollcraftItem extends Item {
 	}
 
 	public static void spawnRepairParticles(PlayerEntity doll, ItemStack material, int count) {
+		if (material == null || material.isEmpty()) {
+			return;
+		}
 		for (int i = 0; i < count; i++) {
 			Vec3d vel = new Vec3d(
 				(doll.getRandom().nextFloat() - 0.5) * 0.1,
