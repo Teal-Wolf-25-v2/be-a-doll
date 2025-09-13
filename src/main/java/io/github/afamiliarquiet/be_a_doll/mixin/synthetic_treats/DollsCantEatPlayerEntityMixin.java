@@ -12,7 +12,7 @@ public abstract class DollsCantEatPlayerEntityMixin {
 	@Inject(at = @At("HEAD"), method = "canConsume", cancellable = true)
 	private void notIfDoll(boolean ignoreHunger, CallbackInfoReturnable<Boolean> cir) {
 		if (BeAMaid.isDoll((PlayerEntity)(Object)this)) {
-			cir.setReturnValue(false);
+			cir.setReturnValue(true);
 		}
 	}
 }
