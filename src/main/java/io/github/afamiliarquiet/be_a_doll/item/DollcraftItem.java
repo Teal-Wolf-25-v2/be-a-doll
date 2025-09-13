@@ -83,7 +83,7 @@ public class DollcraftItem extends Item {
 	@Override
 	public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
 		if (user instanceof PlayerEntity doll) {
-			performCare(doll, doll, stack, user.getActiveHand());
+			performCare(doll, doll, stack, user.getActiveHand(), false);
 		}
 
 		return super.finishUsing(stack, world, user);
@@ -93,16 +93,8 @@ public class DollcraftItem extends Item {
 	@Override
 	public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
 		if (entity instanceof PlayerEntity doll && !user.getItemCooldownManager().isCoolingDown(stack)) {
-			ActionResult careResult = performCare(user, doll, stack, hand);
+			ActionResult careResult = performCare(user, doll, stack, hand, true);
 			if (careResult.isAccepted()) {
-				if (!user.getWorld().isClient()) {
-					S2CDollRepairedLetter letter = new S2CDollRepairedLetter(doll.getId(), stack);
-					PlayerLookup.tracking(doll).forEach(player -> ServerPlayNetworking.send(player, letter));
-					ServerPlayNetworking.send((ServerPlayerEntity) doll, letter);
-				}
-				SoundEvent careSound = BeALibrarian.inspectDollMaterial(doll).getCareSound();
-				user.getWorld().playSound(user, doll.getX(), doll.getY(), doll.getZ(), careSound, SoundCategory.PLAYERS, 1f, doll.getRandom().nextFloat() * 0.2f + 0.9f);
-				spawnRepairParticles(doll, findCareMaterial(user, doll), 16);
 				UseCooldownComponent cooldownComponent = stack.get(DataComponentTypes.USE_COOLDOWN);
 				if (cooldownComponent != null) {
 					cooldownComponent.set(stack, user);
@@ -115,10 +107,25 @@ public class DollcraftItem extends Item {
 		return super.useOnEntity(stack, user, entity, hand);
 	}
 
-	public ActionResult performCare(PlayerEntity user, PlayerEntity doll, ItemStack dollcraftStack, Hand hand) {
+	public ActionResult performCare(PlayerEntity user, PlayerEntity doll, ItemStack dollcraftStack, Hand hand, boolean doExtraEffects) {
 		if (BeAMaid.isDoll(doll) && BeALibrarian.inspectDollMaterial(doll) == this.getVariant()) {
 			ItemStack material = findCareMaterial(user, doll);
 			if (!material.isEmpty()) {
+				if (doExtraEffects) {
+					if (!user.getWorld().isClient()) {
+						S2CDollRepairedLetter letter = new S2CDollRepairedLetter(doll.getId(), material.copy());
+						PlayerLookup.tracking(doll).forEach(player -> {
+							if (player != user) {
+								ServerPlayNetworking.send(player, letter);
+							}
+						});
+						ServerPlayNetworking.send((ServerPlayerEntity) doll, letter);
+					}
+					SoundEvent careSound = BeALibrarian.inspectDollMaterial(doll).getCareSound();
+					user.getWorld().playSound(user, doll.getX(), doll.getY(), doll.getZ(), careSound, SoundCategory.PLAYERS, 1f, doll.getRandom().nextFloat() * 0.2f + 0.9f);
+					spawnRepairParticles(doll, material, 16);
+				}
+
 				caringIsCaring(doll);
 				material.split(1);
 				dollcraftStack.damage(1, user, LivingEntity.getSlotForHand(hand));
