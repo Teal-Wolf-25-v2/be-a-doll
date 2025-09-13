@@ -13,6 +13,7 @@
 		"shoulder_riding.RiptideIgnorePassengersLivingEntityMixin",
 		"shoulder_riding.ShoulderAwarenessPlayerEntityMixin",
 		"shoulder_riding.ShoulderRidingEntityMixin",
+		"shoulder_riding.SuffocationResistanceLivingEntityMixin",
 		"synthetic_treats.ActuallyDollsCanPretendToEatItemMixin",
 		"synthetic_treats.AwardWinningFoodActorItemStackMixin",
 		"synthetic_treats.ButItsNotParticularlyDesirableFoodComponentMixin",
