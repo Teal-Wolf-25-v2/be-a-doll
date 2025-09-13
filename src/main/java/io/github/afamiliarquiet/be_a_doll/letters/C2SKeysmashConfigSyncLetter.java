@@ -17,7 +17,7 @@ public record C2SKeysmashConfigSyncLetter(boolean useKeysmashing, boolean readab
 		PacketCodecs.BOOLEAN, C2SKeysmashConfigSyncLetter::readableOthers,
 		PacketCodecs.STRING, C2SKeysmashConfigSyncLetter::letterPoolOverride,
 		PacketCodecs.FLOAT, C2SKeysmashConfigSyncLetter::restockThreshold,
-		PacketCodecs.BOOLEAN, C2SKeysmashConfigSyncLetter::useKeysmashing,
+		PacketCodecs.BOOLEAN, C2SKeysmashConfigSyncLetter::useOrderedSpooling,
 		PacketCodecs.FLOAT, C2SKeysmashConfigSyncLetter::baseClarityChance,
 		PacketCodecs.FLOAT, C2SKeysmashConfigSyncLetter::startingClarityScore,
 		PacketCodecs.FLOAT, C2SKeysmashConfigSyncLetter::keysmashedMultiplier,
