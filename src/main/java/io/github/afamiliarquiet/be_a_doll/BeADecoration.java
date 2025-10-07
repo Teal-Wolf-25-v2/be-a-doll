@@ -29,8 +29,8 @@ public class BeADecoration {
 
 	public static int getParrotCount(PlayerEntity playerMount) {
 		int parrots = 0;
-		if (!playerMount.getShoulderEntityLeft().isEmpty()) parrots++;
-		if (!playerMount.getShoulderEntityRight().isEmpty()) parrots++;
+		if (playerMount.getLeftShoulderParrotVariant().isPresent()) parrots++;
+		if (playerMount.getRightShoulderParrotVariant().isPresent()) parrots++;
 		return parrots;
 	}
 
@@ -43,9 +43,9 @@ public class BeADecoration {
 
 		if (parrotCount == 1) {
 			// force seat if parrot has the other. if there's two parrots and a doll is riding then things are already broken
-			if (!playerMount.getShoulderEntityLeft().isEmpty())
+			if (playerMount.getLeftShoulderParrotVariant().isPresent())
 				armToSitOn = Arm.RIGHT; // if left is occupied, has to be right
-			if (!playerMount.getShoulderEntityRight().isEmpty())
+			if (playerMount.getRightShoulderParrotVariant().isPresent())
 				armToSitOn = Arm.LEFT; // if right is occupied, has to be right
 		}
 		return armToSitOn;
