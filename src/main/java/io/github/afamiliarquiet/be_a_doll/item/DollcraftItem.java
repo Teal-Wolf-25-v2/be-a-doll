@@ -112,7 +112,7 @@ public class DollcraftItem extends Item {
 			ItemStack material = findCareMaterial(user, doll);
 			if (!material.isEmpty()) {
 				if (doExtraEffects) {
-					if (!user.getWorld().isClient()) {
+					if (!user.getEntityWorld().isClient()) {
 						S2CDollRepairedLetter letter = new S2CDollRepairedLetter(doll.getId(), material.copy());
 						PlayerLookup.tracking(doll).forEach(player -> {
 							if (player != user) {
@@ -122,7 +122,7 @@ public class DollcraftItem extends Item {
 						ServerPlayNetworking.send((ServerPlayerEntity) doll, letter);
 					}
 					SoundEvent careSound = BeALibrarian.inspectDollMaterial(doll).getCareSound();
-					user.getWorld().playSound(user, doll.getX(), doll.getY(), doll.getZ(), careSound, SoundCategory.PLAYERS, 1f, doll.getRandom().nextFloat() * 0.2f + 0.9f);
+					user.getEntityWorld().playSound(user, doll.getX(), doll.getY(), doll.getZ(), careSound, SoundCategory.PLAYERS, 1f, doll.getRandom().nextFloat() * 0.2f + 0.9f);
 					spawnRepairParticles(doll, material, 16);
 				}
 
@@ -147,7 +147,7 @@ public class DollcraftItem extends Item {
 			return ItemStack.EMPTY;
 		}
 
-		if (user.isInCreativeMode() || user.getWorld().isClient() && !user.isMainPlayer()) { // otherclientplayers have no inv, so cheat for particles
+		if (user.isInCreativeMode() || user.getEntityWorld().isClient() && !user.isMainPlayer()) { // otherclientplayers have no inv, so cheat for particles
 			return this.getVariant().getDefaultCareMaterial().getDefaultStack();
 		} else {
 			Predicate<ItemStack> predicate = stack -> stack.isIn(this.getVariant().getCareMaterialTag());
@@ -181,7 +181,7 @@ public class DollcraftItem extends Item {
 			);
 			pos = pos.add(dollHouse.getMinPos());
 
-			doll.getWorld().addParticleClient(new ItemStackParticleEffect(ParticleTypes.ITEM, material), pos.x, pos.y, pos.z, vel.x, vel.y + 0.05, vel.z);
+			doll.getEntityWorld().addParticleClient(new ItemStackParticleEffect(ParticleTypes.ITEM, material), pos.x, pos.y, pos.z, vel.x, vel.y + 0.05, vel.z);
 		}
 	}
 
