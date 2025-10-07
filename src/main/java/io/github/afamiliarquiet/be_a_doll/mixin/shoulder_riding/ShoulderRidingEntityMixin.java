@@ -51,7 +51,7 @@ public abstract class ShoulderRidingEntityMixin {
 	}
 
 	// `this` is the doll
-	@ModifyExpressionValue(method = "startRiding(Lnet/minecraft/entity/Entity;Z)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/EntityType;isSaveable()Z"))
+	@ModifyExpressionValue(method = "startRiding(Lnet/minecraft/entity/Entity;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/EntityType;isSaveable()Z"))
 	private boolean forDirtsSakeJustLetMeRideOtherPlayers(boolean original, @Local(argsOnly = true) Entity mount) {
 		// i've seen you do this before intellij. and you've gotta stop it
 		//noinspection ConstantValue
