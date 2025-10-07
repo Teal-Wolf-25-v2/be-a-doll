@@ -34,7 +34,7 @@ public class RibbonItem extends Item {
 	@Override
 	public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
 		if (entity instanceof PlayerEntity doll && BeAMaid.isDoll(doll)) {
-			if (doll.startRiding(user, false)) {
+			if (doll.startRiding(user, false, false)) {
 				user.playSound(BeABirdwatcher.RAVEN_CHIRP, 1f, 1f);
 				return ActionResult.SUCCESS;
 			}
@@ -83,7 +83,7 @@ public class RibbonItem extends Item {
 				&& (pos = getDollPlacementPos(blockHitResult, doll)) != null
 			) {
 				serverPlayerEntity.teleportTo(new TeleportTarget(
-					serverPlayerEntity.getServerWorld(), // updated from getWorld()
+					serverPlayerEntity.getEntityWorld(),
 					pos,
 					Vec3d.ZERO,
 					user.getYaw() + 180,
