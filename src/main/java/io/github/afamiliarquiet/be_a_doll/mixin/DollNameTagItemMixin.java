@@ -22,7 +22,7 @@ public class DollNameTagItemMixin {
 		if (entity instanceof PlayerEntity doll && BeAMaid.isDoll(doll)) {
 			Text text = stack.get(DataComponentTypes.CUSTOM_NAME);
 			if (text != null) {
-				if (!user.getWorld().isClient && entity.isAlive()) {
+				if (!user.getEntityWorld().isClient() && entity.isAlive()) {
 					BeALibrarian.relabelDoll(doll, text);
 					stack.decrement(1);
 				}
