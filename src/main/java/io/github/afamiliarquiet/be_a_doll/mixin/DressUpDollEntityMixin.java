@@ -28,7 +28,7 @@ public abstract class DressUpDollEntityMixin {
 			ItemStack itemStack = thatGrabbyPlayer.getStackInHand(hand);
 			if (thatGrabbyPlayer.isSpectator()) {
 				cir.setReturnValue(ActionResult.SUCCESS);
-			} else if (thatGrabbyplayer.getEntityWorld().isClient) {
+			} else if (thatGrabbyPlayer.getEntityWorld().isClient()) {
 				cir.setReturnValue(ActionResult.SUCCESS_SERVER);
 			} else {
 				EquipmentSlot preferredSlot = thisDoll.getPreferredEquipmentSlot(itemStack);
