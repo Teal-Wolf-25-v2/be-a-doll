@@ -29,20 +29,37 @@ public class DollToDollCommunicationPlayerManagerMixin {
 	@Final
 	private MinecraftServer server;
 
-	@Inject(at = @At("HEAD"), method = "broadcast(Lnet/minecraft/network/message/SignedMessage;Ljava/util/function/Predicate;Lnet/minecraft/server/network/ServerPlayerEntity;Lnet/minecraft/network/message/MessageType$Parameters;)V")
-	private void papersPlease(SignedMessage message, Predicate<ServerPlayerEntity> shouldSendFiltered, @Nullable ServerPlayerEntity sender, MessageType.Parameters params, CallbackInfo ci) {
-		// this is, in my head, a helpful measure with large player counts.
-		// (also a late redecoration. i guess i could shave off one decorate with another mixin,
-		//  but i don't think i really need to worry that much about optimizing.)
+	@Inject(
+		at = @At("HEAD"),
+		method = "broadcast(Lnet/minecraft/network/message/SignedMessage;Ljava/util/function/Predicate;Lnet/minecraft/server/network/ServerPlayerEntity;Lnet/minecraft/network/message/MessageType$Parameters;)V"
+	)
+	private void papersPlease(SignedMessage message,
+							  Predicate<ServerPlayerEntity> shouldSendFiltered,
+							  @Nullable ServerPlayerEntity sender,
+							  MessageType.Parameters params,
+							  CallbackInfo ci) {
 		BeADollthing.prepareMessageSending(message, sender, this.server);
 	}
 
-	@ModifyArg(index = 0, at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerPlayerEntity;sendChatMessage(Lnet/minecraft/network/message/SentMessage;ZLnet/minecraft/network/message/MessageType$Parameters;)V"), method = "broadcast(Lnet/minecraft/network/message/SignedMessage;Ljava/util/function/Predicate;Lnet/minecraft/server/network/ServerPlayerEntity;Lnet/minecraft/network/message/MessageType$Parameters;)V")
-	private SentMessage distributeFliers(SentMessage message, @Local(argsOnly = true) SignedMessage signedMessage, @Local(ordinal = 0, argsOnly = true) ServerPlayerEntity sender, @Local(ordinal = 1) ServerPlayerEntity target) {
+	@ModifyArg(
+		index = 0,
+		at = @At(
+			value = "INVOKE",
+			target = "Lnet/minecraft/server/network/ServerPlayerEntity;sendChatMessage(Lnet/minecraft/network/message/SentMessage;ZLnet/minecraft/network/message/MessageType$Parameters;)V"
+		),
+		method = "broadcast(Lnet/minecraft/network/message/SignedMessage;Ljava/util/function/Predicate;Lnet/minecraft/server/network/ServerPlayerEntity;Lnet/minecraft/network/message/MessageType$Parameters;)V"
+	)
+	private SentMessage distributeFliers(SentMessage message,
+										 @Local(argsOnly = true) SignedMessage signedMessage,
+										 @Local(ordinal = 0, argsOnly = true) ServerPlayerEntity sender,
+										 @Local(ordinal = 1) ServerPlayerEntity target) {
 		IntraLibraryMessageCacheLetter documents = BeALibrarian.checkDocuments(sender);
 		C2SKeysmashConfigSyncLetter passwords = BeALibrarian.checkFilesForPasswordManager(target);
 		if (documents != null && documents.senderSmashesKeys()) {
-			if (target != sender && (BeAMaid.isDoll(target) && passwords.readableOthers() || target.getPos().isInRange(sender.getPos(), 13)) || target == sender && documents.senderSeesClearly()) {
+			if (target != sender
+				&& (BeAMaid.isDoll(target) && passwords.readableOthers()
+				|| target.getEntityPos().isInRange(sender.getEntityPos(), 13))
+				|| target == sender && documents.senderSeesClearly()) {
 				return documents.dolledMessage();
 			} else {
 				return documents.keysmashedMessage();
@@ -52,8 +69,15 @@ public class DollToDollCommunicationPlayerManagerMixin {
 		}
 	}
 
-	@Inject(at = @At("RETURN"), method = "broadcast(Lnet/minecraft/network/message/SignedMessage;Ljava/util/function/Predicate;Lnet/minecraft/server/network/ServerPlayerEntity;Lnet/minecraft/network/message/MessageType$Parameters;)V")
-	private void timesUp(SignedMessage message, Predicate<ServerPlayerEntity> shouldSendFiltered, @Nullable ServerPlayerEntity sender, MessageType.Parameters params, CallbackInfo ci) {
+	@Inject(
+		at = @At("RETURN"),
+		method = "broadcast(Lnet/minecraft/network/message/SignedMessage;Ljava/util/function/Predicate;Lnet/minecraft/server/network/ServerPlayerEntity;Lnet/minecraft/network/message/MessageType$Parameters;)V"
+	)
+	private void timesUp(SignedMessage message,
+						 Predicate<ServerPlayerEntity> shouldSendFiltered,
+						 @Nullable ServerPlayerEntity sender,
+						 MessageType.Parameters params,
+						 CallbackInfo ci) {
 		if (sender != null) {
 			BeALibrarian.shredDocuments(sender);
 		}
