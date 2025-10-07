@@ -37,8 +37,8 @@ public class BeASelf {
 
 	private static void doEssencePlaceEffects(PlayerEntity player, BeADoll.Variant variant) {
 		player.addStatusEffect(new StatusEffectInstance(BeAWitch.OVERFLOWING, 300, 1));
-		player.getWorld().playSoundClient(BeABirdwatcher.ESSENCE_PLACE, SoundCategory.PLAYERS, 1f, player.getRandom().nextFloat() * 0.2f + 0.9f);
-		if (!player.getWorld().isClient()) {
+		player.getEntityWorld().playSoundClient(BeABirdwatcher.ESSENCE_PLACE, SoundCategory.PLAYERS, 1f, player.getRandom().nextFloat() * 0.2f + 0.9f);
+		if (!player.getEntityWorld().isClient()) {
 			BeAMaid.setDoll(player, variant);
 		}
 	}
@@ -50,7 +50,7 @@ public class BeASelf {
 			1200 + (fragmentation != null ? fragmentation.getDuration() : 0),
 			(fragmentation != null ? fragmentation.getAmplifier() + 1 : 0)
 		));
-		player.getWorld().playSoundClient(BeABirdwatcher.ESSENCE_TAKE, SoundCategory.PLAYERS, 1f, player.getRandom().nextFloat() * 0.2f + 0.9f);
+		player.getEntityWorld().playSoundClient(BeABirdwatcher.ESSENCE_TAKE, SoundCategory.PLAYERS, 1f, player.getRandom().nextFloat() * 0.2f + 0.9f);
 	}
 
 	public static boolean isMouseInSurvivalSelf(double mouseX, double mouseY, int screenX, int screenY) {

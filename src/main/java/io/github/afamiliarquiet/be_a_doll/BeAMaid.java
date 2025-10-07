@@ -56,7 +56,7 @@ public class BeAMaid {
 	}
 
 	public static void setDoll(@Nullable PlayerEntity player, BeADoll.Variant variant) {
-		if (player == null || player.getWorld().isClient()) {
+		if (player == null || player.getEntityWorld().isClient()) {
 			return;
 		}
 		if (variant == BeALibrarian.inspectSupposedPlayer(player)) {
