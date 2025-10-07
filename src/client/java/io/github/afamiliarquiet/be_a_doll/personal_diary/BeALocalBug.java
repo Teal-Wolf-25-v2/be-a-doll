@@ -2,16 +2,13 @@ package io.github.afamiliarquiet.be_a_doll.personal_diary;
 
 import io.github.afamiliarquiet.be_a_doll.diary.BeABug;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleFactory;
-import net.minecraft.client.particle.ParticleTextureSheet;
-import net.minecraft.client.particle.SpriteBillboardParticle;
-import net.minecraft.client.particle.SpriteProvider;
+import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
+import org.jetbrains.annotations.Nullable;
 
 public class BeALocalBug {
 	public static void lookAtBug() {
@@ -19,7 +16,7 @@ public class BeALocalBug {
 		bugParty.register(BeABug.FRAGMENTED, FragmentedParticle.Factory::new);
 	}
 
-	public static class FragmentedParticle extends SpriteBillboardParticle {
+	public static class FragmentedParticle extends BillboardParticle {
 		private static final Random RANDOM = Random.create();
 		private final int fromColor;
 		private final int toColor;
@@ -68,8 +65,8 @@ public class BeALocalBug {
 		}
 
 		@Override
-		public ParticleTextureSheet getType() {
-			return ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT;
+		protected RenderType getRenderType() {
+			return RenderType.PARTICLE_ATLAS_TRANSLUCENT;
 		}
 
 		public static class Factory implements ParticleFactory<SimpleParticleType> {
@@ -79,10 +76,17 @@ public class BeALocalBug {
 				this.spriteProvider = spriteProvider;
 			}
 
-			public Particle createParticle(SimpleParticleType simpleParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-				FragmentedParticle bug = new FragmentedParticle(clientWorld, d, e, f, 0xff95a5e9, RANDOM.nextBoolean() ? 0xfff77490 : 0xfffab598, RANDOM.nextDouble(), RANDOM.nextDouble());
-				bug.scale(MathHelper.nextBetween(clientWorld.getRandom(), 3.0F, 5.0F));
-				bug.setSprite(this.spriteProvider);
+//			public Particle createParticle(SimpleParticleType simpleParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+//				FragmentedParticle bug = new FragmentedParticle(clientWorld, d, e, f, 0xff95a5e9, RANDOM.nextBoolean() ? 0xfff77490 : 0xfffab598, RANDOM.nextDouble(), RANDOM.nextDouble());
+//				bug.scale(MathHelper.nextBetween(clientWorld.getRandom(), 3.0F, 5.0F));
+//				bug.setSprite(this.spriteProvider);
+//				return bug;
+//			}
+
+			@Override
+			public @Nullable Particle createParticle(SimpleParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, Random random) {
+				FragmentedParticle bug = new FragmentedParticle(world, x, y, z, 0xff95a5e9, RANDOM.nextBoolean() ? 0xfff77490 : 0xfffab598, RANDOM.nextDouble(), RANDOM.nextDouble());
+				bug.scale(MathHelper.nextBetween(world.getRandom(), 3.0F, 5.0F));
 				return bug;
 			}
 		}

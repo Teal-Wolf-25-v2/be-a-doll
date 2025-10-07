@@ -128,7 +128,7 @@ public class DollcraftItem extends Item {
 
 				caringIsCaring(doll);
 				material.split(1);
-				dollcraftStack.damage(1, user, LivingEntity.getSlotForHand(hand));
+				dollcraftStack.damage(1, user, hand);
 				return ActionResult.SUCCESS;
 			}
 		}
