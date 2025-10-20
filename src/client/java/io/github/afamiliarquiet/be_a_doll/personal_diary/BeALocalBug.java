@@ -2,7 +2,11 @@ package io.github.afamiliarquiet.be_a_doll.personal_diary;
 
 import io.github.afamiliarquiet.be_a_doll.diary.BeABug;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.BillboardParticle;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleFactory;
+import net.minecraft.client.particle.SpriteProvider;
+import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.util.math.ColorHelper;
@@ -21,13 +25,13 @@ public class BeALocalBug {
 		private final int fromColor;
 		private final int toColor;
 
-		protected FragmentedParticle(ClientWorld clientWorld, double x, double y, double z, int fromColor, int toColor, double xr, double zr) {
+		protected FragmentedParticle(ClientWorld clientWorld, double x, double y, double z, int fromColor, int toColor, double xr, double zr, Sprite sprite) {
 			// this is silly. 3 layers to avoid being restricted by super() on line 1 and ignore half of it anyway
-			this(clientWorld, x, y, z, 0.05 - xr * 0.1, 0.0125 - RANDOM.nextDouble() * 0.025, 0.05 - zr  * 0.1, fromColor, toColor);
+			this(clientWorld, x, y, z, 0.05 - xr * 0.1, 0.0125 - RANDOM.nextDouble() * 0.025, 0.05 - zr  * 0.1, fromColor, toColor, sprite);
 		}
 
-		protected FragmentedParticle(ClientWorld clientWorld, double x, double y, double z, double vx, double vy, double vz, int fromColor, int toColor) {
-			super(clientWorld, x+vx*2, y+vy*2, z+vz*2, 0, 0, 0);
+		protected FragmentedParticle(ClientWorld clientWorld, double x, double y, double z, double vx, double vy, double vz, int fromColor, int toColor, Sprite sprite) {
+			super(clientWorld, x+vx*2, y+vy*2, z+vz*2, 0, 0, 0, sprite);
 
 			this.velocityX = vx;
 			this.velocityY = vy;
@@ -85,7 +89,7 @@ public class BeALocalBug {
 
 			@Override
 			public @Nullable Particle createParticle(SimpleParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, Random random) {
-				FragmentedParticle bug = new FragmentedParticle(world, x, y, z, 0xff95a5e9, RANDOM.nextBoolean() ? 0xfff77490 : 0xfffab598, RANDOM.nextDouble(), RANDOM.nextDouble());
+				FragmentedParticle bug = new FragmentedParticle(world, x, y, z, 0xff95a5e9, RANDOM.nextBoolean() ? 0xfff77490 : 0xfffab598, RANDOM.nextDouble(), RANDOM.nextDouble(), this.spriteProvider.getSprite(random));
 				bug.scale(MathHelper.nextBetween(world.getRandom(), 3.0F, 5.0F));
 				return bug;
 			}

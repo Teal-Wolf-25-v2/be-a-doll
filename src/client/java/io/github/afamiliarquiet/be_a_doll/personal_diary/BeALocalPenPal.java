@@ -13,7 +13,7 @@ public class BeALocalPenPal {
 	public static void fillPen() {
 		ClientPlayNetworking.registerGlobalReceiver(S2CDollDismountLetter.ID, ((letter, context) -> {
 			letter.dismountingDollIds().forEach(id -> {
-				Entity ridingDoll = context.player().getWorld().getEntityById(id);
+				Entity ridingDoll = context.player().getEntityWorld().getEntityById(id);
 				if (ridingDoll != null) {
 					ridingDoll.dismountVehicle();
 				}
@@ -21,7 +21,7 @@ public class BeALocalPenPal {
 		}));
 
 		ClientPlayNetworking.registerGlobalReceiver(S2CDollRepairedLetter.ID, (letter, context) -> {
-			Entity repairedEntity = context.player().getWorld().getEntityById(letter.entityId());
+			Entity repairedEntity = context.player().getEntityWorld().getEntityById(letter.entityId());
 			if (repairedEntity instanceof PlayerEntity letThereBeDoll) {
 				DollcraftItem.spawnRepairParticles(letThereBeDoll, letter.material(), 16);
 			}
