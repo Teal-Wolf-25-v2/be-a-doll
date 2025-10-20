@@ -38,6 +38,18 @@ loom {
 		}
 	}
 
+	mixin {
+		showMessageTypes.set(true)
+
+		messages.set([
+				"ACCESSOR_TARGET_NOT_FOUND": "disabled",
+
+				"MIXIN_SOFT_TARGET_NOT_RESOLVED": "error",
+				"TARGET_ELEMENT_NOT_FOUND": "error",
+				"MISSING_INJECTOR_DESC_SINGLETARGET": "error"
+		])
+	}
+
 	accessWidenerPath = file("src/main/resources/be_a_doll.accesswidener") // is this for neo? maybe.
 }
 

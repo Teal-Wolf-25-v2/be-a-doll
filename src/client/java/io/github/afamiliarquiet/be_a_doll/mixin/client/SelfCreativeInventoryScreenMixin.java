@@ -3,6 +3,7 @@ package io.github.afamiliarquiet.be_a_doll.mixin.client;
 import io.github.afamiliarquiet.be_a_doll.BeASelf;
 import io.github.afamiliarquiet.be_a_doll.letters.C2SCreativeEssenceAlterationLetter;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.client.gui.Click;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.entity.player.PlayerInventory;
@@ -25,16 +26,16 @@ public abstract class SelfCreativeInventoryScreenMixin extends HandledScreen<Cre
 	// Tell me how I can do better! Save me! Please! Please, anyone, help me! Is anyone there?!
 	// i don't like screens
 	@Inject(method = "mouseReleased", at = @At("HEAD"), cancellable = true)
-	private void clicky(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
+	private void clicky(Click click, CallbackInfoReturnable<Boolean> cir) {
 		// injecting at head seems fine here. i could've injected at mouseClicked instead here, but.. consistency
-		if (BeASelf.isMouseInCreativeSelf(mouseX, mouseY, this.x, this.y) && this.client != null && this.client.player != null) {
+		if (BeASelf.isMouseInCreativeSelf(click.x(), click.y(), this.x, this.y) && this.client != null && this.client.player != null) {
 			ItemStack cursorStack = this.handler.getCursorStack();
 			ItemStack clickProcessedStack = null;
 
-			if (button == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
+			if (click.button() == GLFW.GLFW_MOUSE_BUTTON_LEFT) {
 				ClientPlayNetworking.send(new C2SCreativeEssenceAlterationLetter(true, cursorStack));
 				clickProcessedStack = BeASelf.clickSelf(cursorStack, this.client.player, true);
-			} else if (button == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
+			} else if (click.button() == GLFW.GLFW_MOUSE_BUTTON_RIGHT) {
 				ClientPlayNetworking.send(new C2SCreativeEssenceAlterationLetter(false, cursorStack));
 				clickProcessedStack = BeASelf.clickSelf(cursorStack, this.client.player, false);
 			}
